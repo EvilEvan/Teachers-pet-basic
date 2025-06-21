@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kindergarten Rapport Generator</title>
+    <link rel="stylesheet" href="shared-styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Kindergarten Rapport Generator</h1>
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <div class="progress-text" id="progressText">Step 1 of 7: Student Information</div>
+            </div>
+        </div>
+
+        <div id="slideContent" class="slide-content">
+            <!-- Slide content will be loaded here dynamically -->
+            <div class="alert">Loading...</div>
+        </div>
+
+        <div class="navigation">
+            <button class="nav-btn" id="prevBtn" onclick="previousSlide()" disabled>⬅️ Previous</button>
+            <span id="slideIndicator">1 / 7</span>
+            <button class="nav-btn" id="nextBtn" onclick="nextSlide()">Next ➡️</button>
+        </div>
+    </div>
+
+    <script src="main-controller.js"></script>
+</body>
+</html>

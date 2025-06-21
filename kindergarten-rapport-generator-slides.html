@@ -1,0 +1,1263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kindergarten Rapport Generator - Slide Interface</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.2em;
+            margin-bottom: 10px;
+        }
+
+        .progress-container {
+            background-color: rgba(255,255,255,0.2);
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 20px;
+        }
+
+        .progress-bar {
+            background-color: rgba(255,255,255,0.3);
+            border-radius: 10px;
+            height: 8px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            background-color: #27ae60;
+            height: 100%;
+            transition: width 0.3s ease;
+            border-radius: 10px;
+        }
+
+        .progress-text {
+            text-align: center;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        .slides-container {
+            position: relative;
+            height: 600px;
+            overflow: hidden;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            padding: 40px;
+            transform: translateX(100%);
+            transition: transform 0.4s ease-in-out;
+            overflow-y: auto;
+        }
+
+        .slide.active {
+            transform: translateX(0);
+        }
+
+        .slide.prev {
+            transform: translateX(-100%);
+        }
+
+        .slide h2 {
+            color: #2c3e50;
+            margin-bottom: 30px;
+            text-align: center;
+            font-size: 1.8em;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+
+        .section {
+            margin-bottom: 30px;
+            padding: 25px;
+            border: 2px solid #ecf0f1;
+            border-radius: 10px;
+            background: linear-gradient(145deg, #f8f9fa, #e9ecef);
+        }
+
+        .section h3 {
+            color: #34495e;
+            margin-bottom: 20px;
+            font-size: 1.3em;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .student-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        input[type="text"], input[type="number"], textarea, select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="text"]:focus, input[type="number"]:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
+        }
+
+        textarea {
+            height: 80px;
+            resize: vertical;
+        }
+
+        .slider-container {
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .slider {
+            width: 100%;
+            margin: 10px 0;
+            height: 6px;
+            border-radius: 3px;
+            background: #ddd;
+            outline: none;
+        }
+
+        .slider::-webkit-slider-thumb {
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #3498db;
+            cursor: pointer;
+        }
+
+        .slider-value {
+            font-weight: bold;
+            color: #e74c3c;
+            font-size: 1.2em;
+            margin-left: 10px;
+        }
+
+        .checkbox-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            background-color: white;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            transition: all 0.3s ease;
+        }
+
+        .checkbox-item:hover {
+            background-color: #f0f8ff;
+            border-color: #3498db;
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            margin-right: 10px;
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px 40px;
+            background-color: #f8f9fa;
+            border-top: 1px solid #ddd;
+        }
+
+        .nav-btn {
+            background: linear-gradient(145deg, #3498db, #2980b9);
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+        }
+
+        .nav-btn:disabled {
+            background: #95a5a6;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .action-btn {
+            background: linear-gradient(145deg, #27ae60, #229954);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 10px;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        .action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(39, 174, 96, 0.4);
+        }
+
+        .clear-btn {
+            background: linear-gradient(145deg, #e74c3c, #c0392b);
+        }
+
+        .clear-btn:hover {
+            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.4);
+        }
+
+        .comments-section {
+            margin-top: 30px;
+            padding: 25px;
+            background: linear-gradient(145deg, #ecf0f1, #bdc3c7);
+            border-radius: 10px;
+        }
+
+        .comment-option {
+            background-color: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            border-left: 5px solid #3498db;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .copy-btn {
+            background: linear-gradient(145deg, #27ae60, #229954);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .copy-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 3px 10px rgba(39, 174, 96, 0.3);
+        }
+
+        .fun-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #e67e22;
+            font-weight: normal;
+            font-size: 0.9em;
+        }
+
+        .review-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .review-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid #ecf0f1;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .review-card h4 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .alert {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            color: #856404;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 0;
+                border-radius: 0;
+                min-height: 100vh;
+            }
+            
+            .student-info {
+                grid-template-columns: 1fr;
+            }
+            
+            .checkbox-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .navigation {
+                padding: 20px;
+            }
+            
+            .slide {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Kindergarten Rapport Generator</h1>
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <div class="progress-text" id="progressText">Step 1 of 7: Student Information</div>
+            </div>
+        </div>
+
+        <div class="slides-container">
+            <!-- Slide 1: Student Information -->
+            <div class="slide active" id="slide1">
+                <h2>📋 Student Information</h2>
+                <div class="section">
+                    <div class="student-info">
+                        <div class="input-group">
+                            <label for="studentName">Student Name: *</label>
+                            <input type="text" id="studentName" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="gender">Gender:</label>
+                            <select id="gender">
+                                <option value="">Select Gender</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label for="strengths">Strengths:</label>
+                            <textarea id="strengths" placeholder="List student's main strengths..."></textarea>
+                        </div>
+                        <div class="input-group">
+                            <label for="weaknesses">Areas for Improvement:</label>
+                            <textarea id="weaknesses" placeholder="Areas that need more practice..."></textarea>
+                        </div>
+                        <div class="input-group">
+                            <label for="overallAttributes">Overall Attributes (0-10):</label>
+                            <input type="number" id="overallAttributes" min="0" max="10" value="5">
+                        </div>
+                        <div class="input-group">
+                            <label for="shyness">Shyness Level (0-10):</label>
+                            <input type="number" id="shyness" min="0" max="10" value="5">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 2: Language Skills -->
+            <div class="slide" id="slide2">
+                <h2>📚 Language Skills</h2>
+                
+                <!-- English Section -->
+                <div class="section">
+                    <h3>English 
+                        <div class="fun-checkbox">
+                            <input type="checkbox" id="englishFun">
+                            <label for="englishFun">Had fun 😊</label>
+                        </div>
+                    </h3>
+                    <div class="slider-container">
+                        <label>Overall Performance (1-5): <span class="slider-value" id="englishValue">3</span></label>
+                        <input type="range" class="slider" id="englishSlider" min="1" max="5" value="3" oninput="updateSliderValue('english')">
+                    </div>
+                    <div class="checkbox-grid">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="english1" name="english">
+                            <label for="english1">Letter matching with pictures</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="english2" name="english">
+                            <label for="english2">Letter tracing and coloring</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="english3" name="english">
+                            <label for="english3">Matching same letters</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="english4" name="english">
+                            <label for="english4">Vocabulary (A-Ant, B-Bee, C-Cat)</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Phonics Section -->
+                <div class="section">
+                    <h3>Phonics 
+                        <div class="fun-checkbox">
+                            <input type="checkbox" id="phonicsFun">
+                            <label for="phonicsFun">Had fun 😊</label>
+                        </div>
+                    </h3>
+                    <div class="slider-container">
+                        <label>Overall Performance (1-5): <span class="slider-value" id="phonicsValue">3</span></label>
+                        <input type="range" class="slider" id="phonicsSlider" min="1" max="5" value="3" oninput="updateSliderValue('phonics')">
+                    </div>
+                    <div class="checkbox-grid">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="phonics1" name="phonics">
+                            <label for="phonics1">Letter A-E recognition</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="phonics2" name="phonics">
+                            <label for="phonics2">Revision A/B/C</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="phonics3" name="phonics">
+                            <label for="phonics3">Annie Ant-Axe vocabulary</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="phonics4" name="phonics">
+                            <label for="phonics4">Character associations (Benny Bear, Candy Cat, etc.)</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 3: Academic Skills -->
+            <div class="slide" id="slide3">
+                <h2>🔢 Academic Skills</h2>
+                
+                <!-- Mathematics Section -->
+                <div class="section">
+                    <h3>Mathematics 
+                        <div class="fun-checkbox">
+                            <input type="checkbox" id="mathFun">
+                            <label for="mathFun">Had fun 😊</label>
+                        </div>
+                    </h3>
+                    <div class="slider-container">
+                        <label>Overall Performance (1-5): <span class="slider-value" id="mathValue">3</span></label>
+                        <input type="range" class="slider" id="mathSlider" min="1" max="5" value="3" oninput="updateSliderValue('math')">
+                    </div>
+                    <div class="checkbox-grid">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="math1" name="math">
+                            <label for="math1">Counting from 1-10</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="math2" name="math">
+                            <label for="math2">Number tracing (1-3)</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="math3" name="math">
+                            <label for="math3">Counting with fingers</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="math4" name="math">
+                            <label for="math4">Number-picture matching</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- I.Q Section -->
+                <div class="section">
+                    <h3>General Knowledge 
+                        <div class="fun-checkbox">
+                            <input type="checkbox" id="iqFun">
+                            <label for="iqFun">Had fun 😊</label>
+                        </div>
+                    </h3>
+                    <div class="slider-container">
+                        <label>Overall Performance (1-5): <span class="slider-value" id="iqValue">3</span></label>
+                        <input type="range" class="slider" id="iqSlider" min="1" max="5" value="3" oninput="updateSliderValue('iq')">
+                    </div>
+                    <div class="checkbox-grid">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="iq1" name="iq">
+                            <label for="iq1">Animals and their food</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="iq2" name="iq">
+                            <label for="iq2">Shapes and colors</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="iq3" name="iq">
+                            <label for="iq3">Dining room objects</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="iq4" name="iq">
+                            <label for="iq4">Bathroom objects</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 4: Knowledge Areas -->
+            <div class="slide" id="slide4">
+                <h2>🌍 Knowledge Areas</h2>
+                
+                <!-- Social Studies Section -->
+                <div class="section">
+                    <h3>Social Studies 
+                        <div class="fun-checkbox">
+                            <input type="checkbox" id="socialFun">
+                            <label for="socialFun">Had fun 😊</label>
+                        </div>
+                    </h3>
+                    <div class="slider-container">
+                        <label>Overall Performance (1-5): <span class="slider-value" id="socialValue">3</span></label>
+                        <input type="range" class="slider" id="socialSlider" min="1" max="5" value="3" oninput="updateSliderValue('social')">
+                    </div>
+                    <div class="checkbox-grid">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="social1" name="social">
+                            <label for="social1">Farm animal characteristics</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="social2" name="social">
+                            <label for="social2">Animal sounds and abilities</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="social3" name="social">
+                            <label for="social3">Animal babies (offspring)</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="social4" name="social">
+                            <label for="social4">Body parts (My face)</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Science Section -->
+                <div class="section">
+                    <h3>Science 
+                        <div class="fun-checkbox">
+                            <input type="checkbox" id="scienceFun">
+                            <label for="scienceFun">Had fun 😊</label>
+                        </div>
+                    </h3>
+                    <div class="slider-container">
+                        <label>Overall Performance (1-5): <span class="slider-value" id="scienceValue">3</span></label>
+                        <input type="range" class="slider" id="scienceSlider" min="1" max="5" value="3" oninput="updateSliderValue('science')">
+                    </div>
+                    <div class="checkbox-grid">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="science1" name="science">
+                            <label for="science1">Floating/Sinking experiments</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="science2" name="science">
+                            <label for="science2">Buoyancy concepts</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="science3" name="science">
+                            <label for="science3">Magnifying glass use</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="science4" name="science">
+                            <label for="science4">Dancing colors experiment</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 5: Interactive Skills -->
+            <div class="slide" id="slide5">
+                <h2>💬 Interactive Skills</h2>
+                
+                <!-- Conversation Section -->
+                <div class="section">
+                    <h3>Conversation Skills 
+                        <div class="fun-checkbox">
+                            <input type="checkbox" id="conversationFun">
+                            <label for="conversationFun">Had fun 😊</label>
+                        </div>
+                    </h3>
+                    <div class="slider-container">
+                        <label>Overall Performance (1-5): <span class="slider-value" id="conversationValue">3</span></label>
+                        <input type="range" class="slider" id="conversationSlider" min="1" max="5" value="3" oninput="updateSliderValue('conversation')">
+                    </div>
+                    <div class="checkbox-grid">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="conversation1" name="conversation">
+                            <label for="conversation1">Daily routine questions</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="conversation2" name="conversation">
+                            <label for="conversation2">Food preferences (snacks)</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="conversation3" name="conversation">
+                            <label for="conversation3">Fruits identification</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="conversation4" name="conversation">
+                            <label for="conversation4">Vegetables recognition</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Arts Section -->
+                <div class="section">
+                    <h3>Arts & Crafts 
+                        <div class="fun-checkbox">
+                            <input type="checkbox" id="artsFun">
+                            <label for="artsFun">Had fun 😊</label>
+                        </div>
+                    </h3>
+                    <div class="slider-container">
+                        <label>Overall Performance (1-5): <span class="slider-value" id="artsValue">3</span></label>
+                        <input type="range" class="slider" id="artsSlider" min="1" max="5" value="3" oninput="updateSliderValue('arts')">
+                    </div>
+                    <div class="checkbox-grid">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="arts1" name="arts">
+                            <label for="arts1">Paper crafts (caterpillar)</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="arts2" name="arts">
+                            <label for="arts2">Origami (Fox, Frog, Ice-cream)</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="arts3" name="arts">
+                            <label for="arts3">Cotton ball projects</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="arts4" name="arts">
+                            <label for="arts4">Creative projects (wobbly crab)</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 6: Physical & Creative -->
+            <div class="slide" id="slide6">
+                <h2>🏃 Physical & Creative Activities</h2>
+                
+                <!-- Physical Education Section -->
+                <div class="section">
+                    <h3>Physical Education 
+                        <div class="fun-checkbox">
+                            <input type="checkbox" id="peFun">
+                            <label for="peFun">Had fun 😊</label>
+                        </div>
+                    </h3>
+                    <div class="slider-container">
+                        <label>Overall Performance (1-5): <span class="slider-value" id="peValue">3</span></label>
+                        <input type="range" class="slider" id="peSlider" min="1" max="5" value="3" oninput="updateSliderValue('pe')">
+                    </div>
+                    <div class="checkbox-grid">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="pe1" name="pe">
+                            <label for="pe1">Ball activities (pass, roll, catch)</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="pe2" name="pe">
+                            <label for="pe2">Racing games</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="pe3" name="pe">
+                            <label for="pe3">Under the arches</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="pe4" name="pe">
+                            <label for="pe4">Football skills</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Puppet Show Section -->
+                <div class="section">
+                    <h3>Puppet Show Participation 
+                        <div class="fun-checkbox">
+                            <input type="checkbox" id="puppetFun">
+                            <label for="puppetFun">Had fun 😊</label>
+                        </div>
+                    </h3>
+                    <div class="slider-container">
+                        <label>Overall Performance (1-5): <span class="slider-value" id="puppetValue">3</span></label>
+                        <input type="range" class="slider" id="puppetSlider" min="1" max="5" value="3" oninput="updateSliderValue('puppet')">
+                    </div>
+                    <div class="checkbox-grid">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="puppet1" name="puppet">
+                            <label for="puppet1">Three Little Pigs engagement</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="puppet2" name="puppet">
+                            <label for="puppet2">Red Riding Hood participation</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="puppet3" name="puppet">
+                            <label for="puppet3">Story comprehension</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="puppet4" name="puppet">
+                            <label for="puppet4">Interactive participation</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 7: Review & Generate -->
+            <div class="slide" id="slide7">
+                <h2>✅ Review & Generate Report</h2>
+                
+                <div id="reviewContent">
+                    <!-- Review content will be populated by JavaScript -->
+                </div>
+
+                <div style="text-align: center; margin: 30px 0;">
+                    <button class="action-btn" onclick="generateComments()">🎯 Generate Rapport Comments</button>
+                    <button class="action-btn clear-btn" onclick="clearAllFields()">🗑️ Clear All Fields</button>
+                </div>
+
+                <!-- Comments Display Section -->
+                <div id="commentsSection" class="comments-section" style="display: none;">
+                    <h3>📝 Generated Comments (Choose One)</h3>
+                    <div id="comment1" class="comment-option"></div>
+                    <div id="comment2" class="comment-option"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="navigation">
+            <button class="nav-btn" id="prevBtn" onclick="previousSlide()" disabled>⬅️ Previous</button>
+            <span id="slideIndicator">1 / 7</span>
+            <button class="nav-btn" id="nextBtn" onclick="nextSlide()">Next ➡️</button>
+        </div>
+    </div>
+
+    <script>
+        let currentSlide = 1;
+        const totalSlides = 7;
+
+        const slideConfig = {
+            1: { title: "Student Information", emoji: "📋" },
+            2: { title: "Language Skills", emoji: "📚" },
+            3: { title: "Academic Skills", emoji: "🔢" },
+            4: { title: "Knowledge Areas", emoji: "🌍" },
+            5: { title: "Interactive Skills", emoji: "💬" },
+            6: { title: "Physical & Creative", emoji: "🏃" },
+            7: { title: "Review & Generate", emoji: "✅" }
+        };
+
+        function updateProgress() {
+            const progressPercent = (currentSlide / totalSlides) * 100;
+            document.getElementById('progressFill').style.width = progressPercent + '%';
+            document.getElementById('progressText').textContent = 
+                `Step ${currentSlide} of ${totalSlides}: ${slideConfig[currentSlide].title}`;
+            document.getElementById('slideIndicator').textContent = `${currentSlide} / ${totalSlides}`;
+        }
+
+        function showSlide(slideNumber) {
+            // Hide all slides
+            document.querySelectorAll('.slide').forEach(slide => {
+                slide.classList.remove('active', 'prev');
+                slide.classList.add('next');
+            });
+
+            // Show current slide
+            const currentSlideElement = document.getElementById(`slide${slideNumber}`);
+            currentSlideElement.classList.remove('next');
+            currentSlideElement.classList.add('active');
+
+            // Update navigation buttons
+            document.getElementById('prevBtn').disabled = slideNumber === 1;
+            document.getElementById('nextBtn').disabled = slideNumber === totalSlides;
+            
+            if (slideNumber === totalSlides) {
+                document.getElementById('nextBtn').textContent = 'Generate Report 🎯';
+            } else {
+                document.getElementById('nextBtn').textContent = 'Next ➡️';
+            }
+
+            updateProgress();
+
+            // Populate review content on last slide
+            if (slideNumber === 7) {
+                populateReviewContent();
+            }
+        }
+
+        function nextSlide() {
+            if (currentSlide === totalSlides) {
+                // On last slide, scroll to generate button
+                document.querySelector('.action-btn').scrollIntoView({ behavior: 'smooth' });
+                return;
+            }
+
+            if (validateCurrentSlide()) {
+                currentSlide++;
+                showSlide(currentSlide);
+            }
+        }
+
+        function previousSlide() {
+            if (currentSlide > 1) {
+                currentSlide--;
+                showSlide(currentSlide);
+            }
+        }
+
+        function validateCurrentSlide() {
+            if (currentSlide === 1) {
+                const studentName = document.getElementById('studentName').value.trim();
+                if (!studentName) {
+                    alert('Please enter the student\'s name before proceeding.');
+                    document.getElementById('studentName').focus();
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        function populateReviewContent() {
+            const studentName = document.getElementById('studentName').value.trim();
+            const gender = document.getElementById('gender').value;
+            const subjects = ['english', 'phonics', 'math', 'iq', 'social', 'science', 'conversation', 'arts', 'pe', 'puppet'];
+            
+            let reviewHTML = '';
+
+            if (!studentName) {
+                reviewHTML = '<div class="alert">⚠️ Please go back and enter the student\'s name to continue.</div>';
+            } else {
+                reviewHTML = `
+                    <div class="review-grid">
+                        <div class="review-card">
+                            <h4>👤 Student Details</h4>
+                            <p><strong>Name:</strong> ${studentName}</p>
+                            <p><strong>Gender:</strong> ${gender || 'Not specified'}</p>
+                        </div>
+                `;
+
+                // Calculate overall performance
+                let totalScore = 0;
+                let subjectCount = 0;
+                let funSubjects = [];
+
+                subjects.forEach(subject => {
+                    const score = parseInt(document.getElementById(subject + 'Slider').value);
+                    const hadFun = document.getElementById(subject + 'Fun').checked;
+                    totalScore += score;
+                    subjectCount++;
+                    if (hadFun) {
+                        funSubjects.push(subject);
+                    }
+                });
+
+                const averageScore = (totalScore / subjectCount).toFixed(1);
+
+                reviewHTML += `
+                        <div class="review-card">
+                            <h4>📊 Performance Summary</h4>
+                            <p><strong>Average Score:</strong> ${averageScore}/5</p>
+                            <p><strong>Subjects Enjoyed:</strong> ${funSubjects.length}</p>
+                        </div>
+                    </div>
+
+                    <div class="section">
+                        <h4>🎯 Ready to Generate Comments</h4>
+                        <p>All information has been collected. Click the "Generate Rapport Comments" button below to create personalized comments for ${studentName}.</p>
+                        <p>You'll receive two different comment options to choose from, both following the established format and including references to subjects where ${studentName} had fun.</p>
+                    </div>
+                `;
+            }
+
+            document.getElementById('reviewContent').innerHTML = reviewHTML;
+        }
+
+        function updateSliderValue(subject) {
+            const slider = document.getElementById(subject + 'Slider');
+            const valueSpan = document.getElementById(subject + 'Value');
+            valueSpan.textContent = slider.value;
+        }
+
+        function clearAllFields() {
+            if (confirm('Are you sure you want to clear all fields? This action cannot be undone.')) {
+                // Clear student information
+                document.getElementById('studentName').value = '';
+                document.getElementById('gender').value = '';
+                document.getElementById('strengths').value = '';
+                document.getElementById('weaknesses').value = '';
+                document.getElementById('overallAttributes').value = 5;
+                document.getElementById('shyness').value = 5;
+
+                // Reset all sliders and checkboxes
+                const subjects = ['english', 'phonics', 'math', 'iq', 'social', 'science', 'conversation', 'arts', 'pe', 'puppet'];
+                subjects.forEach(subject => {
+                    document.getElementById(subject + 'Slider').value = 3;
+                    document.getElementById(subject + 'Value').textContent = '3';
+                    document.getElementById(subject + 'Fun').checked = false;
+                    
+                    const skillCheckboxes = document.querySelectorAll(`input[name="${subject}"]`);
+                    skillCheckboxes.forEach(checkbox => {
+                        checkbox.checked = false;
+                    });
+                });
+
+                // Hide comments section and go back to first slide
+                document.getElementById('commentsSection').style.display = 'none';
+                currentSlide = 1;
+                showSlide(currentSlide);
+                
+                alert('All fields have been cleared successfully!');
+            }
+        }
+
+        // All the existing generation functions from the original file
+        function gatherStudentData() {
+            return {
+                name: document.getElementById('studentName').value.trim(),
+                gender: document.getElementById('gender').value,
+                strengths: document.getElementById('strengths').value.trim(),
+                weaknesses: document.getElementById('weaknesses').value.trim(),
+                overallAttributes: document.getElementById('overallAttributes').value,
+                shyness: document.getElementById('shyness').value,
+                subjects: {
+                    english: {
+                        score: document.getElementById('englishSlider').value,
+                        skills: getCheckedSkills('english'),
+                        hadFun: document.getElementById('englishFun').checked
+                    },
+                    phonics: {
+                        score: document.getElementById('phonicsSlider').value,
+                        skills: getCheckedSkills('phonics'),
+                        hadFun: document.getElementById('phonicsFun').checked
+                    },
+                    math: {
+                        score: document.getElementById('mathSlider').value,
+                        skills: getCheckedSkills('math'),
+                        hadFun: document.getElementById('mathFun').checked
+                    },
+                    iq: {
+                        score: document.getElementById('iqSlider').value,
+                        skills: getCheckedSkills('iq'),
+                        hadFun: document.getElementById('iqFun').checked
+                    },
+                    social: {
+                        score: document.getElementById('socialSlider').value,
+                        skills: getCheckedSkills('social'),
+                        hadFun: document.getElementById('socialFun').checked
+                    },
+                    science: {
+                        score: document.getElementById('scienceSlider').value,
+                        skills: getCheckedSkills('science'),
+                        hadFun: document.getElementById('scienceFun').checked
+                    },
+                    conversation: {
+                        score: document.getElementById('conversationSlider').value,
+                        skills: getCheckedSkills('conversation'),
+                        hadFun: document.getElementById('conversationFun').checked
+                    },
+                    arts: {
+                        score: document.getElementById('artsSlider').value,
+                        skills: getCheckedSkills('arts'),
+                        hadFun: document.getElementById('artsFun').checked
+                    },
+                    pe: {
+                        score: document.getElementById('peSlider').value,
+                        skills: getCheckedSkills('pe'),
+                        hadFun: document.getElementById('peFun').checked
+                    },
+                    puppet: {
+                        score: document.getElementById('puppetSlider').value,
+                        skills: getCheckedSkills('puppet'),
+                        hadFun: document.getElementById('puppetFun').checked
+                    }
+                }
+            };
+        }
+
+        function getCheckedSkills(subject) {
+            const checkboxes = document.querySelectorAll(`input[name="${subject}"]:checked`);
+            return Array.from(checkboxes).map(cb => cb.nextElementSibling.textContent);
+        }
+
+        function getFunSubjects(subjects) {
+            const subjectNames = {
+                english: 'English',
+                phonics: 'Phonics',
+                math: 'Mathematics',
+                iq: 'General Knowledge',
+                social: 'Social Studies',
+                science: 'Science',
+                conversation: 'Communication',
+                arts: 'Arts & Crafts',
+                pe: 'Physical Education',
+                puppet: 'Story Participation'
+            };
+            
+            return Object.entries(subjects)
+                .filter(([key, data]) => data.hadFun)
+                .map(([key, data]) => subjectNames[key]);
+        }
+
+        function generateComments() {
+            const studentName = document.getElementById('studentName').value.trim();
+            if (!studentName) {
+                alert('Please enter the student\'s name first.');
+                currentSlide = 1;
+                showSlide(currentSlide);
+                return;
+            }
+
+            const studentData = gatherStudentData();
+            const comment1 = generateComment1(studentName, studentData);
+            const comment2 = generateComment2(studentName, studentData);
+
+            document.getElementById('comment1').innerHTML = `
+                <h4>Comment Option 1:</h4>
+                <p>${comment1}</p>
+                <button class="copy-btn" onclick="copyToClipboard('${comment1.replace(/'/g, "\\'")}')">📋 Copy Comment 1</button>
+            `;
+
+            document.getElementById('comment2').innerHTML = `
+                <h4>Comment Option 2:</h4>
+                <p>${comment2}</p>
+                <button class="copy-btn" onclick="copyToClipboard('${comment2.replace(/'/g, "\\'")}')">📋 Copy Comment 2</button>
+            `;
+
+            document.getElementById('commentsSection').style.display = 'block';
+            document.getElementById('commentsSection').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Include all the original comment generation functions
+        function generateComment1(name, data) {
+            const strengths = getTopStrengths(data.subjects);
+            const performanceLevel = getOverallPerformance(data.subjects);
+            
+            let comment = `${name} has shown ${performanceLevel} progress throughout this term. `;
+            
+            if (strengths.length > 0) {
+                comment += `${name} particularly excels in ${strengths.slice(0, 2).join(' and ')}, demonstrating strong foundational skills. `;
+            }
+            
+            if (data.strengths) {
+                comment += `${name}'s natural strengths in ${data.strengths.toLowerCase()} have been evident in classroom activities. `;
+            }
+            
+            comment += getSpecificAchievements(data.subjects, name);
+            
+            const funSubjects = getFunSubjects(data.subjects);
+            if (funSubjects.length > 0) {
+                if (funSubjects.length === 1) {
+                    comment += `${name} particularly enjoyed ${funSubjects[0]} activities and showed great enthusiasm during these lessons. `;
+                } else if (funSubjects.length === 2) {
+                    comment += `${name} had lots of fun with ${funSubjects[0]} and ${funSubjects[1]} activities, showing wonderful engagement. `;
+                } else {
+                    comment += `${name} demonstrated real joy in learning, particularly enjoying ${funSubjects.slice(0, 2).join(', ')} and other activities throughout the term. `;
+                }
+            }
+            
+            if (parseInt(data.shyness) > 6) {
+                comment += `While initially reserved, ${name} has gradually become more confident in participating in group activities. `;
+            } else if (parseInt(data.shyness) < 4) {
+                comment += `${name} shows excellent social confidence and actively participates in all classroom discussions. `;
+            }
+            
+            comment += `Keep up the wonderful work, ${name}! Your enthusiasm for learning is truly inspiring.`;
+            
+            return comment;
+        }
+
+        function generateComment2(name, data) {
+            const strengths = getTopStrengths(data.subjects);
+            const performanceLevel = getOverallPerformance(data.subjects);
+            
+            let comment = `${name} has demonstrated ${performanceLevel} development across various learning areas this term. `;
+            
+            comment += getSpecificSubjectComments(data.subjects, name);
+            
+            const funSubjects = getFunSubjects(data.subjects);
+            if (funSubjects.length > 0) {
+                if (funSubjects.length === 1) {
+                    comment += `It's been wonderful to see how much ${name} enjoyed ${funSubjects[0]} this term. `;
+                } else if (funSubjects.length === 2) {
+                    comment += `${name} showed real enthusiasm for ${funSubjects[0]} and ${funSubjects[1]}, which made learning even more enjoyable. `;
+                } else {
+                    comment += `${name}'s enthusiasm was particularly evident in ${funSubjects.slice(0, 2).join(' and ')} activities, creating a positive learning atmosphere. `;
+                }
+            }
+            
+            if (data.strengths) {
+                comment += `${name}'s abilities in ${data.strengths.toLowerCase()} continue to shine through in daily activities. `;
+            }
+            
+            if (parseInt(data.overallAttributes) >= 7) {
+                comment += `${name} consistently shows a positive attitude towards learning and works well with peers. `;
+            }
+            
+            if (data.weaknesses) {
+                comment += `We will continue to support ${name} in developing skills in areas that need more practice. `;
+            }
+            
+            comment += `${name}, you should be proud of all your achievements this term. Your hard work and dedication are truly commendable!`;
+            
+            return comment;
+        }
+
+        function getTopStrengths(subjects) {
+            const subjectNames = {
+                english: 'English',
+                phonics: 'Phonics',
+                math: 'Mathematics',
+                iq: 'General Knowledge',
+                social: 'Social Studies',
+                science: 'Science',
+                conversation: 'Communication',
+                arts: 'Arts & Crafts',
+                pe: 'Physical Education',
+                puppet: 'Story Participation'
+            };
+            
+            return Object.entries(subjects)
+                .filter(([key, data]) => parseInt(data.score) >= 4)
+                .map(([key, data]) => subjectNames[key])
+                .slice(0, 3);
+        }
+
+        function getOverallPerformance(subjects) {
+            const scores = Object.values(subjects).map(s => parseInt(s.score));
+            const average = scores.reduce((a, b) => a + b, 0) / scores.length;
+            
+            if (average >= 4.5) return 'excellent';
+            if (average >= 3.5) return 'good';
+            if (average >= 2.5) return 'steady';
+            return 'developing';
+        }
+
+        function getSpecificAchievements(subjects, name) {
+            let achievements = '';
+            
+            if (parseInt(subjects.math.score) >= 4) {
+                achievements += `${name} shows strong number recognition and counting skills. `;
+            }
+            
+            if (parseInt(subjects.english.score) >= 4) {
+                achievements += `Letter recognition and vocabulary development are particular strengths for ${name}. `;
+            }
+            
+            if (parseInt(subjects.arts.score) >= 4) {
+                achievements += `${name} displays creativity and fine motor skills in arts and crafts activities. `;
+            }
+            
+            return achievements;
+        }
+
+        function getSpecificSubjectComments(subjects, name) {
+            let comments = '';
+            const highScoring = Object.entries(subjects).filter(([key, data]) => parseInt(data.score) >= 4);
+            
+            if (highScoring.length > 0) {
+                const [subject, data] = highScoring[0];
+                const subjectMap = {
+                    english: 'English language activities',
+                    phonics: 'phonetic awareness',
+                    math: 'mathematical concepts',
+                    science: 'science exploration',
+                    arts: 'creative expression'
+                };
+                
+                comments += `${name} has shown particular strength in ${subjectMap[subject] || subject}. `;
+            }
+            
+            return comments;
+        }
+
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(function() {
+                alert('Comment copied to clipboard! 📋✅');
+            }, function(err) {
+                console.error('Could not copy text: ', err);
+                const textArea = document.createElement('textarea');
+                textArea.value = text;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                alert('Comment copied to clipboard! 📋✅');
+            });
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowLeft') {
+                previousSlide();
+            } else if (e.key === 'ArrowRight') {
+                nextSlide();
+            }
+        });
+
+        // Initialize
+        showSlide(1);
+    </script>
+</body>
+</html>
