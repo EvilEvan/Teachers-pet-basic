@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kindergarten Rapport Generator - Enhanced</title>
+    <title>Kindergarten Rapport Generator</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -15,10 +15,8 @@
             --background-color: #f5f7fa;
             --card-background: #ffffff;
             --text-color: #333333;
-            --text-light: #666666;
-            --border-color: #e0e0e0;
+            --text-light: #666666;            --border-color: #e0e0e0;
             --border-radius: 12px;
-            --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
             --transition: all 0.3s ease;
         }
 
@@ -45,7 +43,6 @@
         }        .navbar {
             background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
             padding: 1rem 0;
-            box-shadow: var(--shadow);
             position: sticky;
             top: 0;
             z-index: 100;
@@ -67,45 +64,18 @@
             text-decoration: none;
         }
 
-        .navbar-controls {
-            display: flex;
-            gap: 1rem;
-            align-items: center;
-        }
-
-        .theme-toggle, .save-btn, .load-btn {
-            background: rgba(255, 255, 255, 0.2);
-            border: none;
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: var(--transition);
-            font-size: 0.9rem;
-        }
-
-        .theme-toggle:hover, .save-btn:hover, .load-btn:hover {
-            background: rgba(255, 255, 255, 0.3);
-        }
-
         .main-container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 2rem;
-        }
-
-        .container {
+        }        .container {
             background-color: var(--card-background);
             border-radius: var(--border-radius);
             padding: 2rem;
-            box-shadow: var(--shadow);
             margin-bottom: 2rem;
             transition: var(--transition);
-        }
-
-        .container:hover {
+        }        .container:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
         }
 
         h1 {
@@ -148,127 +118,11 @@
             padding: 2rem;
             border-radius: var(--border-radius);
             margin-bottom: 2rem;
-        }
-
-        .photo-upload {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-
-        .photo-preview {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            border: 3px solid var(--border-color);
-            margin: 0 auto 1rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: var(--background-color);
-            overflow: hidden;
-        }
-
-        .photo-preview img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .photo-preview i {
-            font-size: 3rem;
-            color: var(--text-light);
-        }
-
-        .upload-btn {
-            background-color: var(--secondary-color);
-            color: white;
-            border: none;
-            padding: 0.5rem 1rem;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .upload-btn:hover {
-            background-color: var(--secondary-dark);
-        }
-
-        .student-grid {
+        }        .student-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 1.5rem;
             margin-bottom: 2rem;
-        }
-
-        .subject-container {
-            background: linear-gradient(135deg, #fff8f0, #fff0e6);
-            border: 2px solid var(--border-color);
-            padding: 2rem;
-            border-radius: var(--border-radius);
-        }        .subject-section {
-            margin-bottom: 1.5rem;
-            background-color: var(--card-background);
-            border: 1px solid var(--border-color);
-            border-radius: var(--border-radius);
-            overflow: hidden;
-            transition: var(--transition);
-        }
-
-        .subject-section:hover {
-            border-color: var(--primary-color);
-        }
-
-        .subject-title {
-            font-weight: 600;
-            padding: 1rem;
-            color: var(--primary-color);
-            display: flex;
-            align-items: center;
-            cursor: pointer;
-            background: linear-gradient(135deg, #f8f9ff, #ffffff);
-            border-bottom: 1px solid var(--border-color);
-            transition: var(--transition);
-        }
-
-        .subject-title:hover {
-            background: linear-gradient(135deg, #e8f0ff, #f0f7ff);
-        }
-
-        .subject-title.expanded {
-            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
-            color: white;
-        }
-
-        .subject-content {
-            padding: 1.5rem;
-            display: none;
-            background-color: var(--card-background);
-        }
-
-        .subject-content.expanded {
-            display: block;
-            animation: slideDown 0.3s ease;
-        }
-
-        @keyframes slideDown {
-            from {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .subject-description {
-            background: linear-gradient(135deg, #f0f8ff, #e6f3ff);
-            padding: 1rem;
-            border-radius: 8px;
-            margin-bottom: 1rem;
-            border-left: 4px solid var(--primary-color);
-            font-style: italic;
-            color: var(--text-light);
         }
 
         .subject-row {
@@ -300,66 +154,13 @@
             font-family: inherit;
             font-size: 1rem;
             transition: var(--transition);
-        }
-
-        input[type="text"]:focus, input[type="email"]:focus, select:focus, textarea:focus {
+        }        input[type="text"]:focus, input[type="email"]:focus, select:focus, textarea:focus {
             outline: none;
             border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(74, 109, 167, 0.1);
-        }
-
-        textarea {
+        }        textarea {
             min-height: 100px;
             resize: vertical;
-        }
-
-        .slider-container {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            background: linear-gradient(135deg, #f8f9ff, #ffffff);
-            padding: 1rem;
-            border-radius: 8px;
-            border: 1px solid var(--border-color);
-        }
-
-        .slider {
-            flex: 1;
-            height: 6px;
-            border-radius: 3px;
-            background: var(--border-color);
-            outline: none;
-            -webkit-appearance: none;
-            cursor: pointer;
-        }
-
-        .slider::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background: var(--primary-color);
-            cursor: pointer;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-            transition: var(--transition);
-        }
-
-        .slider::-webkit-slider-thumb:hover {
-            background: var(--primary-dark);
-            transform: scale(1.1);
-        }
-
-        .slider-value {
-            min-width: 40px;
-            text-align: center;
-            font-weight: 600;
-            color: var(--primary-color);
-            background: white;
-            padding: 0.5rem;
-            border-radius: 6px;
-            border: 1px solid var(--border-color);
-        }        .comment-container {
+        }.comment-container {
             margin-top: 2rem;
             background: linear-gradient(135deg, #f0fff4, #e6ffed);
             border: 2px solid var(--secondary-color);
@@ -435,21 +236,15 @@
         .btn-primary {
             background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
             color: white;
-        }
-
-        .btn-primary:hover {
+        }        .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(74, 109, 167, 0.3);
         }
 
         .btn-secondary {
             background: linear-gradient(135deg, var(--secondary-color), var(--secondary-dark));
             color: white;
-        }
-
-        .btn-secondary:hover {
+        }        .btn-secondary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(92, 184, 92, 0.3);
         }
 
         .btn-outline {
@@ -475,11 +270,8 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
-        }
-
-        .copy-button:hover {
+        }        .copy-button:hover {
             transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(92, 184, 92, 0.3);
         }
 
         .toggle-icon {
@@ -581,9 +373,7 @@
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
-        }
-
-        .notification {
+        }        .notification {
             position: fixed;
             top: 2rem;
             right: 2rem;
@@ -591,7 +381,6 @@
             color: white;
             padding: 1rem 1.5rem;
             border-radius: 8px;
-            box-shadow: var(--shadow);
             z-index: 1000;
             transform: translateX(100%);
             transition: transform 0.3s ease;
@@ -688,477 +477,38 @@
             <a href="#" class="navbar-brand">
                 <i class="fas fa-graduation-cap"></i> Kindergarten Rapport Generator
             </a>
-            <div class="navbar-controls">
-                <button class="load-btn" onclick="loadStudentData()">
-                    <i class="fas fa-folder-open"></i> Load
-                </button>
-                <button class="save-btn" onclick="saveStudentData()">
-                    <i class="fas fa-save"></i> Save
-                </button>
-                <button class="theme-toggle" onclick="toggleTheme()">
-                    <i class="fas fa-moon"></i>
-                </button>
-            </div>
         </div>
-    </nav>
-
-    <div class="main-container">
-        <div class="progress-bar">
-            <div class="progress-fill" id="progress-fill"></div>
-        </div>        <div class="container">
+    </nav>    <div class="main-container">
+        <div class="container">
             <h1><i class="fas fa-child"></i> Kindergarten Rapport Generator</h1>
-            
-            <div class="student-info">
-                <h2><i class="fas fa-user"></i> Student Information</h2>
-                
-                <div class="photo-upload">
-                    <div class="photo-preview" id="photo-preview">
-                        <i class="fas fa-user-circle"></i>
-                    </div>
-                    <input type="file" id="photo-input" accept="image/*" style="display: none;" onchange="handlePhotoUpload(event)">
-                    <button class="upload-btn" onclick="document.getElementById('photo-input').click()">
-                        <i class="fas fa-camera"></i> Upload Photo
-                    </button>
-                </div>
-
-                <div class="student-grid">
-                    <div class="form-group">
-                        <label for="student-name">Student Name *</label>
-                        <input type="text" id="student-name" placeholder="Enter student's full name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="student-gender">Gender</label>
-                        <select id="student-gender">
-                            <option value="male">Male</option>
-                            <option value="female">Female</option>
-                            <option value="other">Other</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="student-age">Age</label>
-                        <input type="number" id="student-age" min="3" max="7" placeholder="Age">
-                    </div>
-                    <div class="form-group">
-                        <label for="student-class">Class/Grade</label>
-                        <input type="text" id="student-class" placeholder="e.g., Kindergarten A">
-                    </div>
-                    <div class="form-group">
-                        <label for="teacher-name">Teacher Name</label>
-                        <input type="text" id="teacher-name" placeholder="Your name">
-                    </div>
-                    <div class="form-group">
-                        <label for="report-period">Report Period</label>
-                        <select id="report-period">
-                            <option value="term1">Term 1</option>
-                            <option value="term2">Term 2</option>
-                            <option value="term3">Term 3</option>
-                            <option value="semester1">Semester 1</option>
-                            <option value="semester2">Semester 2</option>
-                            <option value="annual">Annual Report</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="strength-weakness">
-                    <div class="form-group">
-                        <label for="strengths">Strengths</label>
-                        <textarea id="strengths" placeholder="List the student's key strengths and positive attributes"></textarea>
-                        <div class="quick-fill">
-                            <small>Quick fill suggestions:</small>
-                            <div class="quick-fill-buttons">
-                                <button class="quick-fill-btn" onclick="addQuickText('strengths', 'Creative and imaginative')">Creative</button>
-                                <button class="quick-fill-btn" onclick="addQuickText('strengths', 'Helpful to classmates')">Helpful</button>
-                                <button class="quick-fill-btn" onclick="addQuickText('strengths', 'Good listener')">Good listener</button>
-                                <button class="quick-fill-btn" onclick="addQuickText('strengths', 'Follows instructions well')">Follows instructions</button>
-                                <button class="quick-fill-btn" onclick="addQuickText('strengths', 'Curious about learning')">Curious</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="weaknesses">Areas for Improvement</label>
-                        <textarea id="weaknesses" placeholder="Areas where the student could improve or needs support"></textarea>
-                        <div class="quick-fill">
-                            <small>Quick fill suggestions:</small>
-                            <div class="quick-fill-buttons">
-                                <button class="quick-fill-btn" onclick="addQuickText('weaknesses', 'Needs encouragement to participate')">Participation</button>
-                                <button class="quick-fill-btn" onclick="addQuickText('weaknesses', 'Could improve focus during activities')">Focus</button>
-                                <button class="quick-fill-btn" onclick="addQuickText('weaknesses', 'Needs practice with fine motor skills')">Fine motor skills</button>
-                                <button class="quick-fill-btn" onclick="addQuickText('weaknesses', 'Could benefit from more independent work')">Independence</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <div class="stat-value" id="overall-display">7</div>
-                        <div class="stat-label">Overall Performance</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-value" id="shyness-display">5</div>
-                        <div class="stat-label">Social Confidence</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-value" id="selected-subjects">0</div>
-                        <div class="stat-label">Selected Subjects</div>
-                    </div>
-                </div>
-
-                <div class="subject-row">
-                    <div class="form-group">
-                        <label for="overall-attributes">Overall Performance (0-10)</label>
-                        <div class="slider-container">
-                            <input type="range" id="overall-attributes" class="slider" min="0" max="10" value="7">
-                            <span class="slider-value" id="overall-attributes-value">7</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="subject-row">
-                    <div class="form-group">
-                        <label for="shyness">Social Confidence (0-10) - Higher = More Confident</label>
-                        <div class="slider-container">
-                            <input type="range" id="shyness" class="slider" min="0" max="10" value="5">
-                            <span class="slider-value" id="shyness-value">5</span>
-                        </div>
-                    </div>
-                </div>
+              <!-- Student Information Component -->
+            <iframe 
+                id="student-info-frame" 
+                src="student-information.html" 
+                style="width: 100%; height: 600px; border: none; border-radius: 12px; overflow: hidden;"
+                onload="initializeStudentInfoFrame()">
+            </iframe>
+              <!-- Subject Selection Component -->
+            <iframe 
+                src="Subjects.html" 
+                id="subjects-frame"
+                style="width: 100%; height: 800px; border: none; border-radius: 12px;"
+                onload="initializeSubjectsFrame()">
+            </iframe><!-- Action Buttons -->
+            <div class="buttons">
+                <button class="btn btn-primary" id="generate-button">
+                    <i class="fas fa-magic"></i> Generate Comments
+                </button>
+                <button class="btn btn-outline" onclick="clearAll()">
+                    <i class="fas fa-trash"></i> Clear All
+                </button>
+                <button class="btn btn-secondary" onclick="fillSampleData()">
+                    <i class="fas fa-database"></i> Sample Data
+                </button>
+                <button class="btn btn-outline" onclick="testFrames()" style="background: #ff6b35; color: white;">
+                    <i class="fas fa-bug"></i> Test Frames
+                </button>
             </div>
-
-            <div class="behavioral-section">
-                <h2><i class="fas fa-heart"></i> Behavioral Observations</h2>
-                <div class="behavioral-grid">
-                    <div class="form-group">
-                        <label for="cooperation">Cooperation (0-5)</label>
-                        <div class="slider-container">
-                            <input type="range" id="cooperation" class="slider" min="0" max="5" value="3">
-                            <span class="slider-value" id="cooperation-value">3</span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="attention">Attention Span (0-5)</label>
-                        <div class="slider-container">
-                            <input type="range" id="attention" class="slider" min="0" max="5" value="3">
-                            <span class="slider-value" id="attention-value">3</span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="independence">Independence (0-5)</label>
-                        <div class="slider-container">
-                            <input type="range" id="independence" class="slider" min="0" max="5" value="3">
-                            <span class="slider-value" id="independence-value">3</span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="creativity">Creativity (0-5)</label>
-                        <div class="slider-container">
-                            <input type="range" id="creativity" class="slider" min="0" max="5" value="3">
-                            <span class="slider-value" id="creativity-value">3</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="container">
-                <h2><i class="fas fa-book"></i> Subject Performance</h2>
-                
-                <!-- ENGLISH -->            <div class="subject-section">
-                <div class="subject-title" onclick="toggleSubject(this)">
-                    <span class="toggle-icon">▶</span>
-                    <input type="checkbox" id="english-checkbox" class="checkbox-custom">
-                    <label for="english-checkbox">ENGLISH</label>
-                </div>
-                <div class="subject-content">
-                    <div class="subject-description">
-                        <p>Draw lines to match the letter with the correct picture, Trace the letter and color. Draw lines to match the same letters. Vocabulary: A-Ant, B-Bee, C-Cat</p>
-                    </div>
-                    <div class="subject-row">
-                        <div class="form-group">
-                            <label for="english-performance">Performance (0-5)</label>
-                            <div class="slider-container">
-                                <input type="range" id="english-performance" class="slider" min="0" max="5" value="3">
-                                <span class="slider-value" id="english-performance-value">3</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="subject-row">
-                        <div class="form-group">
-                            <label for="english-notes">Additional Notes</label>
-                            <textarea id="english-notes" placeholder="Enter specific observations, achievements, or areas needing attention for English"></textarea>
-                        </div>
-                    </div>
-                </div>
-            </div>            
-            <!-- PHONICS -->
-            <div class="subject-section">
-                <div class="subject-title" onclick="toggleSubject(this)">
-                    <span class="toggle-icon">▶</span>
-                    <input type="checkbox" id="phonics-checkbox" class="checkbox-custom">
-                    <label for="phonics-checkbox">PHONICS</label>
-                </div>
-                <div class="subject-content">
-                    <div class="subject-description">
-                        <p>Letter A-E, Revision A/B/C. Vocabulary: Annie Ant-Axe, Benny Bear-Ball, Candy Cat-Cut, Danny Dog-Dig, Eddie Elephant-Egg.</p>
-                    </div>
-                    <div class="subject-row">
-                        <div class="form-group">
-                            <label for="phonics-performance">Performance (0-5)</label>
-                            <div class="slider-container">
-                                <input type="range" id="phonics-performance" class="slider" min="0" max="5" value="3">
-                                <span class="slider-value" id="phonics-performance-value">3</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="subject-row">
-                        <div class="form-group">
-                            <label for="phonics-notes">Additional Notes</label>
-                            <textarea id="phonics-notes" placeholder="Enter specific observations for Phonics"></textarea>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- MATHEMATICS -->
-            <div class="subject-section">
-                <div class="subject-title" onclick="toggleSubject(this)">
-                    <span class="toggle-icon">▶</span>
-                    <input type="checkbox" id="mathematics-checkbox" class="checkbox-custom">
-                    <label for="mathematics-checkbox">MATHEMATICS</label>
-                </div>
-                <div class="subject-content">
-                    <div class="subject-description">
-                        <p>Count from 1-10. Trace numbers 1-3 following the dotted line and colouring the correct amount of pictures. Place the correct amount of pictures in the boxes. Counting from 1-10 with our fingers. Draw lines to match the correct number to the pictures.</p>
-                    </div>
-                    <div class="subject-row">
-                        <div class="form-group">
-                            <label for="mathematics-performance">Performance (0-5)</label>
-                            <div class="slider-container">
-                                <input type="range" id="mathematics-performance" class="slider" min="0" max="5" value="3">
-                                <span class="slider-value" id="mathematics-performance-value">3</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="subject-row">
-                        <div class="form-group">
-                            <label for="mathematics-notes">Additional Notes</label>
-                            <textarea id="mathematics-notes" placeholder="Enter specific observations for Mathematics"></textarea>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- I.Q -->
-            <div class="subject-section">
-                <div class="subject-title" onclick="toggleSubject(this)">
-                    <span class="toggle-icon">▶</span>
-                    <input type="checkbox" id="iq-checkbox" class="checkbox-custom">
-                    <label for="iq-checkbox">I.Q</label>
-                </div>
-                <div class="subject-content">
-                    <div class="subject-description">
-                        <p>Animal and their food and different food that animals can eat, Shapes and colours, Objects in the Dining Room/ Bathroom.</p>
-                    </div>
-                    <div class="subject-row">
-                        <div class="form-group">
-                            <label for="iq-performance">Performance (0-5)</label>
-                            <div class="slider-container">
-                                <input type="range" id="iq-performance" class="slider" min="0" max="5" value="3">
-                                <span class="slider-value" id="iq-performance-value">3</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="subject-row">
-                        <div class="form-group">
-                            <label for="iq-notes">Additional Notes</label>
-                            <textarea id="iq-notes" placeholder="Enter specific observations for I.Q"></textarea>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- SOCIAL STUDIES -->
-            <div class="subject-section">
-                <div class="subject-title" onclick="toggleSubject(this)">
-                    <span class="toggle-icon">▶</span>
-                    <input type="checkbox" id="social-studies-checkbox" class="checkbox-custom">
-                    <label for="social-studies-checkbox">SOCIAL STUDIES</label>
-                </div>
-                <div class="subject-content">
-                    <div class="subject-description">
-                        <p>Farm animals- characteristic, abilities, sounds, food, offsprings (babies), My Body- My face</p>
-                    </div>
-                    <div class="subject-row">
-                        <div class="form-group">
-                            <label for="social-studies-performance">Performance (0-5)</label>
-                            <div class="slider-container">
-                                <input type="range" id="social-studies-performance" class="slider" min="0" max="5" value="3">
-                                <span class="slider-value" id="social-studies-performance-value">3</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="subject-row">
-                        <div class="form-group">
-                            <label for="social-studies-notes">Additional Notes</label>
-                            <textarea id="social-studies-notes" placeholder="Enter specific observations for Social Studies"></textarea>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- SCIENCE -->
-            <div class="subject-section">
-                <div class="subject-title" onclick="toggleSubject(this)">
-                    <span class="toggle-icon">▶</span>
-                    <input type="checkbox" id="science-checkbox" class="checkbox-custom">
-                    <label for="science-checkbox">SCIENCE</label>
-                </div>
-                <div class="subject-content">
-                    <div class="subject-description">
-                        <p>Floating Sinking eggs- Introducing the concept of buoyancy and how salt affects water density. Green beans dancing (soda)-Introducing the effects of gas buoyancy with soda water.</p>
-                    </div>
-                    <div class="subject-row">
-                        <div class="form-group">
-                            <label for="science-performance">Performance (0-5)</label>
-                            <div class="slider-container">
-                                <input type="range" id="science-performance" class="slider" min="0" max="5" value="3">
-                                <span class="slider-value" id="science-performance-value">3</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="subject-row">
-                        <div class="form-group">
-                            <label for="science-notes">Additional Notes</label>
-                            <textarea id="science-notes" placeholder="Enter specific observations for Science"></textarea>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- CONVERSATION -->
-            <div class="subject-section">
-                <div class="subject-title" onclick="toggleSubject(this)">
-                    <span class="toggle-icon">▶</span>
-                    <input type="checkbox" id="conversation-checkbox" class="checkbox-custom">
-                    <label for="conversation-checkbox">CONVERSATION</label>
-                </div>
-                <div class="subject-content">
-                    <div class="subject-description">
-                        <p>How old are you? - I am three years old. What do you do in the morning? – I wake up. What do you do after eating? -I brush my teeth.</p>
-                    </div>
-                    <div class="subject-row">
-                        <div class="form-group">
-                            <label for="conversation-performance">Performance (0-5)</label>
-                            <div class="slider-container">
-                                <input type="range" id="conversation-performance" class="slider" min="0" max="5" value="3">
-                                <span class="slider-value" id="conversation-performance-value">3</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="subject-row">
-                        <div class="form-group">
-                            <label for="conversation-notes">Additional Notes</label>
-                            <textarea id="conversation-notes" placeholder="Enter specific observations for Conversation"></textarea>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- ARTS -->
-            <div class="subject-section">
-                <div class="subject-title" onclick="toggleSubject(this)">
-                    <span class="toggle-icon">▶</span>
-                    <input type="checkbox" id="arts-checkbox" class="checkbox-custom">
-                    <label for="arts-checkbox">ARTS</label>
-                </div>
-                <div class="subject-content">
-                    <div class="subject-description">
-                        <p>Paper caterpillar making, Origami- Fox, Frog, Ice-cream. Cotton ball sheep. Wobbly crab.</p>
-                    </div>
-                    <div class="subject-row">
-                        <div class="form-group">
-                            <label for="arts-performance">Performance (0-5)</label>
-                            <div class="slider-container">
-                                <input type="range" id="arts-performance" class="slider" min="0" max="5" value="3">
-                                <span class="slider-value" id="arts-performance-value">3</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="subject-row">
-                        <div class="form-group">
-                            <label for="arts-notes">Additional Notes</label>
-                            <textarea id="arts-notes" placeholder="Enter specific observations for Arts"></textarea>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- PHYSICAL EDUCATION -->
-            <div class="subject-section">
-                <div class="subject-title" onclick="toggleSubject(this)">
-                    <span class="toggle-icon">▶</span>
-                    <input type="checkbox" id="pe-checkbox" class="checkbox-custom">
-                    <label for="pe-checkbox">PHYSICAL EDUCATION</label>
-                </div>
-                <div class="subject-content">
-                    <div class="subject-description">
-                        <p>Pass the ball, Roll the ball, Drop and catch the ball, racing game, under the arches, football</p>
-                    </div>
-                    <div class="subject-row">
-                        <div class="form-group">
-                            <label for="pe-performance">Performance (0-5)</label>
-                            <div class="slider-container">
-                                <input type="range" id="pe-performance" class="slider" min="0" max="5" value="3">
-                                <span class="slider-value" id="pe-performance-value">3</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="subject-row">
-                        <div class="form-group">
-                            <label for="pe-notes">Additional Notes</label>
-                            <textarea id="pe-notes" placeholder="Enter specific observations for Physical Education"></textarea>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- PUPPET SHOW -->
-            <div class="subject-section">
-                <div class="subject-title" onclick="toggleSubject(this)">
-                    <span class="toggle-icon">▶</span>
-                    <input type="checkbox" id="puppet-checkbox" class="checkbox-custom">
-                    <label for="puppet-checkbox">PUPPET SHOW</label>
-                </div>
-                <div class="subject-content">
-                    <div class="subject-description">
-                        <p>Three little pigs, The Red riding hood, the panicked rabbit, Noonid doesn't eat vegetables. Lion and the Mouse.</p>
-                    </div>
-                    <div class="subject-row">
-                        <div class="form-group">
-                            <label for="puppet-performance">Performance (0-5)</label>
-                            <div class="slider-container">
-                                <input type="range" id="puppet-performance" class="slider" min="0" max="5" value="3">
-                                <span class="slider-value" id="puppet-performance-value">3</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="subject-row">
-                        <div class="form-group">
-                            <label for="puppet-notes">Additional Notes</label>
-                            <textarea id="puppet-notes" placeholder="Enter specific observations for Puppet Show"></textarea>
-                        </div>
-                    </div>
-                </div>
-            </div></div>
-        
-        <div class="buttons">
-            <button class="btn btn-primary" id="generate-button">
-                <i class="fas fa-magic"></i> Generate Comments
-            </button>
-            <button class="btn btn-outline" onclick="clearAll()">
-                <i class="fas fa-refresh"></i> Clear All
-            </button>
-            <button class="btn btn-outline" onclick="fillSampleData()">
-                <i class="fas fa-user"></i> Load Sample
-            </button>
         </div>
         
         <div class="comment-container" id="comment-container" style="display: none;">
@@ -1224,170 +574,358 @@
         // Global variables
         let currentTheme = 'light';
         let studentData = {};
-        
-        // Initialize the application
+        let studentInfoFrame;
+        let subjectsFrame; // Add subjects frame reference
+          // Initialize the application
         document.addEventListener('DOMContentLoaded', function() {
             initializeApp();
             loadTheme();
-            setupEventListeners();
-            updateProgress();
-        });
-
-        function initializeApp() {
-            // Initialize all slider value displays
-            document.querySelectorAll('.slider').forEach(slider => {
-                const valueDisplay = document.getElementById(`${slider.id}-value`);
-                slider.addEventListener('input', () => {
-                    valueDisplay.textContent = slider.value;
-                    updateStats();
-                    updateProgress();
-                });
-            });
-
-            // Initialize checkboxes
-            document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
-                checkbox.addEventListener('change', () => {
-                    updateStats();
-                    updateProgress();
-                });
-            });
-
-            // Initialize form inputs
-            document.querySelectorAll('input, textarea, select').forEach(input => {
-                input.addEventListener('input', updateProgress);
-            });
-        }
-
-        function setupEventListeners() {
-            // Generate button
-            document.getElementById('generate-button').addEventListener('click', function() {
-                const studentName = document.getElementById('student-name').value.trim();
-                if (!studentName) {
-                    showNotification('Please enter the student\'s name!', 'error');
-                    return;
+            setupMessageListener();
+            // Wait for iframes to load before setting up event listeners
+            waitForIframesToLoad();
+        });        // Wait for iframes to load properly
+        function waitForIframesToLoad() {
+            let studentFrameReady = false;
+            let subjectsFrameReady = false;
+            
+            function checkIfReady() {
+                if (studentFrameReady && subjectsFrameReady) {
+                    console.log('Both iframes are ready, setting up event listeners');
+                    setupEventListeners();
+                    // Only update progress after both frames are ready
+                    setTimeout(() => {
+                        updateProgress();
+                    }, 200);
                 }
-                
-                showLoading();
-                setTimeout(() => {
-                    generateComments();
-                    hideLoading();
-                    document.getElementById('comment-container').style.display = 'block';
-                    document.getElementById('comment-container').scrollIntoView({ 
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }, 1000);
-            });
+            }
+            
+            // Wait for student info iframe
+            const studentFrame = document.getElementById('student-info-frame');
+            if (studentFrame) {
+                studentFrame.addEventListener('load', function() {
+                    console.log('Student info iframe loaded');
+                    setTimeout(() => {
+                        const result = initializeStudentInfoFrame();
+                        studentFrameReady = result;
+                        checkIfReady();
+                    }, 100);
+                });
+            }
+            
+            // Wait for subjects iframe
+            const subjectsFrame = document.getElementById('subjects-frame');
+            if (subjectsFrame) {
+                subjectsFrame.addEventListener('load', function() {
+                    console.log('Subjects iframe loaded');
+                    setTimeout(() => {
+                        const result = initializeSubjectsFrame();
+                        subjectsFrameReady = result;
+                        checkIfReady();
+                    }, 100);
+                });
+            }
         }
 
-        function updateStats() {
-            // Update overall performance display
-            const overall = document.getElementById('overall-attributes').value;
-            document.getElementById('overall-display').textContent = overall;
-            
-            // Update social confidence display (inverted shyness)
-            const confidence = 10 - document.getElementById('shyness').value;
-            document.getElementById('shyness-display').textContent = confidence;
-            
-            // Update selected subjects count
-            const selectedCount = document.querySelectorAll('input[type="checkbox"]:checked').length;
-            document.getElementById('selected-subjects').textContent = selectedCount;
+        // Setup message listener for iframe communication
+        function setupMessageListener() {
+            window.addEventListener('message', function(event) {
+                if (event.data.type === 'studentInfoUpdated') {
+                    studentData = event.data.data;
+                    updateSelectedSubjectsCount();
+                    updateProgress();
+                } else if (event.data.type === 'subjectsUpdated') {
+                    updateProgress();
+                }
+            });
+        }        // Initialize student info frame
+        function initializeStudentInfoFrame() {
+            try {
+                const frame = document.getElementById('student-info-frame');
+                if (frame && frame.contentWindow && frame.contentWindow.getStudentData) {
+                    studentInfoFrame = frame.contentWindow;
+                    console.log('Student info frame initialized successfully');
+                    return true;
+                } else {
+                    console.error('Student info frame not ready - missing required functions');
+                    return false;
+                }
+            } catch (error) {
+                console.error('Error initializing student info frame:', error);
+                return false;
+            }
         }
 
-        function updateProgress() {
-            const requiredFields = ['student-name'];
-            const allFields = ['student-name', 'student-gender', 'student-age', 'teacher-name', 'strengths', 'weaknesses'];
-            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-            
-            let filledRequired = 0;
-            let filledOptional = 0;
-            let selectedSubjects = 0;
-            
-            requiredFields.forEach(fieldId => {
-                const field = document.getElementById(fieldId);
-                if (field && field.value.trim()) filledRequired++;
-            });
-            
-            allFields.forEach(fieldId => {
-                const field = document.getElementById(fieldId);
-                if (field && field.value.trim()) filledOptional++;
-            });
-            
-            checkboxes.forEach(checkbox => {
-                if (checkbox.checked) selectedSubjects++;
-            });
-            
-            const totalScore = (filledRequired * 3) + (filledOptional * 2) + (selectedSubjects * 1);
-            const maxScore = (requiredFields.length * 3) + (allFields.length * 2) + (checkboxes.length * 1);
-            const progress = Math.min((totalScore / maxScore) * 100, 100);
-            
-            document.getElementById('progress-fill').style.width = `${progress}%`;
-        }
-
-        // Photo upload functionality
-        function handlePhotoUpload(event) {
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    const preview = document.getElementById('photo-preview');
-                    preview.innerHTML = `<img src="${e.target.result}" alt="Student photo">`;
+        // Initialize subjects frame
+        function initializeSubjectsFrame() {
+            try {
+                const frame = document.getElementById('subjects-frame');
+                if (frame && frame.contentWindow && frame.contentWindow.getSubjectData) {
+                    subjectsFrame = frame.contentWindow;
+                    console.log('Subjects frame initialized successfully');
+                    return true;
+                } else {
+                    console.error('Subjects frame not ready - missing required functions');
+                    return false;
+                }
+            } catch (error) {
+                console.error('Error initializing subjects frame:', error);
+                return false;
+            }
+        }        // Get student data from iframe
+        function getStudentDataFromFrame() {
+            if (!studentInfoFrame || !studentInfoFrame.getStudentData) {
+                console.warn('Student info frame not properly initialized');
+                return {
+                    name: '',
+                    gender: 'male',
+                    strengths: '',
+                    weaknesses: '',
+                    overallAttributes: 7
                 };
-                reader.readAsDataURL(file);
+            }
+            
+            try {
+                const data = studentInfoFrame.getStudentData();
+                console.log('Retrieved student data:', data);
+                return data;
+            } catch (error) {
+                console.error('Error getting student data:', error);
+                return {
+                    name: '',
+                    gender: 'male',
+                    strengths: '',
+                    weaknesses: '',
+                    overallAttributes: 7
+                };
+            }
+        }
+
+        // Set student data in iframe
+        function setStudentDataInFrame(data) {
+            try {
+                if (studentInfoFrame && studentInfoFrame.setStudentData) {
+                    studentInfoFrame.setStudentData(data);
+                } else {
+                    console.warn('Student info frame not ready for setting data');
+                }
+            } catch (error) {
+                console.error('Error setting student data:', error);
+            }
+        }
+
+        // Clear student data in iframe
+        function clearStudentDataInFrame() {
+            try {
+                if (studentInfoFrame && studentInfoFrame.clearStudentData) {
+                    studentInfoFrame.clearStudentData();
+                } else {
+                    console.warn('Student info frame not ready for clearing data');
+                }
+            } catch (error) {
+                console.error('Error clearing student data:', error);
+            }
+        }        // Get subject data from iframe
+        function getSubjectDataFromFrame() {
+            if (!subjectsFrame || !subjectsFrame.getSubjectData) {
+                console.warn('Subjects frame not properly initialized');
+                return {
+                    english: { checked: false, activities: {} },
+                    phonics: { checked: false, activities: {} },
+                    mathematics: { checked: false, activities: {} },
+                    iq: { checked: false, activities: {} },
+                    'social-studies': { checked: false, activities: {} },
+                    science: { checked: false, activities: {} },
+                    conversation: { checked: false, activities: {} },
+                    arts: { checked: false, activities: {} },
+                    pe: { checked: false, activities: {} },
+                    puppet: { checked: false, activities: {} }
+                };
+            }
+            
+            try {
+                const data = subjectsFrame.getSubjectData();
+                console.log('Retrieved subject data:', data);
+                return data;
+            } catch (error) {
+                console.error('Error getting subject data:', error);
+                return {
+                    english: { checked: false, activities: {} },
+                    phonics: { checked: false, activities: {} },
+                    mathematics: { checked: false, activities: {} },
+                    iq: { checked: false, activities: {} },
+                    'social-studies': { checked: false, activities: {} },
+                    science: { checked: false, activities: {} },
+                    conversation: { checked: false, activities: {} },
+                    arts: { checked: false, activities: {} },
+                    pe: { checked: false, activities: {} },
+                    puppet: { checked: false, activities: {} }
+                };
+            }
+        }
+
+        // Set subject data in iframe
+        function setSubjectDataInFrame(data) {
+            try {
+                if (subjectsFrame && subjectsFrame.setSubjectData) {
+                    subjectsFrame.setSubjectData(data);
+                } else {
+                    console.warn('Subjects frame not ready for setting data');
+                }
+            } catch (error) {
+                console.error('Error setting subject data:', error);
+            }
+        }
+
+        // Clear subject data in iframe
+        function clearSubjectDataInFrame() {
+            try {
+                if (subjectsFrame && subjectsFrame.clearSubjectData) {
+                    subjectsFrame.clearSubjectData();
+                } else {
+                    console.warn('Subjects frame not ready for clearing data');
+                }
+            } catch (error) {
+                console.error('Error clearing subject data:', error);
+            }
+        }function initializeApp() {
+            // The subject initialization is now handled by the subjects iframe
+            // No need to initialize checkboxes here - handled by Subjects.html
+        }
+        
+        // Load theme function
+        function loadTheme() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            currentTheme = savedTheme;
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        }
+          // Update selected subjects count
+        function updateSelectedSubjectsCount() {
+            try {
+                const subjectData = getSubjectDataFromFrame();
+                let count = 0;
+                Object.values(subjectData).forEach(subject => {
+                    if (subject.checked) count++;
+                });
+                
+                // Update the count in student info iframe if it exists
+                if (studentInfoFrame && studentInfoFrame.document) {
+                    const countElement = studentInfoFrame.document.getElementById('selected-subjects');
+                    if (countElement) {
+                        countElement.textContent = count;
+                    }
+                }
+            } catch (error) {
+                console.warn('Could not update selected subjects count:', error);
+            }
+        }        function setupEventListeners() {
+            // Generate button
+            const generateButton = document.getElementById('generate-button');
+            if (generateButton) {
+                generateButton.addEventListener('click', function() {
+                    console.log('Generate button clicked');
+                    
+                    try {
+                        // Validate that both iframes are ready
+                        if (!studentInfoFrame || !studentInfoFrame.getStudentData) {
+                            showNotification('Student information form not ready. Please wait a moment and try again.', 'error');
+                            return;
+                        }
+                        
+                        if (!subjectsFrame || !subjectsFrame.getSubjectData) {
+                            showNotification('Subjects form not ready. Please wait a moment and try again.', 'error');
+                            return;
+                        }
+                        
+                        // Get current data
+                        const currentStudentData = getStudentDataFromFrame();
+                        const subjectData = getSubjectDataFromFrame();
+                        
+                        // Validate required data
+                        if (!currentStudentData || !currentStudentData.name || !currentStudentData.name.trim()) {
+                            showNotification('Please enter the student\'s name!', 'error');
+                            return;
+                        }
+                        
+                        // Check if any subjects are selected
+                        const hasSelectedSubjects = Object.values(subjectData).some(subject => subject.checked === true);
+                        if (!hasSelectedSubjects) {
+                            showNotification('Please select at least one subject!', 'error');
+                            return;
+                        }
+                        
+                        console.log('All validation passed, generating comments...');
+                        
+                        showLoading();
+                        
+                        setTimeout(() => {
+                            try {
+                                generateComments();
+                                hideLoading();
+                                document.getElementById('comment-container').style.display = 'block';
+                                document.getElementById('comment-container').scrollIntoView({ 
+                                    behavior: 'smooth',
+                                    block: 'start'
+                                });
+                                showNotification('Comments generated successfully!');
+                            } catch (error) {
+                                console.error('Error generating comments:', error);
+                                hideLoading();
+                                showNotification('Error generating comments: ' + error.message, 'error');
+                            }
+                        }, 500);
+                        
+                    } catch (error) {
+                        console.error('Error in generate button handler:', error);
+                        showNotification(error.message, 'error');
+                    }
+                });
+            } else {
+                console.error('Generate button not found');
+            }
+        }function updateStats() {
+            // Update selected subjects count in iframe
+            updateSelectedSubjectsCount();
+        }        function updateProgress() {
+            try {
+                const currentStudentData = getStudentDataFromFrame();
+                const subjectData = getSubjectDataFromFrame();
+                
+                let filledRequired = 0;
+                let filledOptional = 0;
+                let selectedSubjects = 0;
+                
+                // Check required fields from student data
+                if (currentStudentData.name && currentStudentData.name.trim()) filledRequired++;
+                
+                // Check all student fields
+                let filledStudentFields = 0;
+                if (currentStudentData.name && currentStudentData.name.trim()) filledStudentFields++;
+                if (currentStudentData.gender) filledStudentFields++;
+                if (currentStudentData.strengths && currentStudentData.strengths.trim()) filledStudentFields++;
+                if (currentStudentData.weaknesses && currentStudentData.weaknesses.trim()) filledStudentFields++;
+                
+                // Count selected subjects from iframe
+                Object.values(subjectData).forEach(subject => {
+                    if (subject.checked) selectedSubjects++;
+                });
+                
+                const totalScore = (filledRequired * 3) + (filledStudentFields * 2) + (selectedSubjects * 1);
+                const maxScore = (1 * 3) + (4 * 2) + (10 * 1); // 10 subjects total
+                const progress = Math.min((totalScore / maxScore) * 100, 100);
+                
+                const progressBar = document.getElementById('progress-fill');
+                if (progressBar) {
+                    progressBar.style.width = `${progress}%`;
+                }
+            } catch (error) {
+                console.warn('Could not update progress:', error);
             }
         }
 
         // Quick fill functionality
         function addQuickText(fieldId, text) {
-            const field = document.getElementById(fieldId);
-            const currentValue = field.value.trim();
-            if (currentValue) {
-                field.value = currentValue + ', ' + text;
-            } else {
-                field.value = text;
-            }
-            updateProgress();
-        }
-
-        // Theme toggle
-        function toggleTheme() {
-            currentTheme = currentTheme === 'light' ? 'dark' : 'light';
-            document.documentElement.setAttribute('data-theme', currentTheme);
-            
-            const themeIcon = document.querySelector('.theme-toggle i');
-            themeIcon.className = currentTheme === 'light' ? 'fas fa-moon' : 'fas fa-sun';
-            
-            localStorage.setItem('theme', currentTheme);
-            showNotification(`Switched to ${currentTheme} mode`);
-        }
-
-        function loadTheme() {
-            const savedTheme = localStorage.getItem('theme');
-            if (savedTheme) {
-                currentTheme = savedTheme;
-                document.documentElement.setAttribute('data-theme', currentTheme);
-                const themeIcon = document.querySelector('.theme-toggle i');
-                themeIcon.className = currentTheme === 'light' ? 'fas fa-moon' : 'fas fa-sun';
-            }
-        }
-
-        // Enhanced subject toggle with animation
-        function toggleSubject(element) {
-            const content = element.nextElementSibling;
-            const isExpanded = element.classList.contains('expanded');
-            
-            if (isExpanded) {
-                element.classList.remove('expanded');
-                content.classList.remove('expanded');
-                content.style.display = 'none';
-            } else {
-                element.classList.add('expanded');
-                content.style.display = 'block';
-                content.classList.add('expanded');
-            }
-        }
-
-        // Enhanced copy functionality
+            document.getElementById(fieldId).value += text;
+        }        // Enhanced copy functionality
         function copyComment(commentId) {
             const commentElement = document.getElementById(commentId);
             const commentText = commentElement.textContent.replace(/\d+ words$/, '').trim();
@@ -1460,158 +998,51 @@
 
         // Update word counts for comments
         function updateWordCounts() {
-            ['comment1', 'comment2'].forEach(commentId => {
-                const commentElement = document.getElementById(commentId);
-                const text = commentElement.textContent.replace(/\d+ words$/, '').trim();
-                const wordCount = countWords(text);
-                const wordCountElement = commentElement.querySelector('.word-count');
-                if (wordCountElement) {
-                    wordCountElement.textContent = `${wordCount} words`;
-                    wordCountElement.style.color = wordCount >= 200 && wordCount <= 300 ? '#28a745' : '#ffc107';
-                }
-            });
-        }
-
-        // Save and load functionality
-        function saveStudentData() {
-            const data = {
-                studentName: document.getElementById('student-name').value,
-                gender: document.getElementById('student-gender').value,
-                age: document.getElementById('student-age').value,
-                studentClass: document.getElementById('student-class').value,
-                teacherName: document.getElementById('teacher-name').value,
-                reportPeriod: document.getElementById('report-period').value,
-                strengths: document.getElementById('strengths').value,
-                weaknesses: document.getElementById('weaknesses').value,
-                overallAttributes: document.getElementById('overall-attributes').value,
-                shyness: document.getElementById('shyness').value,
-                cooperation: document.getElementById('cooperation').value,
-                attention: document.getElementById('attention').value,
-                independence: document.getElementById('independence').value,
-                creativity: document.getElementById('creativity').value,
-                subjects: {}
-            };
-            
-            // Save subject data
-            const subjects = ['english', 'phonics', 'mathematics', 'iq', 'social-studies', 'science', 'conversation', 'arts', 'pe', 'puppet'];
-            subjects.forEach(subject => {
-                data.subjects[subject] = {
-                    checked: document.getElementById(`${subject}-checkbox`).checked,
-                    performance: document.getElementById(`${subject}-performance`).value,
-                    notes: document.getElementById(`${subject}-notes`).value
-                };
-            });
-            
-            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `${data.studentName || 'student'}_rapport_data.json`;
-            a.click();
-            URL.revokeObjectURL(url);
-            
-            showNotification('Student data saved successfully!');
-        }
-
-        function loadStudentData() {
-            const input = document.createElement('input');
-            input.type = 'file';
-            input.accept = '.json';
-            input.onchange = function(event) {
-                const file = event.target.files[0];
-                if (file) {
-                    const reader = new FileReader();
-                    reader.onload = function(e) {
-                        try {
-                            const data = JSON.parse(e.target.result);
-                            
-                            // Load basic student info
-                            document.getElementById('student-name').value = data.studentName || '';
-                            document.getElementById('student-gender').value = data.gender || 'male';
-                            document.getElementById('student-age').value = data.age || '';
-                            document.getElementById('student-class').value = data.studentClass || '';
-                            document.getElementById('teacher-name').value = data.teacherName || '';
-                            document.getElementById('report-period').value = data.reportPeriod || 'term1';
-                            document.getElementById('strengths').value = data.strengths || '';
-                            document.getElementById('weaknesses').value = data.weaknesses || '';
-                            document.getElementById('overall-attributes').value = data.overallAttributes || 7;
-                            document.getElementById('shyness').value = data.shyness || 5;
-                            document.getElementById('cooperation').value = data.cooperation || 3;
-                            document.getElementById('attention').value = data.attention || 3;
-                            document.getElementById('independence').value = data.independence || 3;
-                            document.getElementById('creativity').value = data.creativity || 3;
-                            
-                            // Load subject data
-                            if (data.subjects) {
-                                Object.keys(data.subjects).forEach(subject => {
-                                    const subjectData = data.subjects[subject];
-                                    const checkbox = document.getElementById(`${subject}-checkbox`);
-                                    const performance = document.getElementById(`${subject}-performance`);
-                                    const notes = document.getElementById(`${subject}-notes`);
-                                    
-                                    if (checkbox) checkbox.checked = subjectData.checked || false;
-                                    if (performance) performance.value = subjectData.performance || 3;
-                                    if (notes) notes.value = subjectData.notes || '';
-                                });
-                            }
-                            
-                            updateStats();
-                            updateProgress();
-                            initializeApp(); // Reinitialize sliders
-                            showNotification('Student data loaded successfully!');
-                            
-                        } catch (error) {
-                            showNotification('Error loading file. Please check the file format.', 'error');
-                        }
-                    };
-                    reader.readAsText(file);
-                }
-            };
-            input.click();
-        }
-
-        // Sample data for testing
+            // This function can be expanded to update word counts for all comment boxes
+        }        // Sample data for testing
         function fillSampleData() {
-            document.getElementById('student-name').value = 'Emma Johnson';
-            document.getElementById('student-gender').value = 'female';
-            document.getElementById('student-age').value = '5';
-            document.getElementById('student-class').value = 'Kindergarten A';
-            document.getElementById('teacher-name').value = 'Ms. Sarah Wilson';
-            document.getElementById('strengths').value = 'Creative and imaginative, Helpful to classmates, Good listener';
-            document.getElementById('weaknesses').value = 'Needs encouragement to participate in group activities';
-            document.getElementById('overall-attributes').value = '8';
-            document.getElementById('shyness').value = '3';
+            console.log('Filling sample data...');
             
-            // Check some subjects
-            document.getElementById('english-checkbox').checked = true;
-            document.getElementById('mathematics-checkbox').checked = true;
-            document.getElementById('arts-checkbox').checked = true;
+            const sampleData = {
+                name: 'Emma Johnson',
+                gender: 'female',
+                strengths: 'Creative and imaginative, Helpful to classmates, Good listener',
+                weaknesses: 'Needs encouragement to participate in group activities',
+                overallAttributes: 8,
+                socialConfidence: 7
+            };
             
-            updateStats();
+            setStudentDataInFrame(sampleData);
+              // Set sample subject data
+            const sampleSubjectData = {
+                english: { checked: true, activities: { activity1: true, activity2: true, activity3: true, vocabulary: true } },
+                phonics: { checked: true, activities: { activity1: true, activity2: true, vocabulary: true } },
+                mathematics: { checked: true, activities: { activity1: true, activity2: true, activity3: true, activity4: true, vocabulary: true } },
+                arts: { checked: true, activities: { activity1: true, activity2: true, activity3: true, vocabulary: true } },
+                science: { checked: false, activities: {} },
+                conversation: { checked: true, activities: { activity1: true, activity2: true, activity3: true, vocabulary: true } },
+                'social-studies': { checked: false, activities: {} },
+                iq: { checked: false, activities: {} },
+                pe: { checked: false, activities: {} },
+                puppet: { checked: false, activities: {} }
+            };
+            
+            setSubjectDataInFrame(sampleSubjectData);
+            
             updateProgress();
-            initializeApp();
             showNotification('Sample data loaded!');
-        }
-
-        // Clear all data
+        }// Clear all data
         function clearAll() {
             if (confirm('Are you sure you want to clear all data? This action cannot be undone.')) {
-                document.querySelectorAll('input[type="text"], input[type="number"], textarea, select').forEach(field => {
-                    field.value = '';
-                });
-                document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
-                    checkbox.checked = false;
-                });
-                document.querySelectorAll('.slider').forEach(slider => {
-                    slider.value = slider.getAttribute('value') || 3;
-                });
+                // Clear student data in iframe
+                clearStudentDataInFrame();
                 
-                document.getElementById('photo-preview').innerHTML = '<i class="fas fa-user-circle"></i>';
+                // Clear subject data in iframe
+                clearSubjectDataInFrame();
+                
                 document.getElementById('comment-container').style.display = 'none';
-                
-                updateStats();
+
                 updateProgress();
-                initializeApp();
                 showNotification('All data cleared!');
             }
         }
@@ -1638,15 +1069,70 @@
             const button = document.getElementById('generate-button');
             button.innerHTML = '<i class="fas fa-magic"></i> Generate Comments';
             button.disabled = false;
-        }
-
-        // Export functionality
+        }        // Export functionality
         function exportToPDF() {
             showNotification('PDF export feature coming soon!');
         }
 
         function exportToWord() {
             showNotification('Word export feature coming soon!');
+        }
+        
+        // Copy to clipboard functionality for main comment
+        function copyToClipboard(elementId) {
+            const element = document.getElementById(elementId);
+            if (element) {
+                const text = element.textContent.replace(/\d+ words$/, '').trim();
+                navigator.clipboard.writeText(text).then(() => {
+                    showNotification('Comment copied to clipboard!');
+                }).catch(() => {
+                    showNotification('Comment copied to clipboard!');
+                });
+            }
+        }
+        
+        // Download as text functionality
+        function downloadAsText() {
+            const studentData = getStudentDataFromFrame();
+            const mainComment = document.getElementById('main-comment');
+            if (mainComment && studentData.name) {
+                const text = mainComment.textContent.replace(/\d+ words$/, '').trim();
+                const blob = new Blob([text], { type: 'text/plain' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `${studentData.name}_report.txt`;
+                a.click();
+                URL.revokeObjectURL(url);
+                showNotification('Report downloaded!');
+            }
+        }
+        
+        // Print comment functionality
+        function printComment() {
+            const studentData = getStudentDataFromFrame();
+            const mainComment = document.getElementById('main-comment');
+            if (mainComment) {
+                const text = mainComment.textContent.replace(/\d+ words$/, '').trim();
+                const printWindow = window.open('', '_blank');
+                printWindow.document.write(`
+                    <html>
+                    <head>
+                        <title>Student Report - ${studentData.name || 'Student'}</title>
+                        <style>
+                            body { font-family: 'Times New Roman', serif; margin: 2cm; line-height: 1.6; }
+                            h1 { color: #4a6da7; }
+                        </style>
+                    </head>
+                    <body>
+                        <h1>Kindergarten Report - ${studentData.name || 'Student'}</h1>
+                        <p>${text}</p>
+                    </body>
+                    </html>
+                `);
+                printWindow.document.close();
+                printWindow.print();
+            }
         }
 
         function printReport() {
@@ -1665,9 +1151,6 @@
                 </head>
                 <body>
                     <h1>Kindergarten Report - ${document.getElementById('student-name').value}</h1>
-                    <p><strong>Teacher:</strong> ${document.getElementById('teacher-name').value}</p>
-                    <p><strong>Class:</strong> ${document.getElementById('student-class').value}</p>
-                    <p><strong>Period:</strong> ${document.getElementById('report-period').value}</p>
                     ${printContent}
                 </body>
                 </html>
@@ -1681,69 +1164,82 @@
             const subject = `Kindergarten Report for ${studentName}`;
             const body = `Please find the kindergarten report for ${studentName} attached.`;
             window.location.href = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-        }        
-        // Enhanced comment generation system
+        }        // Enhanced comment generation system
         function generateComments() {
-            // Get student information
-            const studentName = document.getElementById('student-name').value;
-            const gender = document.getElementById('student-gender').value;
-            const age = document.getElementById('student-age').value;
-            const strengths = document.getElementById('strengths').value;
-            const weaknesses = document.getElementById('weaknesses').value;
-            const overallAttributes = parseInt(document.getElementById('overall-attributes').value);
-            const socialConfidence = 10 - parseInt(document.getElementById('shyness').value);
-            const cooperation = parseInt(document.getElementById('cooperation').value);
-            const attention = parseInt(document.getElementById('attention').value);
-            const independence = parseInt(document.getElementById('independence').value);
-            const creativity = parseInt(document.getElementById('creativity').value);
-            
-            // Get selected subjects and their performance
-            const subjects = [
-                { name: 'English', id: 'english', checked: document.getElementById('english-checkbox').checked, performance: parseInt(document.getElementById('english-performance').value), notes: document.getElementById('english-notes').value },
-                { name: 'Phonics', id: 'phonics', checked: document.getElementById('phonics-checkbox').checked, performance: parseInt(document.getElementById('phonics-performance').value), notes: document.getElementById('phonics-notes').value },
-                { name: 'Mathematics', id: 'mathematics', checked: document.getElementById('mathematics-checkbox').checked, performance: parseInt(document.getElementById('mathematics-performance').value), notes: document.getElementById('mathematics-notes').value },
-                { name: 'I.Q', id: 'iq', checked: document.getElementById('iq-checkbox').checked, performance: parseInt(document.getElementById('iq-performance').value), notes: document.getElementById('iq-notes').value },
-                { name: 'Social Studies', id: 'social-studies', checked: document.getElementById('social-studies-checkbox').checked, performance: parseInt(document.getElementById('social-studies-performance').value), notes: document.getElementById('social-studies-notes').value },
-                { name: 'Science', id: 'science', checked: document.getElementById('science-checkbox').checked, performance: parseInt(document.getElementById('science-performance').value), notes: document.getElementById('science-notes').value },
-                { name: 'Conversation', id: 'conversation', checked: document.getElementById('conversation-checkbox').checked, performance: parseInt(document.getElementById('conversation-performance').value), notes: document.getElementById('conversation-notes').value },
-                { name: 'Arts', id: 'arts', checked: document.getElementById('arts-checkbox').checked, performance: parseInt(document.getElementById('arts-performance').value), notes: document.getElementById('arts-notes').value },
-                { name: 'Physical Education', id: 'pe', checked: document.getElementById('pe-checkbox').checked, performance: parseInt(document.getElementById('pe-performance').value), notes: document.getElementById('pe-notes').value },
-                { name: 'Puppet Show', id: 'puppet', checked: document.getElementById('puppet-checkbox').checked, performance: parseInt(document.getElementById('puppet-performance').value), notes: document.getElementById('puppet-notes').value }
-            ];
-            
-            // Filter selected subjects
-            const selectedSubjects = subjects.filter(subject => subject.checked);
-            
-            // Generate enhanced AI comments
-            const comment1 = generateEnhancedComment1(studentName, gender, age, strengths, weaknesses, overallAttributes, socialConfidence, cooperation, attention, independence, creativity, selectedSubjects);
-            const comment2 = generateEnhancedComment2(studentName, gender, age, strengths, weaknesses, overallAttributes, socialConfidence, cooperation, attention, independence, creativity, selectedSubjects);
-            
-            // Set comments and update word counts
-            document.getElementById('comment1').innerHTML = comment1 + '<div class="word-count"></div>';
-            document.getElementById('comment2').innerHTML = comment2 + '<div class="word-count"></div>';
-            
-            updateWordCounts();
+            try {
+                // Get student information from iframe
+                const currentStudentData = getStudentDataFromFrame();
+                console.log('Generating comments with student data:', currentStudentData);
+                
+                const studentName = currentStudentData.name;
+                const gender = currentStudentData.gender || 'other';
+                const strengths = currentStudentData.strengths || '';
+                const weaknesses = currentStudentData.weaknesses || '';
+                const overallAttributes = currentStudentData.overallAttributes || 7;
+                
+                // Get selected subjects and their activity data from iframe
+                const subjectData = getSubjectDataFromFrame();
+                console.log('Subject data:', subjectData);
+                
+                const subjects = [
+                    { name: 'English', id: 'english', ...subjectData.english },
+                    { name: 'Phonics', id: 'phonics', ...subjectData.phonics },
+                    { name: 'Mathematics', id: 'mathematics', ...subjectData.mathematics },
+                    { name: 'I.Q', id: 'iq', ...subjectData.iq },
+                    { name: 'Social Studies', id: 'social-studies', ...subjectData['social-studies'] },
+                    { name: 'Science', id: 'science', ...subjectData.science },
+                    { name: 'Conversation', id: 'conversation', ...subjectData.conversation },
+                    { name: 'Arts', id: 'arts', ...subjectData.arts },
+                    { name: 'Physical Education', id: 'pe', ...subjectData.pe },
+                    { name: 'Puppet Show', id: 'puppet', ...subjectData.puppet }
+                ];
+                
+                // Filter selected subjects
+                const selectedSubjects = subjects.filter(subject => subject.checked === true);
+                console.log('Selected subjects:', selectedSubjects);
+                
+                if (selectedSubjects.length === 0) {
+                    throw new Error('No subjects selected. Please select at least one subject.');
+                }
+                
+                // Generate enhanced AI comments
+                const comment1 = generateEnhancedComment1(studentName, gender, strengths, weaknesses, overallAttributes, selectedSubjects);
+                const comment2 = generateEnhancedComment2(studentName, gender, strengths, weaknesses, overallAttributes, selectedSubjects);
+                
+                console.log('Generated comment 1:', comment1);
+                console.log('Generated comment 2:', comment2);
+                
+                // Set comments and update word counts
+                const comment1Element = document.getElementById('comment1');
+                const comment2Element = document.getElementById('comment2');
+                
+                if (!comment1Element || !comment2Element) {
+                    throw new Error('Comment display elements not found. Please refresh the page.');
+                }
+                
+                comment1Element.innerHTML = comment1 + `<div class="word-count">${countWords(comment1)} words</div>`;
+                comment2Element.innerHTML = comment2 + `<div class="word-count">${countWords(comment2)} words</div>`;
+                
+                updateWordCounts();
+            } catch (error) {
+                console.error('Error in generateComments:', error);
+                throw error; // Re-throw to be caught by caller
+            }
         }
 
-        function generateEnhancedComment1(studentName, gender, age, strengths, weaknesses, overallAttributes, socialConfidence, cooperation, attention, independence, creativity, selectedSubjects) {
+        function generateEnhancedComment1(studentName, gender, strengths, weaknesses, overallAttributes, selectedSubjects) {
             const pronouns = {
                 male: { subject: 'he', object: 'him', possessive: 'his', reflexive: 'himself' },
                 female: { subject: 'she', object: 'her', possessive: 'her', reflexive: 'herself' },
                 other: { subject: 'they', object: 'them', possessive: 'their', reflexive: 'themselves' }
             };
             const pronoun = pronouns[gender] || pronouns.other;
+              // Behavioral trait descriptors - using default values since behavioral section was removed
+            const cooperationLevel = 3; // Default moderate level
+            const attentionLevel = 3;   // Default moderate level  
+            const independenceLevel = 3; // Default moderate level
+            const creativityLevel = 3;   // Default moderate level
             
-            // Performance descriptors with more variety
-            const performanceDescriptors = {
-                0: ['is beginning to explore', 'needs significant support with', 'is developing foundational skills in'],
-                1: ['is learning to understand', 'shows emerging skills in', 'is building confidence in'],
-                2: ['demonstrates developing abilities in', 'is making steady progress in', 'shows growing competence in'],
-                3: ['performs well in', 'demonstrates good understanding of', 'shows solid skills in'],
-                4: ['excels in', 'displays strong abilities in', 'demonstrates excellent grasp of'],
-                5: ['shows exceptional talent in', 'masters concepts in', 'displays outstanding achievement in']
-            };
-            
-            // Behavioral trait descriptors
             const behavioralTraits = {
                 cooperation: {
                     low: 'is developing collaborative skills',
@@ -1772,37 +1268,16 @@
                 if (value <= 3) return 'medium';
                 return 'high';
             }
-            
-            // Start building the comment
-            let comment = `${studentName} is a `;
-            
-            // Add age-appropriate descriptor
-            const ageDescriptors = {
-                3: 'curious and energetic young learner',
-                4: 'developing and enthusiastic student',
-                5: 'bright and engaged kindergartener',
-                6: 'mature and capable student',
-                7: 'advanced and thoughtful learner'
-            };
-            comment += ageDescriptors[age] || 'wonderful young student';
-            
-            // Add personality traits based on social confidence
-            if (socialConfidence >= 7) {
-                comment += ` who approaches new experiences with confidence and enthusiasm. ${pronoun.subject.charAt(0).toUpperCase() + pronoun.subject.slice(1)} `;
-            } else if (socialConfidence >= 4) {
-                comment += ` who balances thoughtful observation with active participation. ${pronoun.subject.charAt(0).toUpperCase() + pronoun.subject.slice(1)} `;
-            } else {
-                comment += ` who is gradually building confidence in social situations. With gentle encouragement, ${pronoun.subject} `;
-            }
-            
-            // Add behavioral observations
+              // Start building the comment
+            let comment = `${studentName} is a wonderful young student who demonstrates a positive attitude toward learning. ${pronoun.subject.charAt(0).toUpperCase() + pronoun.subject.slice(1)} `;
+              // Add behavioral observations using default values
             const behaviorTraits = [
-                behavioralTraits.cooperation[getTraitLevel(cooperation)],
-                behavioralTraits.attention[getTraitLevel(attention)],
-                behavioralTraits.independence[getTraitLevel(independence)]
+                behavioralTraits.cooperation[getTraitLevel(cooperationLevel)],
+                behavioralTraits.attention[getTraitLevel(attentionLevel)],
+                behavioralTraits.independence[getTraitLevel(independenceLevel)]
             ];
             comment += `${behaviorTraits[Math.floor(Math.random() * behaviorTraits.length)]} and `;
-            comment += `${behavioralTraits.creativity[getTraitLevel(creativity)]}. `;
+            comment += `${behavioralTraits.creativity[getTraitLevel(creativityLevel)]}. `;
             
             // Add strengths if provided
             if (strengths.trim()) {
@@ -1812,42 +1287,132 @@
                     comment += `${pronoun.possessive.charAt(0).toUpperCase() + pronoun.possessive.slice(1)} particular strengths include ${selectedStrengths.join(' and ')}, which enhance ${pronoun.possessive} learning experience. `;
                 }
             }
-            
-            // Add academic performance for selected subjects
+              // Add academic subjects for selected subjects
             if (selectedSubjects.length > 0) {
-                // Group subjects by performance level
-                const highPerformance = selectedSubjects.filter(s => s.performance >= 4);
-                const mediumPerformance = selectedSubjects.filter(s => s.performance >= 2 && s.performance < 4);
-                const lowPerformance = selectedSubjects.filter(s => s.performance < 2);
+                const selectedSubjectNames = selectedSubjects.slice(0, 3).map(s => s.name || s.id);
                 
-                // High performance subjects
-                if (highPerformance.length > 0) {
-                    const subjects = highPerformance.slice(0, 2);
-                    if (subjects.length === 1) {
-                        const descriptor = performanceDescriptors[subjects[0].performance][Math.floor(Math.random() * 3)];
-                        comment += `${pronoun.subject.charAt(0).toUpperCase() + pronoun.subject.slice(1)} ${descriptor} ${subjects[0].name}. `;
-                    } else {
-                        comment += `${pronoun.subject.charAt(0).toUpperCase() + pronoun.subject.slice(1)} demonstrates strong abilities in both ${subjects[0].name} and ${subjects[1].name}. `;
+                if (selectedSubjectNames.length === 1) {
+                    comment += `${pronoun.subject.charAt(0).toUpperCase() + pronoun.subject.slice(1)} shows good engagement in ${selectedSubjectNames[0]} activities. `;
+                } else if (selectedSubjectNames.length === 2) {
+                    comment += `${pronoun.subject.charAt(0).toUpperCase() + pronoun.subject.slice(1)} demonstrates positive participation in ${selectedSubjectNames[0]} and ${selectedSubjectNames[1]}. `;
+                } else {
+                    comment += `${pronoun.subject.charAt(0).toUpperCase() + pronoun.subject.slice(1)} actively participates in various subjects including ${selectedSubjectNames[0]}, ${selectedSubjectNames[1]}, and ${selectedSubjectNames[2]}. `;                }
+                  // Add specific activity comments for all subjects if selected
+                selectedSubjects.forEach(subject => {
+                    if (subject.activities) {
+                        const activities = subject.activities;
+                        const completedActivities = [];
+                        
+                        // English activities
+                        if (subject.id === 'english') {
+                            if (activities.activity1) completedActivities.push('matching letters with pictures');
+                            if (activities.activity2) completedActivities.push('tracing and coloring letters');
+                            if (activities.activity3) completedActivities.push('matching same letters');
+                            if (activities.vocabulary) completedActivities.push('vocabulary development (A-Ant, B-Bee, C-Cat)');
+                        }
+                        
+                        // Phonics activities
+                        else if (subject.id === 'phonics') {
+                            if (activities.activity1) completedActivities.push('letter A-E recognition');
+                            if (activities.activity2) completedActivities.push('revision of A/B/C');
+                            if (activities.vocabulary) completedActivities.push('vocabulary mastery with Annie Ant-Axe, Benny Bear-Ball, Candy Cat-Cut, Danny Dog-Dig, Eddie Elephant-Egg');
+                        }
+                        
+                        // Mathematics activities
+                        else if (subject.id === 'mathematics') {
+                            if (activities.activity1) completedActivities.push('counting from 1-10');
+                            if (activities.activity2) completedActivities.push('tracing numbers 1-3');
+                            if (activities.activity3) completedActivities.push('placing correct amount of pictures');
+                            if (activities.activity4) completedActivities.push('finger counting 1-10');
+                            if (activities.vocabulary) completedActivities.push('number vocabulary one through ten');
+                        }
+                        
+                        // I.Q activities
+                        else if (subject.id === 'iq') {
+                            if (activities.activity1) completedActivities.push('animal and food matching');
+                            if (activities.activity2) completedActivities.push('shapes and colors identification');
+                            if (activities.activity3) completedActivities.push('room objects recognition');
+                            if (activities.vocabulary) completedActivities.push('vocabulary mastery including animals, shapes, colors, and household items');
+                        }
+                        
+                        // Social Studies activities
+                        else if (subject.id === 'social-studies') {
+                            if (activities.activity1) completedActivities.push('farm animal characteristics and abilities');
+                            if (activities.activity2) completedActivities.push('animal sounds, food, and offspring');
+                            if (activities.activity3) completedActivities.push('body parts and face identification');
+                            if (activities.vocabulary) completedActivities.push('vocabulary including farm animals and body parts');
+                        }
+                        
+                        // Science activities
+                        else if (subject.id === 'science') {
+                            if (activities.activity1) completedActivities.push('floating and sinking experiments');
+                            if (activities.activity2) completedActivities.push('dancing beans in soda experiment');
+                            if (activities.activity3) completedActivities.push('buoyancy exploration with rocks');
+                            if (activities.activity4) completedActivities.push('balloon blow-up experiments');
+                            if (activities.activity5) completedActivities.push('magnifying glass exploration');
+                            if (activities.activity6) completedActivities.push('dancing colors in milk experiment');
+                            if (activities.vocabulary) completedActivities.push('science vocabulary including sink, float, bubbles, and magnifying glass');
+                        }
+                        
+                        // Conversation activities
+                        else if (subject.id === 'conversation') {
+                            if (activities.activity1) completedActivities.push('age identification questions');
+                            if (activities.activity2 || activities.activity3 || activities.activity4 || activities.activity5 || activities.activity6) {
+                                completedActivities.push('daily routine conversations');
+                            }
+                            if (activities.activity7 || activities.activity8 || activities.activity9) {
+                                completedActivities.push('food and nutrition discussions');
+                            }
+                            if (activities.vocabulary) completedActivities.push('conversation vocabulary including daily activities and food items');
+                        }
+                        
+                        // Arts activities
+                        else if (subject.id === 'arts') {
+                            if (activities.activity1) completedActivities.push('paper caterpillar making');
+                            if (activities.activity2) completedActivities.push('origami projects (fox, frog, ice cream)');
+                            if (activities.activity3) completedActivities.push('cotton ball sheep creation');
+                            if (activities.activity4) completedActivities.push('wobbly crab crafting');
+                            if (activities.vocabulary) completedActivities.push('arts and crafts vocabulary');
+                        }
+                        
+                        // Physical Education activities
+                        else if (subject.id === 'pe') {
+                            if (activities.activity1 || activities.activity2 || activities.activity3) {
+                                completedActivities.push('ball handling skills');
+                            }
+                            if (activities.activity4) completedActivities.push('racing games');
+                            if (activities.activity5) completedActivities.push('under the arches activities');
+                            if (activities.activity6) completedActivities.push('football skills');
+                            if (activities.vocabulary) completedActivities.push('physical education vocabulary');
+                        }
+                        
+                        // Puppet Show activities
+                        else if (subject.id === 'puppet') {
+                            if (activities.activity1) completedActivities.push('Three Little Pigs performance');
+                            if (activities.activity2) completedActivities.push('Red Riding Hood storytelling');
+                            if (activities.activity3) completedActivities.push('The Panicked Rabbit story');
+                            if (activities.activity4) completedActivities.push('No Don\'t Eat Vegetables puppet show');
+                            if (activities.activity5) completedActivities.push('Lion and the Mouse performance');
+                            if (activities.vocabulary) completedActivities.push('storytelling vocabulary');
+                        }
+                        
+                        // Add activity comments to the report
+                        if (completedActivities.length > 0) {
+                            if (completedActivities.length === 1) {
+                                comment += `In ${subject.name}, ${pronoun.subject} has successfully completed ${completedActivities[0]}. `;
+                            } else if (completedActivities.length === 2) {
+                                comment += `In ${subject.name}, ${pronoun.subject} has mastered ${completedActivities[0]} and ${completedActivities[1]}. `;
+                            } else {
+                                const randomSelection = completedActivities.slice(0, Math.min(3, completedActivities.length));
+                                if (randomSelection.length === 3) {
+                                    comment += `In ${subject.name}, ${pronoun.subject} has demonstrated proficiency in ${randomSelection[0]}, ${randomSelection[1]}, and ${randomSelection[2]}. `;
+                                } else {
+                                    comment += `In ${subject.name}, ${pronoun.subject} has shown excellent progress with ${randomSelection.join(' and ')}. `;
+                                }
+                            }
+                        }
                     }
-                }
-                
-                // Medium performance subjects
-                if (mediumPerformance.length > 0) {
-                    const subjects = mediumPerformance.slice(0, 2);
-                    if (subjects.length === 1) {
-                        const descriptor = performanceDescriptors[subjects[0].performance][Math.floor(Math.random() * 3)];
-                        comment += `${pronoun.subject.charAt(0).toUpperCase() + pronoun.subject.slice(1)} ${descriptor} ${subjects[0].name}. `;
-                    } else {
-                        comment += `${pronoun.subject.charAt(0).toUpperCase() + pronoun.subject.slice(1)} is making good progress in ${subjects[0].name} and ${subjects[1].name}. `;
-                    }
-                }
-                
-                // Add specific notes if available
-                const subjectsWithNotes = selectedSubjects.filter(s => s.notes.trim());
-                if (subjectsWithNotes.length > 0) {
-                    const randomNote = subjectsWithNotes[Math.floor(Math.random() * subjectsWithNotes.length)];
-                    comment += `In ${randomNote.name}, ${randomNote.notes} `;
-                }
+                });
             }
             
             // Add areas for improvement if provided
@@ -1855,7 +1420,7 @@
                 comment += `Areas for continued growth include ${weaknesses.toLowerCase()}. With ongoing support and practice, ${pronoun.subject} will continue to develop these important skills. `;
             }
             
-            // Add encouraging closing based on overall performance
+            // Add encouraging closing based on overall engagement
             const closings = {
                 high: [
                     `${studentName} consistently demonstrates excellent effort and a positive attitude toward learning. ${pronoun.subject.charAt(0).toUpperCase() + pronoun.subject.slice(1)} is a joy to have in our classroom community.`,
@@ -1864,6 +1429,7 @@
                 ],
                 medium: [
                     `${studentName} is making steady progress and shows a genuine interest in learning. I look forward to ${pronoun.possessive} continued growth.`,
+                   
                     `With consistent effort, ${studentName} continues to develop important foundational skills. ${pronoun.subject.charAt(0).toUpperCase() + pronoun.subject.slice(1)} is a valued member of our class.`,
                     `${studentName} demonstrates growing confidence in ${pronoun.possessive} abilities and is developing strong learning habits.`
                 ],
@@ -1873,36 +1439,33 @@
                     `${studentName} shows great potential and benefits from encouragement. I am confident in ${pronoun.possessive} ability to continue growing.`
                 ]
             };
+              let engagementLevel = 'medium';
+            if (overallAttributes >= 8) engagementLevel = 'high';
+            else if (overallAttributes <= 4) engagementLevel = 'low';
             
-            let performanceLevel = 'medium';
-            if (overallAttributes >= 8) performanceLevel = 'high';
-            else if (overallAttributes <= 4) performanceLevel = 'low';
-            
-            const closingOptions = closings[performanceLevel];
+            const closingOptions = closings[engagementLevel];
             comment += closingOptions[Math.floor(Math.random() * closingOptions.length)];
             
             return comment;
         }
 
-        function generateEnhancedComment2(studentName, gender, age, strengths, weaknesses, overallAttributes, socialConfidence, cooperation, attention, independence, creativity, selectedSubjects) {
+        function generateEnhancedComment2(studentName, gender, strengths, weaknesses, overallAttributes, selectedSubjects) {
             const pronouns = {
                 male: { subject: 'he', object: 'him', possessive: 'his', reflexive: 'himself' },
                 female: { subject: 'she', object: 'her', possessive: 'her', reflexive: 'herself' },
                 other: { subject: 'they', object: 'them', possessive: 'their', reflexive: 'themselves' }
             };
-            const pronoun = pronouns[gender] || pronouns.other;
-            
-            // Alternative comment structure focusing on different aspects
+            const pronoun = pronouns[gender] || pronouns.other;              // Alternative comment structure focusing on different aspects
             let comment = `It has been a pleasure working with ${studentName} this term. `;
             
+            // Default values for behavioral traits since behavioral section was removed
+            const attention = 3;      // Default moderate level
+            const independence = 3;   // Default moderate level  
+            const cooperation = 3;    // Default moderate level
+            const creativity = 3;     // Default moderate level
+            
             // Start with overall classroom presence
-            if (socialConfidence >= 7) {
-                comment += `${pronoun.subject.charAt(0).toUpperCase() + pronoun.subject.slice(1)} brings positive energy to our classroom and readily engages with both peers and activities. `;
-            } else if (socialConfidence >= 4) {
-                comment += `${pronoun.subject.charAt(0).toUpperCase() + pronoun.subject.slice(1)} contributes thoughtfully to our classroom environment and is developing strong peer relationships. `;
-            } else {
-                comment += `${pronoun.subject.charAt(0).toUpperCase() + pronoun.subject.slice(1)} is becoming more comfortable in our classroom environment and is gradually building social connections. `;
-            }
+            comment += `${pronoun.subject.charAt(0).toUpperCase() + pronoun.subject.slice(1)} contributes positively to our classroom environment and demonstrates good social interactions with peers. `;
             
             // Focus on learning approach and work habits
             const workHabits = [];
@@ -1928,30 +1491,148 @@
             } else {
                 comment += `${pronoun.subject.charAt(0).toUpperCase() + pronoun.subject.slice(1)} is exploring creative expression and developing ${pronoun.possessive} unique perspective. `;
             }
-            
-            // Academic achievements - focus on strongest areas first
+              // Academic achievements - focus on selected subjects
             if (selectedSubjects.length > 0) {
-                const sortedSubjects = selectedSubjects.sort((a, b) => b.performance - a.performance);
-                const topSubjects = sortedSubjects.slice(0, 3);
+                const topSubjects = selectedSubjects.slice(0, 3);
                 
                 if (topSubjects.length > 0) {
-                    comment += `Academically, ${studentName} shows particular aptitude in `;
+                    comment += `Academically, ${studentName} shows positive engagement in `;
                     
                     if (topSubjects.length === 1) {
-                        comment += `${topSubjects[0].name}, where ${pronoun.subject} consistently demonstrates strong understanding and engagement. `;
+                        comment += `${topSubjects[0].name || topSubjects[0].id}, where ${pronoun.subject} demonstrates good understanding and participation. `;
                     } else if (topSubjects.length === 2) {
-                        comment += `${topSubjects[0].name} and ${topSubjects[1].name}, consistently showing strong performance in these areas. `;
+                        comment += `${topSubjects[0].name || topSubjects[0].id} and ${topSubjects[1].name || topSubjects[1].id}, showing consistent participation in these areas. `;
                     } else {
-                        comment += `${topSubjects[0].name}, ${topSubjects[1].name}, and ${topSubjects[2].name}, demonstrating well-rounded academic development. `;
+                        comment += `${topSubjects[0].name || topSubjects[0].id}, ${topSubjects[1].name || topSubjects[1].id}, and ${topSubjects[2].name || topSubjects[2].id}, demonstrating well-rounded academic development. `;
                     }
                 }
-                
-                // Add progress notes for developing subjects
-                const developingSubjects = selectedSubjects.filter(s => s.performance >= 2 && s.performance < 4);
-                if (developingSubjects.length > 0) {
-                    const randomDeveloping = developingSubjects[Math.floor(Math.random() * developingSubjects.length)];
-                    comment += `${pronoun.subject.charAt(0).toUpperCase() + pronoun.subject.slice(1)} is making steady progress in ${randomDeveloping.name} and continues to build confidence in this subject area. `;
+                  // Add progress notes for additional subjects
+                if (selectedSubjects.length > 3) {
+                    const randomSubject = selectedSubjects[Math.floor(Math.random() * selectedSubjects.length)];
+                    comment += `${pronoun.subject.charAt(0).toUpperCase() + pronoun.subject.slice(1)} also shows interest in ${randomSubject.name || randomSubject.id} and continues to build understanding in this area. `;
                 }
+                  // Add specific activity progress for all subjects if selected
+                selectedSubjects.forEach(subject => {
+                    if (subject.activities) {
+                        const activities = subject.activities;
+                        const completedActivities = [];
+                        const incompleteActivities = [];
+                        
+                        // Check activities for each subject
+                        if (subject.id === 'english') {
+                            if (activities.activity1) completedActivities.push('letter-picture matching');
+                            else incompleteActivities.push('letter-picture matching');
+                            
+                            if (activities.activity2) completedActivities.push('letter tracing');
+                            else incompleteActivities.push('letter tracing');
+                            
+                            if (activities.activity3) completedActivities.push('letter recognition');
+                            else incompleteActivities.push('letter recognition');
+                            
+                            if (activities.vocabulary) completedActivities.push('basic vocabulary');
+                            else incompleteActivities.push('basic vocabulary');
+                        }
+                        
+                        else if (subject.id === 'phonics') {
+                            if (activities.activity1) completedActivities.push('letter A-E recognition');
+                            else incompleteActivities.push('letter A-E recognition');
+                            
+                            if (activities.activity2) completedActivities.push('A/B/C revision');
+                            else incompleteActivities.push('A/B/C revision');
+                            
+                            if (activities.vocabulary) completedActivities.push('phonics vocabulary');
+                            else incompleteActivities.push('phonics vocabulary');
+                        }
+                        
+                        else if (subject.id === 'mathematics') {
+                            if (activities.activity1) completedActivities.push('counting 1-10');
+                            else incompleteActivities.push('counting 1-10');
+                            
+                            if (activities.activity2) completedActivities.push('number tracing');
+                            else incompleteActivities.push('number tracing');
+                            
+                            if (activities.activity3) completedActivities.push('quantity matching');
+                            else incompleteActivities.push('quantity matching');
+                            
+                            if (activities.activity4) completedActivities.push('finger counting');
+                            else incompleteActivities.push('finger counting');
+                        }
+                        
+                        else if (subject.id === 'iq') {
+                            if (activities.activity1) completedActivities.push('animal-food matching');
+                            else incompleteActivities.push('animal-food matching');
+                            
+                            if (activities.activity2) completedActivities.push('shapes and colors');
+                            else incompleteActivities.push('shapes and colors');
+                            
+                            if (activities.activity3) completedActivities.push('room objects identification');
+                            else incompleteActivities.push('room objects identification');
+                        }
+                        
+                        else if (subject.id === 'social-studies') {
+                            if (activities.activity1) completedActivities.push('farm animal characteristics');
+                            else incompleteActivities.push('farm animal characteristics');
+                            
+                            if (activities.activity2) completedActivities.push('animal sounds and offspring');
+                            else incompleteActivities.push('animal sounds and offspring');
+                            
+                            if (activities.activity3) completedActivities.push('body parts identification');
+                            else incompleteActivities.push('body parts identification');
+                        }
+                        
+                        else if (subject.id === 'science') {
+                            if (activities.activity1) completedActivities.push('floating/sinking experiments');
+                            if (activities.activity2) completedActivities.push('dancing beans experiment');
+                            if (activities.activity3) completedActivities.push('buoyancy exploration');
+                            if (activities.activity4) completedActivities.push('balloon experiments');
+                            if (activities.activity5) completedActivities.push('magnifying glass use');
+                            if (activities.activity6) completedActivities.push('milk color experiment');
+                        }
+                        
+                        else if (subject.id === 'conversation') {
+                            if (activities.activity1) completedActivities.push('age questions');
+                            if (activities.activity2 || activities.activity3 || activities.activity4 || activities.activity5 || activities.activity6) {
+                                completedActivities.push('daily routine conversations');
+                            }
+                            if (activities.activity7 || activities.activity8 || activities.activity9) {
+                                completedActivities.push('food conversations');
+                            }
+                        }
+                        
+                        else if (subject.id === 'arts') {
+                            if (activities.activity1) completedActivities.push('paper crafts');
+                            if (activities.activity2) completedActivities.push('origami skills');
+                            if (activities.activity3) completedActivities.push('textile crafts');
+                            if (activities.activity4) completedActivities.push('creative constructions');
+                        }
+                        
+                        else if (subject.id === 'pe') {
+                            if (activities.activity1 || activities.activity2 || activities.activity3) {
+                                completedActivities.push('ball skills');
+                            }
+                            if (activities.activity4) completedActivities.push('racing activities');
+                            if (activities.activity5) completedActivities.push('coordination games');
+                            if (activities.activity6) completedActivities.push('football skills');
+                        }
+                        
+                        else if (subject.id === 'puppet') {
+                            if (activities.activity1 || activities.activity2 || activities.activity3 || activities.activity4 || activities.activity5) {
+                                completedActivities.push('storytelling performances');
+                            }
+                        }
+                        
+                        // Generate activity-specific comments
+                        if (completedActivities.length >= 2) {
+                            comment += `In ${subject.name}, ${pronoun.subject} has shown excellent progress with ${completedActivities.slice(0, 2).join(' and ')}, demonstrating strong foundational skills. `;
+                        } else if (completedActivities.length > 0) {
+                            comment += `${pronoun.subject.charAt(0).toUpperCase() + pronoun.subject.slice(1)} is developing ${subject.name.toLowerCase()} skills and has made good progress with ${completedActivities[0]}. `;
+                        }
+                        
+                        if (incompleteActivities.length > 0 && incompleteActivities.length <= 2) {
+                            comment += `Continued practice with ${incompleteActivities.join(' and ')} will further strengthen ${pronoun.possessive} ${subject.name.toLowerCase()} foundation. `;
+                        }
+                    }
+                });
             }
             
             // Incorporate specific strengths
@@ -1973,13 +1654,65 @@
             const futureClosings = [
                 `${studentName} has shown wonderful growth this term, and I am excited to see ${pronoun.possessive} continued development. ${pronoun.subject.charAt(0).toUpperCase() + pronoun.subject.slice(1)} is well-prepared for future learning challenges.`,
                 `I am proud of ${studentName}'s achievements and the progress ${pronoun.subject} has made. ${pronoun.subject.charAt(0).toUpperCase() + pronoun.subject.slice(1)} approaches learning with curiosity and determination.`,
+
                 `${studentName} is a valued member of our classroom community. ${pronoun.subject.charAt(0).toUpperCase() + pronoun.subject.slice(1)} has established a strong foundation for continued academic and social success.`,
                 `Working with ${studentName} has been rewarding, and ${pronoun.subject} consistently demonstrates the qualities that will serve ${pronoun.object} well in future educational endeavors.`
             ];
-            
-            comment += futureClosings[Math.floor(Math.random() * futureClosings.length)];
+              comment += futureClosings[Math.floor(Math.random() * futureClosings.length)];
             
             return comment;
+        }
+        
+        // Test function to diagnose iframe issues
+        function testFrames() {
+            console.log('=== FRAME DIAGNOSTIC TEST ===');
+            
+            // Test student info frame
+            console.log('Student info frame:', studentInfoFrame);
+            if (studentInfoFrame) {
+                console.log('Student frame has getStudentData:', typeof studentInfoFrame.getStudentData);
+                if (studentInfoFrame.getStudentData) {
+                    try {
+                        const studentData = studentInfoFrame.getStudentData();
+                        console.log('Student data retrieved:', studentData);
+                    } catch (e) {
+                        console.error('Error getting student data:', e);
+                    }
+                }
+            }
+            
+            // Test subjects frame
+            console.log('Subjects frame:', subjectsFrame);
+            if (subjectsFrame) {
+                console.log('Subjects frame has getSubjectData:', typeof subjectsFrame.getSubjectData);
+                if (subjectsFrame.getSubjectData) {
+                    try {
+                        const subjectData = subjectsFrame.getSubjectData();
+                        console.log('Subject data retrieved:', subjectData);
+                    } catch (e) {
+                        console.error('Error getting subject data:', e);
+                    }
+                }
+            }
+            
+            // Test comment elements
+            const comment1Element = document.getElementById('comment1');
+            const comment2Element = document.getElementById('comment2');
+            console.log('Comment 1 element found:', !!comment1Element);
+            console.log('Comment 2 element found:', !!comment2Element);
+            
+            // Try to generate a test comment
+            try {
+                const testComment = "This is a test comment to verify the system is working.";
+                if (comment1Element) {
+                    comment1Element.innerHTML = testComment + '<div class="word-count">12 words</div>';
+                    console.log('Test comment set successfully');
+                }
+            } catch (e) {
+                console.error('Error setting test comment:', e);
+            }
+            
+            showNotification('Frame diagnostic complete - check console for details');
         }
     </script>
 </body>
