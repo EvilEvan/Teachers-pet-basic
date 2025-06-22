@@ -3,740 +3,635 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Subject Performance - Kindergarten Rapport</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>Subject Selection - Kindergarten Report Generator</title>
     <style>
-        :root {
-            --primary-color: #4a6da7;
-            --primary-dark: #3a5a8f;
-            --secondary-color: #5cb85c;
-            --secondary-dark: #4cae4c;
-            --background-color: #f5f7fa;
-            --card-background: #ffffff;
-            --text-color: #333333;
-            --text-light: #666666;
-            --border-color: #e0e0e0;
-            --border-radius: 12px;
-            --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            --transition: all 0.3s ease;
-        }
-
-        [data-theme="dark"] {
-            --background-color: #1a1a2e;
-            --card-background: #16213e;
-            --text-color: #ffffff;
-            --text-light: #b0b0b0;
-            --border-color: #3a3a5c;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         body {
-            font-family: 'Inter', sans-serif;
-            line-height: 1.6;
-            background-color: var(--background-color);
-            color: var(--text-color);
-            transition: var(--transition);
-            padding: 2rem;
-        }
-
-        .subject-container {
-            max-width: 1200px;
+            font-family: Arial, sans-serif;
+            max-width: 1000px;
             margin: 0 auto;
-            background: linear-gradient(135deg, #fff8f0, #fff0e6);
-            border: 2px solid var(--border-color);
-            padding: 2rem;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
+            padding: 20px;
+            background-color: #f5f5f5;
         }
-
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
         h1 {
-            color: var(--primary-color);
+            color: #2c3e50;
             text-align: center;
-            margin-bottom: 2rem;
-            font-weight: 700;
-            font-size: 2.5rem;
+            margin-bottom: 30px;
         }
-
-        h2 {
-            color: var(--primary-color);
-            margin-bottom: 1.5rem;
-            font-weight: 600;
-            font-size: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
         .subject-section {
-            margin-bottom: 1.5rem;
-            background-color: var(--card-background);
-            border: 1px solid var(--border-color);
-            border-radius: var(--border-radius);
-            overflow: hidden;
-            transition: var(--transition);
-        }
-
-        .subject-section:hover {
-            border-color: var(--primary-color);
-        }
-
-        .subject-title {
-            font-weight: 600;
-            padding: 1rem;
-            color: var(--primary-color);
+            margin-bottom: 30px;
+            border: 2px solid #ecf0f1;
+            border-radius: 8px;
+            padding: 20px;
+        }        .subject-title {
+            color: #3498db;
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 5px;
             display: flex;
             align-items: center;
-            cursor: pointer;
-            background: linear-gradient(135deg, #f8f9ff, #ffffff);
-            border-bottom: 1px solid var(--border-color);
-            transition: var(--transition);
+            gap: 10px;
         }
-
-        .subject-title:hover {
-            background: linear-gradient(135deg, #e8f0ff, #f0f7ff);
+        .subject-checkbox {
+            transform: scale(1.3);
+            margin-right: 5px;
         }
-
-        .subject-title.expanded {
-            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
-            color: white;
-        }
-
-        .subject-content {
-            padding: 1.5rem;
-            display: none;
-            background-color: var(--card-background);
-        }
-
-        .subject-content.expanded {
-            display: block;
-            animation: slideDown 0.3s ease;
-        }
-
-        @keyframes slideDown {
-            from {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .subject-description {
-            background: linear-gradient(135deg, #f0f8ff, #e6f3ff);
-            padding: 1rem;
-            border-radius: 8px;
-            margin-bottom: 1rem;
-            border-left: 4px solid var(--primary-color);
-            font-style: italic;
-            color: var(--text-light);
-        }        .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-            flex: 1;
-        }
-
-        label {
-            font-weight: 500;
-            color: var(--text-color);
-            font-size: 0.9rem;
-        }        input[type="text"], select {
-            padding: 0.8rem;
-            border-radius: 8px;
-            border: 2px solid var(--border-color);
-            background-color: var(--card-background);
-            color: var(--text-color);
-            font-family: inherit;
-            font-size: 1rem;
-            transition: var(--transition);
-        }
-
-        input[type="text"]:focus, select:focus {
-            outline: none;
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(74, 109, 167, 0.1);
-        }
-
-        .checkbox-custom {
-            appearance: none;
-            width: 20px;
-            height: 20px;
-            border: 2px solid var(--border-color);
-            border-radius: 4px;
-            margin-right: 0.5rem;
-            cursor: pointer;
-            position: relative;
-            transition: var(--transition);
-        }
-
-        .checkbox-custom:checked {
-            background-color: var(--primary-color);
-            border-color: var(--primary-color);
-        }        .checkbox-custom:checked::after {
-            content: '✓';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: white;
-            font-weight: bold;
-            font-size: 12px;
-        }        .activity-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 12px;
-            margin-top: 10px;
-            background: linear-gradient(135deg, #f8f9ff, #ffffff);
-            padding: 1rem;
-            border-radius: 8px;
-            border: 1px solid var(--border-color);
-        }
-
-        .activity-label {
+        .topic-item {
             display: flex;
             align-items: flex-start;
-            gap: 8px;
-            cursor: pointer;
-            padding: 0.5rem;
-            border-radius: 6px;
-            transition: var(--transition);
+            margin: 10px 0;
+            padding: 8px;
+            border-radius: 5px;
+            transition: background-color 0.2s;
         }
-
-        .activity-label:hover {
-            background: linear-gradient(135deg, #e8f0ff, #f0f7ff);
+        .topic-item:hover {
+            background-color: #f8f9fa;
         }
-
-        .activity-label span {
+        .topic-checkbox {
+            margin-right: 10px;
+            margin-top: 2px;
+            transform: scale(1.2);
+        }
+        .topic-text {
+            flex: 1;
             line-height: 1.4;
-            font-size: 0.9rem;
         }
-
-        .toggle-icon {
-            margin-right: 0.5rem;
-            transition: transform 0.3s ease;
-            font-size: 0.8rem;
+        .button {
+            background-color: #3498db;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px 5px;
+            transition: background-color 0.3s;
         }
-
-        .expanded .toggle-icon {
-            transform: rotate(90deg);
+        .button:hover {
+            background-color: #2980b9;
         }
-
-        .stats {
-            background: var(--card-background);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 1rem;
-            margin-bottom: 2rem;
+        .button-success {
+            background-color: #27ae60;
+        }
+        .button-success:hover {
+            background-color: #229954;
+        }
+        .navigation {
+            text-align: center;
+            margin: 30px 0;
+            padding: 20px;
+            border-top: 2px solid #ecf0f1;
+        }
+        .selection-summary {
+            background: #e8f4fd;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            border-left: 4px solid #3498db;
+        }
+        .bulk-actions {
+            margin-bottom: 20px;
+            text-align: center;
+        }        .bulk-actions button {
+            margin: 5px;
+            padding: 8px 16px;
+            font-size: 14px;
+        }
+        .comments-section {
+            margin-top: 30px;
+            border-top: 2px solid #ecf0f1;
+            padding-top: 30px;
+        }
+        .comment-box {
+            background: #ecf0f1;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+            min-height: 100px;
+        }
+        .comment-option {
+            margin: 15px 0;
+            padding: 15px;
+            border: 2px solid #bdc3c7;
+            border-radius: 5px;
+            background: #f8f9fa;
+            cursor: pointer;
+        }
+        .comment-option:hover {
+            background: #e9ecef;
+        }
+        .comment-option.selected {
+            border-color: #3498db;
+            background: #e3f2fd;
+        }
+        .final-actions {
+            margin-top: 20px;
             text-align: center;
         }
-
-        .stats h3 {
-            color: var(--primary-color);
-            margin-bottom: 0.5rem;
-        }
-
-        .stats .count {
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--secondary-color);
-        }
-
-        @media (max-width: 768px) {
-            body {
-                padding: 1rem;
-            }
-            
-            .subject-container {
-                padding: 1rem;
-            }
-              h1 {
-                font-size: 2rem;
-            }
+        .final-actions .button {
+            margin: 10px;
         }
     </style>
 </head>
 <body>
-    <div class="subject-container">
-        <h1><i class="fas fa-book"></i> Subject Performance</h1>
+    <div class="container">
+        <h1>Subject Selection</h1>
+        <p style="text-align: center; color: #7f8c8d; margin-bottom: 30px;">
+            Select the topics you want to mention in the student's report comments.
+        </p>
         
-        <div class="stats">
-            <h3>Selected Subjects</h3>
-            <div class="count" id="selected-subjects-count">0</div>
+        <div class="bulk-actions">
+            <button type="button" class="button" onclick="selectAll()">Select All</button>
+            <button type="button" class="button" onclick="clearAll()">Clear All</button>
         </div>
 
-        <!-- ENGLISH -->
-        <div class="subject-section">
-            <div class="subject-title" onclick="toggleSubject(this)">
-                <i class="fas fa-chevron-right toggle-icon"></i>
-                <input type="checkbox" class="checkbox-custom" id="english-checkbox" onclick="event.stopPropagation();">
-                <i class="fas fa-language"></i> ENGLISH
-            </div>
-            <div class="subject-content">
-                <div class="subject-description">
-                    Develops early literacy skills through letter recognition, vocabulary building, and foundational reading activities.
+        <div class="selection-summary">
+            <strong>Selected Topics: </strong><span id="selectionCount">0</span>
+        </div>
+
+        <form id="subjectsForm">            <!-- ENGLISH -->
+            <div class="subject-section">
+                <div class="subject-title">
+                    <input type="checkbox" class="subject-checkbox" id="subject_english" value="English">
+                    <label for="subject_english">ENGLISH</label>
                 </div>
-                  <!-- Activity Checkboxes -->
-                <div class="form-group">
-                    <label>Activity Completion</label>
-                    <div class="activity-grid">
-                        <label class="activity-label">
-                            <input type="checkbox" class="checkbox-custom" id="english-activity-1">
-                            <span>Draw lines to match the letter with the correct picture</span>
-                        </label>
-                        <label class="activity-label">
-                            <input type="checkbox" class="checkbox-custom" id="english-activity-2">
-                            <span>Trace the letter and color</span>
-                        </label>                        <label class="activity-label">
-                            <input type="checkbox" class="checkbox-custom" id="english-activity-3">
-                            <span>Draw lines to match the same letters</span>
-                        </label>
-                    </div>                </div>
-            </div>
-        </div><!-- PHONICS -->
-        <div class="subject-section">
-            <div class="subject-title" onclick="toggleSubject(this)">
-                <i class="fas fa-chevron-right toggle-icon"></i>
-                <input type="checkbox" class="checkbox-custom" id="phonics-checkbox" onclick="event.stopPropagation();">
-                <i class="fas fa-spell-check"></i> PHONICS
-            </div>
-            <div class="subject-content">
-                <div class="subject-description">
-                    Focuses on letter recognition, sound awareness, and beginning reading skills through fun activities and games.
+                <div class="topic-item">
+                    <input type="checkbox" class="topic-checkbox" id="english1" value="Draw lines to match the letter with the correct picture">
+                    <label for="english1" class="topic-text">Draw lines to match the letter with the correct picture</label>
                 </div>
-                <!-- Activity Checkboxes -->
-                <div class="form-group">
-                    <label>Activity Completion</label>
-                    <div class="activity-grid">
-                        <label class="activity-label">
-                            <input type="checkbox" class="checkbox-custom" id="phonics-activity-1">
-                            <span>Letter A-E</span>
-                        </label>
-                        <label class="activity-label">
-                            <input type="checkbox" class="checkbox-custom" id="phonics-activity-2">
-                            <span>Revision A/B/C</span>
-                        </label>
-                        <label class="activity-label">
-                            <input type="checkbox" class="checkbox-custom" id="phonics-vocabulary">
-                            <span>Vocabulary mastery: Annie Ant-Axe, Benny Bear-Ball, Candy Cat-Cut, Danny Dog-Dig, Eddie Elephant-Egg</span>
-                        </label>
-                    </div>                </div>
-            </div>
-        </div><!-- MATHEMATICS -->
-        <div class="subject-section">
-            <div class="subject-title" onclick="toggleSubject(this)">
-                <i class="fas fa-chevron-right toggle-icon"></i>
-                <input type="checkbox" class="checkbox-custom" id="mathematics-checkbox" onclick="event.stopPropagation();">
-                <i class="fas fa-calculator"></i> MATHEMATICS
-            </div>
-            <div class="subject-content">
-                <div class="subject-description">
-                    Introduces basic number concepts, counting, simple operations, and mathematical thinking through hands-on activities.
+                <div class="topic-item">
+                    <input type="checkbox" class="topic-checkbox" id="english2" value="Trace the letter and color">
+                    <label for="english2" class="topic-text">Trace the letter and color</label>
                 </div>
-                <!-- Activity Checkboxes -->
-                <div class="form-group">
-                    <label>Activity Completion</label>
-                    <div class="activity-grid">
-                        <label class="activity-label">
-                            <input type="checkbox" class="checkbox-custom" id="mathematics-activity-1">
-                            <span>Count from 1-10</span>
-                        </label>
-                        <label class="activity-label">
-                            <input type="checkbox" class="checkbox-custom" id="mathematics-activity-2">
-                            <span>Trace numbers 1-3 following the dotted line and colouring the correct amount of pictures</span>
-                        </label>
-                        <label class="activity-label">
-                            <input type="checkbox" class="checkbox-custom" id="mathematics-activity-3">
-                            <span>Place the correct amount of pictures in the boxes</span>
-                        </label>
-                        <label class="activity-label">
-                            <input type="checkbox" class="checkbox-custom" id="mathematics-activity-4">
-                            <span>Counting from 1-10 with our fingers</span>
-                        </label>
-                        <label class="activity-label">
-                            <input type="checkbox" class="checkbox-custom" id="mathematics-vocabulary">
-                            <span>Vocabulary mastery: One – ten</span>
-                        </label>
-                    </div>                </div>
-            </div>
-        </div><!-- I.Q -->
-        <div class="subject-section">
-            <div class="subject-title" onclick="toggleSubject(this)">
-                <i class="fas fa-chevron-right toggle-icon"></i>
-                <input type="checkbox" class="checkbox-custom" id="iq-checkbox" onclick="event.stopPropagation();">
-                <i class="fas fa-brain"></i> I.Q (Cognitive Development)
-            </div>
-            <div class="subject-content">
-                <div class="subject-description">
-                    Assesses problem-solving skills, logical thinking, pattern recognition, and cognitive development milestones.
+                <div class="topic-item">
+                    <input type="checkbox" class="topic-checkbox" id="english3" value="Draw lines to match the same letters">
+                    <label for="english3" class="topic-text">Draw lines to match the same letters</label>
                 </div>
-                <!-- Activity Checkboxes -->
-                <div class="form-group">
-                    <label>Activity Completion</label>
-                    <div class="activity-grid">
-                        <label class="activity-label">
-                            <input type="checkbox" class="checkbox-custom" id="iq-activity-1">
-                            <span>Animal and their food and different food that animals can eat</span>
-                        </label>
-                        <label class="activity-label">
-                            <input type="checkbox" class="checkbox-custom" id="iq-activity-2">
-                            <span>Shapes and colours</span>
-                        </label>                        <label class="activity-label">
-                            <input type="checkbox" class="checkbox-custom" id="iq-activity-3">
-                            <span>Objects in the Dining Room/ Bathroom</span>
-                        </label>
-                    </div>                </div>
-            </div>
-        </div><!-- SOCIAL STUDIES -->
-        <div class="subject-section">
-            <div class="subject-title" onclick="toggleSubject(this)">
-                <i class="fas fa-chevron-right toggle-icon"></i>
-                <input type="checkbox" class="checkbox-custom" id="social-studies-checkbox" onclick="event.stopPropagation();">
-                <i class="fas fa-globe"></i> SOCIAL STUDIES
-            </div>
-            <div class="subject-content">
-                <div class="subject-description">
-                    Explores community, family roles, cultural awareness, and basic social concepts through interactive learning.
+            </div>            <!-- PHONICS -->
+            <div class="subject-section">
+                <div class="subject-title">
+                    <input type="checkbox" class="subject-checkbox" id="subject_phonics" value="Phonics">
+                    <label for="subject_phonics">PHONICS</label>
                 </div>
-                <!-- Activity Checkboxes -->
-                <div class="form-group">
-                    <label>Activity Completion</label>
-                    <div class="activity-grid">
-                        <label class="activity-label">
-                            <input type="checkbox" class="checkbox-custom" id="social-studies-activity-1">
-                            <span>Farm animals- characteristic, abilities</span>
-                        </label>
-                        <label class="activity-label">
-                            <input type="checkbox" class="checkbox-custom" id="social-studies-activity-2">
-                            <span>sounds, food, offsprings (babies)</span>
-                        </label>                        <label class="activity-label">
-                            <input type="checkbox" class="checkbox-custom" id="social-studies-activity-3">
-                            <span>My Body- My face</span>
-                        </label>
-                    </div>                </div>
-            </div>
-        </div><!-- SCIENCE -->
-        <div class="subject-section">
-            <div class="subject-title" onclick="toggleSubject(this)">
-                <i class="fas fa-chevron-right toggle-icon"></i>
-                <input type="checkbox" class="checkbox-custom" id="science-checkbox" onclick="event.stopPropagation();">
-                <i class="fas fa-flask"></i> SCIENCE
-            </div>
-            <div class="subject-content">
-                <div class="subject-description">
-                    Encourages curiosity about the natural world through simple experiments, observations, and discovery activities.
+                <div class="topic-item">
+                    <input type="checkbox" class="topic-checkbox" id="phonics1" value="Letter A-E recognition">
+                    <label for="phonics1" class="topic-text">Letter A-E recognition</label>
                 </div>
-                <!-- Activity Checkboxes -->
-                <div class="form-group">
-                    <label>Activity Completion</label>
-                    <div class="activity-grid">
-                        <label class="activity-label">
-                            <input type="checkbox" class="checkbox-custom" id="science-activity-1">
-                            <span>Floating Sinking eggs- Introducing the concept of buoyancy and how salt affects water density</span>
-                        </label>
-                        <label class="activity-label">
-                            <input type="checkbox" class="checkbox-custom" id="science-activity-2">
-                            <span>Green beans dancing (soda)- Introducing the effects of gas buoyancy with soda water</span>
-                        </label>                        <label class="activity-label">
-                            <input type="checkbox" class="checkbox-custom" id="science-activity-3">
-                            <span>The Rock is light- Introducing the effects of buoyancy with water</span>
-                        </label>
-                    </div>                </div>
-            </div>
-        </div><!-- CONVERSATION -->
-        <div class="subject-section">
-            <div class="subject-title" onclick="toggleSubject(this)">
-                <i class="fas fa-chevron-right toggle-icon"></i>
-                <input type="checkbox" class="checkbox-custom" id="conversation-checkbox" onclick="event.stopPropagation();">
-                <i class="fas fa-comments"></i> CONVERSATION
-            </div>
-            <div class="subject-content">
-                <div class="subject-description">
-                    Develops verbal communication skills, listening abilities, and confidence in expressing ideas and thoughts.
+                <div class="topic-item">
+                    <input type="checkbox" class="topic-checkbox" id="phonics2" value="Candy Cat-Cut vocabulary">
+                    <label for="phonics2" class="topic-text">Candy Cat-Cut vocabulary</label>
                 </div>
-                <!-- Activity Checkboxes -->
-                <div class="form-group">
-                    <label>Activity Completion</label>
-                    <div class="activity-grid">
-                        <label class="activity-label">
-                            <input type="checkbox" class="checkbox-custom" id="conversation-activity-1">
-                            <span>How old are you? - I am three years old</span>
-                        </label>
-                        <label class="activity-label">
-                            <input type="checkbox" class="checkbox-custom" id="conversation-activity-2">
-                            <span>What do you do in the morning? – I wake up</span>
-                        </label>                        <label class="activity-label">
-                            <input type="checkbox" class="checkbox-custom" id="conversation-activity-3">
-                            <span>What do you do after eating? -I brush my teeth</span>
-                        </label>
-                    </div>                </div>
-            </div>
-        </div><!-- ARTS -->
-        <div class="subject-section">
-            <div class="subject-title" onclick="toggleSubject(this)">
-                <i class="fas fa-chevron-right toggle-icon"></i>
-                <input type="checkbox" class="checkbox-custom" id="arts-checkbox" onclick="event.stopPropagation();">
-                <i class="fas fa-palette"></i> ARTS
-            </div>
-            <div class="subject-content">
-                <div class="subject-description">
-                    Nurtures creativity and self-expression through drawing, painting, crafts, and various artistic activities.
+                <div class="topic-item">
+                    <input type="checkbox" class="topic-checkbox" id="phonics3" value="Eddie Elephant-Egg vocabulary">
+                    <label for="phonics3" class="topic-text">Eddie Elephant-Egg vocabulary</label>
                 </div>
-                <!-- Activity Checkboxes -->
-                <div class="form-group">
-                    <label>Activity Completion</label>
-                    <div class="activity-grid">
-                        <label class="activity-label">
-                            <input type="checkbox" class="checkbox-custom" id="arts-activity-1">
-                            <span>Paper caterpillar making</span>
-                        </label>
-                        <label class="activity-label">
-                            <input type="checkbox" class="checkbox-custom" id="arts-activity-2">
-                            <span>Origami- Fox, Frog, Ice-cream</span>
-                        </label>                        <label class="activity-label">
-                            <input type="checkbox" class="checkbox-custom" id="arts-activity-3">
-                            <span>Cotton ball sheep</span>
-                        </label>
-                    </div>                </div>
-            </div>
-        </div><!-- PHYSICAL EDUCATION -->
-        <div class="subject-section">
-            <div class="subject-title" onclick="toggleSubject(this)">
-                <i class="fas fa-chevron-right toggle-icon"></i>
-                <input type="checkbox" class="checkbox-custom" id="pe-checkbox" onclick="event.stopPropagation();">
-                <i class="fas fa-running"></i> PHYSICAL EDUCATION
-            </div>
-            <div class="subject-content">
-                <div class="subject-description">
-                    Promotes physical development, coordination, teamwork, and healthy habits through games and activities.
+            </div>            <!-- MATHEMATICS -->
+            <div class="subject-section">
+                <div class="subject-title">
+                    <input type="checkbox" class="subject-checkbox" id="subject_mathematics" value="Mathematics">
+                    <label for="subject_mathematics">MATHEMATICS</label>
                 </div>
-                <!-- Activity Checkboxes -->
-                <div class="form-group">
-                    <label>Activity Completion</label>
-                    <div class="activity-grid">
-                        <label class="activity-label">
-                            <input type="checkbox" class="checkbox-custom" id="pe-activity-1">
-                            <span>Pass the ball</span>
-                        </label>
-                        <label class="activity-label">
-                            <input type="checkbox" class="checkbox-custom" id="pe-activity-2">
-                            <span>Roll the ball</span>
-                        </label>                        <label class="activity-label">
-                            <input type="checkbox" class="checkbox-custom" id="pe-activity-3">
-                            <span>Drop and catch the ball</span>
-                        </label>
-                    </div>                </div>
-            </div>
-        </div><!-- PUPPET SHOW -->
-        <div class="subject-section">
-            <div class="subject-title" onclick="toggleSubject(this)">
-                <i class="fas fa-chevron-right toggle-icon"></i>
-                <input type="checkbox" class="checkbox-custom" id="puppet-checkbox" onclick="event.stopPropagation();">
-                <i class="fas fa-theater-masks"></i> PUPPET SHOW
-            </div>
-            <div class="subject-content">
-                <div class="subject-description">
-                    Enhances imagination, storytelling abilities, and social skills through puppet play and dramatic activities.
+                <div class="topic-item">
+                    <input type="checkbox" class="topic-checkbox" id="math1" value="Count from 1-10">
+                    <label for="math1" class="topic-text">Count from 1-10</label>
                 </div>
-                <!-- Activity Checkboxes -->
-                <div class="form-group">
-                    <label>Activity Completion</label>
-                    <div class="activity-grid">
-                        <label class="activity-label">
-                            <input type="checkbox" class="checkbox-custom" id="puppet-activity-1">
-                            <span>Three little pigs</span>
-                        </label>
-                        <label class="activity-label">
-                            <input type="checkbox" class="checkbox-custom" id="puppet-activity-2">
-                            <span>The Red riding hood</span>
-                        </label>                        <label class="activity-label">
-                            <input type="checkbox" class="checkbox-custom" id="puppet-activity-3">
-                            <span>the panicked rabbit</span>
-                        </label>
-                    </div>                </div>
+                <div class="topic-item">
+                    <input type="checkbox" class="topic-checkbox" id="math2" value="Trace numbers 1-3">
+                    <label for="math2" class="topic-text">Trace numbers 1-3 following the dotted line and coloring</label>
+                </div>
+                <div class="topic-item">
+                    <input type="checkbox" class="topic-checkbox" id="math3" value="Place correct amount of pictures in boxes">
+                    <label for="math3" class="topic-text">Place the correct amount of pictures in the boxes</label>
+                </div>
+                <div class="topic-item">
+                    <input type="checkbox" class="topic-checkbox" id="math4" value="Counting 1-10 with fingers">
+                    <label for="math4" class="topic-text">Counting from 1-10 with our fingers</label>
+                </div>
+            </div>            <!-- I.Q -->
+            <div class="subject-section">
+                <div class="subject-title">
+                    <input type="checkbox" class="subject-checkbox" id="subject_iq" value="I.Q">
+                    <label for="subject_iq">I.Q</label>
+                </div>
+                <div class="topic-item">
+                    <input type="checkbox" class="topic-checkbox" id="iq1" value="Animal and their food">
+                    <label for="iq1" class="topic-text">Animal and their food and different food that animals can eat</label>
+                </div>
+                <div class="topic-item">
+                    <input type="checkbox" class="topic-checkbox" id="iq2" value="Shapes and colours">
+                    <label for="iq2" class="topic-text">Shapes and colours</label>
+                </div>
+            </div>            <!-- SOCIAL STUDIES -->
+            <div class="subject-section">
+                <div class="subject-title">
+                    <input type="checkbox" class="subject-checkbox" id="subject_social" value="Social Studies">
+                    <label for="subject_social">SOCIAL STUDIES</label>
+                </div>
+                <div class="topic-item">
+                    <input type="checkbox" class="topic-checkbox" id="social1" value="Farm animals characteristics">
+                    <label for="social1" class="topic-text">Farm animals - characteristic, abilities</label>
+                </div>
+                <div class="topic-item">
+                    <input type="checkbox" class="topic-checkbox" id="social2" value="Animal sounds">
+                    <label for="social2" class="topic-text">Animal sounds</label>
+                </div>
+                <div class="topic-item">
+                    <input type="checkbox" class="topic-checkbox" id="social3" value="My Body - My face">
+                    <label for="social3" class="topic-text">My Body - My face</label>
+                </div>
+            </div>            <!-- SCIENCE -->
+            <div class="subject-section">
+                <div class="subject-title">
+                    <input type="checkbox" class="subject-checkbox" id="subject_science" value="Science">
+                    <label for="subject_science">SCIENCE</label>
+                </div>
+                <div class="topic-item">
+                    <input type="checkbox" class="topic-checkbox" id="science1" value="Floating Sinking eggs experiment">
+                    <label for="science1" class="topic-text">Floating Sinking eggs - Introducing the concept of buoyancy and how salt affects water density</label>
+                </div>
+                <div class="topic-item">
+                    <input type="checkbox" class="topic-checkbox" id="science2" value="The Rock is light experiment">
+                    <label for="science2" class="topic-text">The Rock is light - Introducing the effects of buoyancy with water</label>
+                </div>
+                <div class="topic-item">
+                    <input type="checkbox" class="topic-checkbox" id="science3" value="Bottle balloon blow-up experiment">
+                    <label for="science3" class="topic-text">Bottle balloon blow-up experiment - Introducing concept of carbonation (gas) in soda water</label>
+                </div>
+                <div class="topic-item">
+                    <input type="checkbox" class="topic-checkbox" id="science4" value="Dancing colors milk experiment">
+                    <label for="science4" class="topic-text">Dancing colors (milk) - Introducing concept of surface tension and interactions between different materials</label>
+                </div>
+            </div>            <!-- CONVERSATION 1 -->
+            <div class="subject-section">
+                <div class="subject-title">
+                    <input type="checkbox" class="subject-checkbox" id="subject_conv1" value="Conversation Skills">
+                    <label for="subject_conv1">CONVERSATION 1</label>
+                </div>
+                <div class="topic-item">
+                    <input type="checkbox" class="topic-checkbox" id="conv1_1" value="How old are you conversation">
+                    <label for="conv1_1" class="topic-text">How old are you? - I am three years old</label>
+                </div>
+                <div class="topic-item">
+                    <input type="checkbox" class="topic-checkbox" id="conv1_2" value="Daily routine conversations">
+                    <label for="conv1_2" class="topic-text">Daily routine conversations (morning routine, after eating, etc.)</label>
+                </div>
+            </div>            <!-- CONVERSATION 3 -->
+            <div class="subject-section">
+                <div class="subject-title">
+                    <input type="checkbox" class="subject-checkbox" id="subject_conv3" value="Vocabulary Development">
+                    <label for="subject_conv3">CONVERSATION 3</label>
+                </div>
+                <div class="topic-item">
+                    <input type="checkbox" class="topic-checkbox" id="conv3_1" value="Snacks conversation">
+                    <label for="conv3_1" class="topic-text">Snacks - What snacks do you like? – I like donut</label>
+                </div>
+                <div class="topic-item">
+                    <input type="checkbox" class="topic-checkbox" id="conv3_2" value="Fruits conversation">
+                    <label for="conv3_2" class="topic-text">Fruits - What is this? - It's a banana</label>
+                </div>
+                <div class="topic-item">
+                    <input type="checkbox" class="topic-checkbox" id="conv3_3" value="Vegetables conversation">
+                    <label for="conv3_3" class="topic-text">Vegetables - What vegetables do you have? - I have a pumpkin</label>
+                </div>
+            </div>            <!-- PHYSICAL EDUCATION -->
+            <div class="subject-section">
+                <div class="subject-title">
+                    <input type="checkbox" class="subject-checkbox" id="subject_pe" value="Physical Education">
+                    <label for="subject_pe">PHYSICAL EDUCATION</label>
+                </div>
+                <div class="topic-item">
+                    <input type="checkbox" class="topic-checkbox" id="pe1" value="Pass the ball">
+                    <label for="pe1" class="topic-text">Pass the ball</label>
+                </div>
+                <div class="topic-item">
+                    <input type="checkbox" class="topic-checkbox" id="pe2" value="Drop and catch the ball">
+                    <label for="pe2" class="topic-text">Drop and catch the ball</label>
+                </div>
+                <div class="topic-item">
+                    <input type="checkbox" class="topic-checkbox" id="pe3" value="Racing game">
+                    <label for="pe3" class="topic-text">Racing game</label>
+                </div>
+                <div class="topic-item">
+                    <input type="checkbox" class="topic-checkbox" id="pe4" value="Football">
+                    <label for="pe4" class="topic-text">Football</label>
+                </div>
+            </div>        </form>
+
+        <div class="comments-section" id="commentsSection">
+            <h2 style="color: #2c3e50; text-align: center;">Generate Report Comments</h2>
+            <p style="text-align: center; color: #7f8c8d; margin-bottom: 30px;">
+                Click the button below to generate personalized comments based on your selections.
+            </p>
+            
+            <div class="final-actions">
+                <button type="button" class="button button-success" id="generateBtn" onclick="generateComments()">
+                    Generate Comments
+                </button>
+            </div>
+
+            <div id="generatedComments" style="display: none;">
+                <h3 style="color: #2c3e50; margin-top: 30px;">Choose your preferred comment:</h3>
+                  <div class="comment-option" id="comment1" onclick="selectComment(1)">
+                    <h4>Option 1: <span id="wordCount1" style="color: #7f8c8d; font-weight: normal; font-size: 14px;"></span></h4>
+                    <div id="commentText1" class="comment-box">Comments will appear here after generation...</div>
+                </div>
+                
+                <div class="comment-option" id="comment2" onclick="selectComment(2)">
+                    <h4>Option 2: <span id="wordCount2" style="color: #7f8c8d; font-weight: normal; font-size: 14px;"></span></h4>
+                    <div id="commentText2" class="comment-box">Comments will appear here after generation...</div>
+                </div>
+
+                <div class="final-actions">
+                    <button type="button" class="button" onclick="copySelectedComment()">Copy Selected Comment</button>
+                    <button type="button" class="button" onclick="generateComments()">Generate New Comments</button>
+                    <button type="button" class="button" onclick="startOver()">Start Over</button>
+                </div>
             </div>
         </div>
-    </div>
 
-    <script>
-        // Initialize the subjects application
-        document.addEventListener('DOMContentLoaded', function() {
-            initializeSubjects();
-            updateSelectedCount();
-        });        function initializeSubjects() {
-            // Initialize checkboxes only
-            document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
-                checkbox.addEventListener('change', () => {
-                    updateSelectedCount();
-                    notifyParent();
-                });
-            });
+        <div class="navigation">
+            <button type="button" class="button" onclick="goBack()">← Back to Student Info</button>
+        </div>
+    </div>    <script>
+        let selectedTopics = [];
+        let selectedComment = null;
+
+        function updateSelectionCount() {
+            const count = document.querySelectorAll('.topic-checkbox:checked').length;
+            document.getElementById('selectionCount').textContent = count;
         }
 
-        function toggleSubject(element) {
-            const content = element.nextElementSibling;
-            const isExpanded = element.classList.contains('expanded');
-            
-            if (isExpanded) {
-                element.classList.remove('expanded');
-                content.classList.remove('expanded');
-                content.style.display = 'none';
-            } else {
-                element.classList.add('expanded');
-                content.style.display = 'block';
-                content.classList.add('expanded');
-            }
+        function selectAll() {
+            document.querySelectorAll('.topic-checkbox, .subject-checkbox').forEach(checkbox => {
+                checkbox.checked = true;
+            });
+            updateSelectionCount();
+            saveSelections();
         }
 
-        function updateSelectedCount() {
-            const selectedCount = document.querySelectorAll('input[type="checkbox"]:checked').length;
-            document.getElementById('selected-subjects-count').textContent = selectedCount;
-        }
-
-        function notifyParent() {
-            // Notify parent window of changes
-            if (window.parent && window.parent !== window) {
-                window.parent.postMessage({
-                    type: 'subjectsUpdated',
-                    data: getSubjectData()
-                }, '*');
-            }
-        }        function getSubjectData() {
-            const subjects = [
-                'phonics', 'mathematics', 'iq', 'social-studies', 'science', 
-                'conversation', 'arts', 'pe', 'puppet', 'english'
-            ];
-              const data = {};
-            subjects.forEach(subject => {
-                const checkbox = document.getElementById(`${subject}-checkbox`);
-                
-                // Define subject names
-                const subjectNames = {
-                    'english': 'English',
-                    'phonics': 'Phonics',
-                    'mathematics': 'Mathematics',
-                    'iq': 'I.Q (Cognitive Development)',
-                    'social-studies': 'Social Studies',
-                    'science': 'Science',
-                    'conversation': 'Conversation',
-                    'arts': 'Arts',
-                    'pe': 'Physical Education',
-                    'puppet': 'Puppet Show'
-                };
-                
-                data[subject] = {
-                    id: subject,
-                    name: subjectNames[subject] || subject,
-                    checked: checkbox ? checkbox.checked : false,
-                    activities: {}
-                };
-                  // Collect activity checkboxes for each subject
-                if (subject === 'english') {
-                    data[subject].activities = {
-                        activity1: document.getElementById('english-activity-1')?.checked || false,
-                        activity2: document.getElementById('english-activity-2')?.checked || false,
-                        activity3: document.getElementById('english-activity-3')?.checked || false
-                    };
-                } else if (subject === 'phonics') {
-                    data[subject].activities = {
-                        activity1: document.getElementById('phonics-activity-1')?.checked || false,
-                        activity2: document.getElementById('phonics-activity-2')?.checked || false,
-                        vocabulary: document.getElementById('phonics-vocabulary')?.checked || false
-                    };
-                } else if (subject === 'mathematics') {
-                    data[subject].activities = {
-                        activity1: document.getElementById('mathematics-activity-1')?.checked || false,
-                        activity2: document.getElementById('mathematics-activity-2')?.checked || false,
-                        activity3: document.getElementById('mathematics-activity-3')?.checked || false,
-                        activity4: document.getElementById('mathematics-activity-4')?.checked || false,
-                        vocabulary: document.getElementById('mathematics-vocabulary')?.checked || false
-                    };
-                } else if (subject === 'iq') {
-                    data[subject].activities = {
-                        activity1: document.getElementById('iq-activity-1')?.checked || false,
-                        activity2: document.getElementById('iq-activity-2')?.checked || false,
-                        activity3: document.getElementById('iq-activity-3')?.checked || false
-                    };
-                } else if (subject === 'social-studies') {
-                    data[subject].activities = {
-                        activity1: document.getElementById('social-studies-activity-1')?.checked || false,
-                        activity2: document.getElementById('social-studies-activity-2')?.checked || false,
-                        activity3: document.getElementById('social-studies-activity-3')?.checked || false
-                    };
-                } else if (subject === 'science') {
-                    data[subject].activities = {
-                        activity1: document.getElementById('science-activity-1')?.checked || false,
-                        activity2: document.getElementById('science-activity-2')?.checked || false,
-                        activity3: document.getElementById('science-activity-3')?.checked || false
-                    };
-                } else if (subject === 'conversation') {
-                    data[subject].activities = {
-                        activity1: document.getElementById('conversation-activity-1')?.checked || false,
-                        activity2: document.getElementById('conversation-activity-2')?.checked || false,
-                        activity3: document.getElementById('conversation-activity-3')?.checked || false
-                    };
-                } else if (subject === 'arts') {
-                    data[subject].activities = {
-                        activity1: document.getElementById('arts-activity-1')?.checked || false,
-                        activity2: document.getElementById('arts-activity-2')?.checked || false,
-                        activity3: document.getElementById('arts-activity-3')?.checked || false
-                    };
-                } else if (subject === 'pe') {
-                    data[subject].activities = {
-                        activity1: document.getElementById('pe-activity-1')?.checked || false,
-                        activity2: document.getElementById('pe-activity-2')?.checked || false,
-                        activity3: document.getElementById('pe-activity-3')?.checked || false
-                    };
-                } else if (subject === 'puppet') {
-                    data[subject].activities = {
-                        activity1: document.getElementById('puppet-activity-1')?.checked || false,
-                        activity2: document.getElementById('puppet-activity-2')?.checked || false,
-                        activity3: document.getElementById('puppet-activity-3')?.checked || false
-                    };
-                }
-            });
-            
-            return data;
-        }        function setSubjectData(data) {
-            Object.keys(data).forEach(subject => {
-                const checkbox = document.getElementById(`${subject}-checkbox`);
-                
-                if (checkbox && data[subject].checked !== undefined) {
-                    checkbox.checked = data[subject].checked;
-                }
-                
-                // Handle activity checkboxes for all subjects
-                if (data[subject].activities) {
-                    const activities = data[subject].activities;
-                    Object.keys(activities).forEach(activityKey => {
-                        const activityCheckbox = document.getElementById(`${subject}-${activityKey}`);
-                        if (activityCheckbox && activities[activityKey] !== undefined) {
-                            activityCheckbox.checked = activities[activityKey];
-                        }
-                    });
-                }
-            });
-            
-            updateSelectedCount();
-        }        function clearSubjectData() {
-            document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+        function clearAll() {
+            document.querySelectorAll('.topic-checkbox, .subject-checkbox').forEach(checkbox => {
                 checkbox.checked = false;
             });
-            
-            updateSelectedCount();
+            updateSelectionCount();
+            saveSelections();
         }
 
-        // Expose functions for parent window
-        window.getSubjectData = getSubjectData;
-        window.setSubjectData = setSubjectData;
-        window.clearSubjectData = clearSubjectData;
+        function saveSelections() {
+            const selectedTopics = [];
+            const selectedSubjects = [];
+            
+            document.querySelectorAll('.topic-checkbox:checked').forEach(checkbox => {
+                selectedTopics.push(checkbox.value);
+            });
+            
+            document.querySelectorAll('.subject-checkbox:checked').forEach(checkbox => {
+                selectedSubjects.push(checkbox.value);
+            });
+            
+            localStorage.setItem('selectedSubjects', JSON.stringify(selectedTopics));
+            localStorage.setItem('selectedSubjectTitles', JSON.stringify(selectedSubjects));
+        }
+
+        function loadSelections() {
+            const savedTopics = localStorage.getItem('selectedSubjects');
+            const savedSubjects = localStorage.getItem('selectedSubjectTitles');
+            
+            if (savedTopics) {
+                const selectedValues = JSON.parse(savedTopics);
+                document.querySelectorAll('.topic-checkbox').forEach(checkbox => {
+                    if (selectedValues.includes(checkbox.value)) {
+                        checkbox.checked = true;
+                    }
+                });
+            }
+            
+            if (savedSubjects) {
+                const selectedSubjectValues = JSON.parse(savedSubjects);
+                document.querySelectorAll('.subject-checkbox').forEach(checkbox => {
+                    if (selectedSubjectValues.includes(checkbox.value)) {
+                        checkbox.checked = true;
+                    }
+                });
+            }
+            
+            updateSelectionCount();
+        }
+
+        function goBack() {
+            saveSelections();
+            window.location.href = 'student-information.html';
+        }
+
+        function generateComments() {
+            const studentData = JSON.parse(localStorage.getItem('studentData') || '{}');
+            const selectedTopics = JSON.parse(localStorage.getItem('selectedSubjects') || '[]');
+            const selectedSubjects = JSON.parse(localStorage.getItem('selectedSubjectTitles') || '[]');
+            
+            if (!studentData.studentName || !studentData.gender) {
+                alert('Please complete student information first by going back to the previous page.');
+                return;
+            }
+            
+            if (selectedTopics.length === 0 && selectedSubjects.length === 0) {
+                alert('Please select at least one topic or subject area before generating comments.');
+                return;
+            }            // Generate two different comments
+            const comment1 = generateComment(studentData, selectedTopics, selectedSubjects, 1);
+            const comment2 = generateComment(studentData, selectedTopics, selectedSubjects, 2);
+
+            document.getElementById('commentText1').innerHTML = comment1;
+            document.getElementById('commentText2').innerHTML = comment2;
+            
+            // Display word counts
+            const wordCount1 = comment1.split(' ').length;
+            const wordCount2 = comment2.split(' ').length;
+            document.getElementById('wordCount1').textContent = `(${wordCount1} words)`;
+            document.getElementById('wordCount2').textContent = `(${wordCount2} words)`;
+            
+            document.getElementById('generatedComments').style.display = 'block';
+            
+            // Scroll to comments
+            document.getElementById('generatedComments').scrollIntoView({ behavior: 'smooth' });
+        }        function generateComment(studentData, selectedTopics, selectedSubjects, variant) {
+            const name = studentData.studentName;
+            const pronoun = studentData.gender === 'he' ? 'He' : studentData.gender === 'she' ? 'She' : 'They';
+            const possessive = studentData.gender === 'he' ? 'his' : studentData.gender === 'she' ? 'her' : 'their';
+            const pronounLower = pronoun.toLowerCase();
+            const verb = studentData.gender === 'they' ? 'have' : 'has';
+            const isAre = studentData.gender === 'they' ? 'are' : 'is';
+            const verbPast = studentData.gender === 'they' ? 'were' : 'was';
+            
+            // Enhanced performance descriptors based on overall attributes
+            const overall = parseInt(studentData.overallAttributes || 5);
+            const performanceData = {
+                9: { desc: 'exceptional', adverb: 'consistently', achievement: 'outstanding progress' },
+                8: { desc: 'excellent', adverb: 'confidently', achievement: 'remarkable growth' },
+                7: { desc: 'very good', adverb: 'effectively', achievement: 'significant development' },
+                6: { desc: 'good', adverb: 'steadily', achievement: 'positive progress' },
+                5: { desc: 'satisfactory', adverb: 'gradually', achievement: 'steady improvement' },
+                4: { desc: 'developing', adverb: 'persistently', achievement: 'encouraging development' },
+                3: { desc: 'emerging', adverb: 'determinedly', achievement: 'foundational growth' }
+            };
+            const perf = performanceData[Math.min(overall, 9)] || performanceData[5];
+            
+            // Subject-specific vocabulary and descriptors
+            const subjectDescriptors = {
+                'English': ['letter recognition', 'early literacy skills', 'foundational reading concepts', 'alphabet knowledge'],
+                'Phonics': ['sound awareness', 'phonemic skills', 'letter-sound connections', 'pronunciation development'],
+                'Mathematics': ['number recognition', 'counting abilities', 'mathematical concepts', 'numerical understanding'],
+                'Physical Education': ['motor skills', 'physical coordination', 'athletic abilities', 'movement activities'],
+                'Social Studies': ['social awareness', 'environmental understanding', 'community concepts', 'cultural knowledge'],
+                'Science': ['scientific curiosity', 'exploratory learning', 'investigative skills', 'natural phenomena understanding'],
+                'Conversation': ['verbal communication', 'language expression', 'conversational skills', 'oral development']
+            };
+
+            // Opening variations
+            const openings = [
+                `${name} ${verb} demonstrated ${perf.desc} engagement throughout this reporting period.`,
+                `${name} ${verb} shown ${perf.achievement} across multiple learning areas this term.`,
+                `${name} ${verb} approached learning opportunities with ${perf.desc} enthusiasm and effort.`,
+                `Throughout this term, ${name} ${verb} displayed ${perf.desc} participation in classroom activities.`
+            ];
+            
+            let comment = openings[variant % openings.length] + ' ';
+
+            // Enhanced strengths integration
+            if (studentData.strengths) {
+                const strengthTransitions = [
+                    `${pronoun} particularly excels in`,
+                    `Notable strengths are evident in`,
+                    `${pronoun} demonstrates particular aptitude for`,
+                    `Areas of strength include`
+                ];
+                comment += `${strengthTransitions[variant % strengthTransitions.length]} ${studentData.strengths.toLowerCase()}. `;
+            }
+
+            // Subject-specific commentary with educational vocabulary
+            if (selectedSubjects.length > 0) {
+                const subjectComments = [];
+                selectedSubjects.forEach(subject => {
+                    const descriptors = subjectDescriptors[subject] || ['academic skills'];
+                    const descriptor = descriptors[Math.floor(Math.random() * descriptors.length)];
+                    subjectComments.push(`${descriptor} in ${subject}`);
+                });
+
+                const transitions = [
+                    `${pronoun} ${verb} made meaningful progress in`,
+                    `Significant development ${verbPast} observed in`,
+                    `${name} demonstrates growing competence in`,
+                    `Progress ${verb} been particularly notable in`
+                ];
+                
+                comment += `${transitions[variant % transitions.length]} ${subjectComments.join(', ')}. `;
+            }
+
+            // Specific topic integration with pedagogical language
+            if (selectedTopics.length > 0) {
+                const topicSample = selectedTopics.slice(0, Math.min(3, selectedTopics.length));
+                const activityTransitions = [
+                    `Specifically, ${pronounLower} ${verb} shown competency in activities such as`,
+                    `Notable achievements include`,
+                    `Particular success ${verbPast} evident in`,
+                    `${pronoun} demonstrates skill development through`
+                ];
+                
+                comment += `${activityTransitions[variant % activityTransitions.length]} ${topicSample.join(', ').toLowerCase()}. `;
+            }
+
+            // Growth areas with constructive language
+            if (studentData.weaknesses) {
+                const growthTransitions = [
+                    `Areas identified for continued development include`,
+                    `Future learning goals focus on`,
+                    `Opportunities for growth lie in`,
+                    `With ongoing support, ${pronounLower} will continue developing`
+                ];
+                comment += `${growthTransitions[variant % growthTransitions.length]} ${studentData.weaknesses.toLowerCase()}. `;
+            }
+
+            // Enhanced positive conclusions
+            const conclusions = [
+                `${name} ${isAre} a valued and enthusiastic member of our learning community who demonstrates great potential for continued academic growth.`,
+                `With ${possessive} positive attitude and growing independence, ${name} ${isAre} well-positioned for future learning success.`,
+                `${pronoun} ${isAre} a pleasure to teach and should feel proud of ${possessive} accomplishments and progress this term.`,
+                `${name} approaches learning with curiosity and determination, qualities that will serve ${possessive.toLowerCase()} well in future educational endeavors.`,
+                `The progress ${name} ${verb} made this term reflects ${possessive} dedication and readiness for new challenges ahead.`
+            ];
+            
+            comment += conclusions[variant % conclusions.length];
+
+            // Ensure comment meets 90-120 word target
+            const wordCount = comment.split(' ').length;
+            if (wordCount < 90) {
+                // Add bridging sentence for length
+                const bridges = [
+                    ` ${pronoun} consistently demonstrates a positive learning attitude that enhances ${possessive} educational experience.`,
+                    ` ${name}'s engagement in classroom activities reflects ${possessive} growing confidence and academic readiness.`,
+                    ` The social and academic skills ${pronounLower} ${verb} developed will provide a strong foundation for future learning.`
+                ];
+                comment = comment.slice(0, -1) + bridges[variant % bridges.length] + comment.slice(-1);
+            }
+
+            return comment;
+        }
+
+        function selectComment(optionNumber) {
+            // Remove previous selection
+            document.querySelectorAll('.comment-option').forEach(el => el.classList.remove('selected'));
+            
+            // Add selection to clicked option
+            document.getElementById(`comment${optionNumber}`).classList.add('selected');
+            selectedComment = optionNumber;
+        }
+
+        function copySelectedComment() {
+            if (!selectedComment) {
+                alert('Please select a comment option first.');
+                return;
+            }
+            
+            const commentText = document.getElementById(`commentText${selectedComment}`).textContent;
+            navigator.clipboard.writeText(commentText).then(() => {
+                alert('Comment copied to clipboard!');
+            }).catch(() => {
+                // Fallback for older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = commentText;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                alert('Comment copied to clipboard!');
+            });
+        }
+
+        function startOver() {
+            if (confirm('This will clear all your selections and start over. Are you sure?')) {
+                localStorage.removeItem('studentData');
+                localStorage.removeItem('selectedSubjects');
+                localStorage.removeItem('selectedSubjectTitles');
+                window.location.href = 'student-information.html';
+            }
+        }
+
+        // Add event listeners to all checkboxes
+        document.addEventListener('change', function(e) {
+            if (e.target.classList.contains('topic-checkbox') || e.target.classList.contains('subject-checkbox')) {
+                updateSelectionCount();
+                saveSelections();
+            }
+        });
+
+        // Load saved selections on page load
+        window.addEventListener('load', loadSelections);
     </script>
 </body>
 </html>
