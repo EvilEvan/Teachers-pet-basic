@@ -142,6 +142,7 @@
 </head>
 <body>
     <div class="container">
+        <button type="button" class="button" id="refreshReportBtn" style="float:right;" onclick="refreshReport()">Refresh Report</button>
         <h1>Subject Selection</h1>
         <p style="text-align: center; color: #7f8c8d; margin-bottom: 30px;">
             Select the topics you want to mention in the student's report comments.
@@ -174,6 +175,14 @@
                     <input type="checkbox" class="topic-checkbox" id="english3" value="Draw lines to match the same letters">
                     <label for="english3" class="topic-text">Draw lines to match the same letters</label>
                 </div>
+                <div class="topic-item">
+                    <input type="checkbox" class="topic-checkbox" id="english4" value="Circle the letter that begins each picture">
+                    <label for="english4" class="topic-text">Circle the letter that begins each picture</label>
+                </div>
+                <div class="topic-item">
+                    <input type="checkbox" class="topic-checkbox" id="english5" value="Sing the Alphabet song with actions">
+                    <label for="english5" class="topic-text">Sing the Alphabet song with actions</label>
+                </div>
             </div>            <!-- PHONICS -->
             <div class="subject-section">
                 <div class="subject-title">
@@ -191,6 +200,14 @@
                 <div class="topic-item">
                     <input type="checkbox" class="topic-checkbox" id="phonics3" value="Eddie Elephant-Egg vocabulary">
                     <label for="phonics3" class="topic-text">Eddie Elephant-Egg vocabulary</label>
+                </div>
+                <div class="topic-item">
+                    <input type="checkbox" class="topic-checkbox" id="phonics4" value="Identify beginning sounds of objects">
+                    <label for="phonics4" class="topic-text">Identify beginning sounds of objects</label>
+                </div>
+                <div class="topic-item">
+                    <input type="checkbox" class="topic-checkbox" id="phonics5" value="Blend simple CVC words">
+                    <label for="phonics5" class="topic-text">Blend simple CVC words</label>
                 </div>
             </div>            <!-- MATHEMATICS -->
             <div class="subject-section">
@@ -214,6 +231,10 @@
                     <input type="checkbox" class="topic-checkbox" id="math4" value="Counting 1-10 with fingers">
                     <label for="math4" class="topic-text">Counting from 1-10 with our fingers</label>
                 </div>
+                <div class="topic-item">
+                    <input type="checkbox" class="topic-checkbox" id="math5" value="Identify basic shapes">
+                    <label for="math5" class="topic-text">Identify basic shapes</label>
+                </div>
             </div>            <!-- I.Q -->
             <div class="subject-section">
                 <div class="subject-title">
@@ -227,6 +248,18 @@
                 <div class="topic-item">
                     <input type="checkbox" class="topic-checkbox" id="iq2" value="Shapes and colours">
                     <label for="iq2" class="topic-text">Shapes and colours</label>
+                </div>
+                <div class="topic-item">
+                    <input type="checkbox" class="topic-checkbox" id="iq3" value="Puzzle matching shapes">
+                    <label for="iq3" class="topic-text">Puzzle matching shapes</label>
+                </div>
+                <div class="topic-item">
+                    <input type="checkbox" class="topic-checkbox" id="iq4" value="Memory game pairs">
+                    <label for="iq4" class="topic-text">Memory game pairs</label>
+                </div>
+                <div class="topic-item">
+                    <input type="checkbox" class="topic-checkbox" id="iq5" value="Sorting objects by size">
+                    <label for="iq5" class="topic-text">Sorting objects by size</label>
                 </div>
             </div>            <!-- SOCIAL STUDIES -->
             <div class="subject-section">
@@ -245,6 +278,14 @@
                 <div class="topic-item">
                     <input type="checkbox" class="topic-checkbox" id="social3" value="My Body - My face">
                     <label for="social3" class="topic-text">My Body - My face</label>
+                </div>
+                <div class="topic-item">
+                    <input type="checkbox" class="topic-checkbox" id="social4" value="Community helpers and their roles">
+                    <label for="social4" class="topic-text">Community helpers and their roles</label>
+                </div>
+                <div class="topic-item">
+                    <input type="checkbox" class="topic-checkbox" id="social5" value="Good manners at school">
+                    <label for="social5" class="topic-text">Good manners at school</label>
                 </div>
             </div>            <!-- SCIENCE -->
             <div class="subject-section">
@@ -268,6 +309,10 @@
                     <input type="checkbox" class="topic-checkbox" id="science4" value="Dancing colors milk experiment">
                     <label for="science4" class="topic-text">Dancing colors (milk) - Introducing concept of surface tension and interactions between different materials</label>
                 </div>
+                <div class="topic-item">
+                    <input type="checkbox" class="topic-checkbox" id="science5" value="Five senses matching game">
+                    <label for="science5" class="topic-text">Five senses matching game</label>
+                </div>
             </div>            <!-- CONVERSATION 1 -->
             <div class="subject-section">
                 <div class="subject-title">
@@ -281,6 +326,18 @@
                 <div class="topic-item">
                     <input type="checkbox" class="topic-checkbox" id="conv1_2" value="Daily routine conversations">
                     <label for="conv1_2" class="topic-text">Daily routine conversations (morning routine, after eating, etc.)</label>
+                </div>
+                <div class="topic-item">
+                    <input type="checkbox" class="topic-checkbox" id="conv1_3" value="Greetings and introducing myself">
+                    <label for="conv1_3" class="topic-text">Greetings and introducing myself</label>
+                </div>
+                <div class="topic-item">
+                    <input type="checkbox" class="topic-checkbox" id="conv1_4" value="Simple yes/no questions">
+                    <label for="conv1_4" class="topic-text">Simple yes/no questions</label>
+                </div>
+                <div class="topic-item">
+                    <input type="checkbox" class="topic-checkbox" id="conv1_5" value="Expressing likes and dislikes">
+                    <label for="conv1_5" class="topic-text">Expressing likes and dislikes</label>
                 </div>
             </div>            <!-- CONVERSATION 3 -->
             <div class="subject-section">
@@ -299,6 +356,14 @@
                 <div class="topic-item">
                     <input type="checkbox" class="topic-checkbox" id="conv3_3" value="Vegetables conversation">
                     <label for="conv3_3" class="topic-text">Vegetables - What vegetables do you have? - I have a pumpkin</label>
+                </div>
+                <div class="topic-item">
+                    <input type="checkbox" class="topic-checkbox" id="conv3_4" value="Animals vocabulary conversation">
+                    <label for="conv3_4" class="topic-text">Animals vocabulary conversation</label>
+                </div>
+                <div class="topic-item">
+                    <input type="checkbox" class="topic-checkbox" id="conv3_5" value="Colors vocabulary conversation">
+                    <label for="conv3_5" class="topic-text">Colors vocabulary conversation</label>
                 </div>
             </div>            <!-- PHYSICAL EDUCATION -->
             <div class="subject-section">
@@ -321,6 +386,10 @@
                 <div class="topic-item">
                     <input type="checkbox" class="topic-checkbox" id="pe4" value="Football">
                     <label for="pe4" class="topic-text">Football</label>
+                </div>
+                <div class="topic-item">
+                    <input type="checkbox" class="topic-checkbox" id="pe5" value="Jumping on the spot">
+                    <label for="pe5" class="topic-text">Jumping on the spot</label>
                 </div>
             </div>        </form>
 
@@ -535,7 +604,8 @@
 
             // Specific topic integration with pedagogical language
             if (selectedTopics.length > 0) {
-                const topicSample = selectedTopics.slice(0, Math.min(3, selectedTopics.length));
+                // Use all selected topics rather than limiting to a sample so that every ticked box is referenced
+                const topicListLower = selectedTopics.map(t => t.toLowerCase());
                 const activityTransitions = [
                     `Specifically, ${pronounLower} ${verb} shown competency in activities such as`,
                     `Notable achievements include`,
@@ -543,7 +613,7 @@
                     `${pronoun} demonstrates skill development through`
                 ];
                 
-                comment += `${activityTransitions[variant % activityTransitions.length]} ${topicSample.join(', ').toLowerCase()}. `;
+                comment += `${activityTransitions[variant % activityTransitions.length]} ${topicListLower.join(', ')}. `;
             }
 
             // Growth areas with constructive language
@@ -632,6 +702,11 @@
 
         // Load saved selections on page load
         window.addEventListener('load', loadSelections);
+
+        // Refresh the current report / selections
+        function refreshReport() {
+            window.location.reload();
+        }
     </script>
 </body>
 </html>
