@@ -6,6 +6,10 @@ const urlsToCache = [
     '/Subjects.html',
     '/styles/play.css',
     '/scripts/play.js',
+    '/styles/student.css',
+    '/styles/subjects.css',
+    '/scripts/student.js',
+    '/scripts/subjects.js',
 ];
 
 self.addEventListener('install', (event) => {
