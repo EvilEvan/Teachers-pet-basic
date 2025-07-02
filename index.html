@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="description" content="An automated kindergarten comment generator for teachers to create personalized student reports">
+    <meta name="keywords" content="kindergarten, report, teacher, education, comments, generator">
+    <meta name="author" content="Teachers Pet - Report Generator">
+    
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#3498db">
+    <meta name="msapplication-TileColor" content="#3498db">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Teachers Pet">
+    <meta name="mobile-web-app-capable" content="yes">
+    
+    <!-- Favicon and Icons -->
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/icons/icon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/icons/icon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/images/icons/icon-180x180.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="assets/images/icons/icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="assets/images/icons/icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="assets/images/icons/icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="assets/images/icons/icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="assets/images/icons/icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="assets/images/icons/icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="assets/images/icons/icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="57x57" href="assets/images/icons/icon-57x57.png">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/global.css">
+    <link rel="stylesheet" href="assets/css/mobile.css">
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="assets/css/global.css" as="style">
+    <link rel="preload" href="assets/js/mobile.js" as="script">
+    
+    <!-- DNS Prefetch for performance -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    
+    <title>Teachers Pet - Kindergarten Report Generator</title>
+    
+    <!-- Critical CSS for above-the-fold content -->
+    <style>
+        /* Critical CSS inlined for faster loading */
+        body {
+            background: var(--bg-gradient, linear-gradient(135deg, #667eea 0%, #764ba2 100%));
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg-gradient, linear-gradient(135deg, #667eea 0%, #764ba2 100%));
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+        
+        .loading-screen.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .app-logo {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+        
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(255,255,255,0.3);
+            border-top: 4px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-top: 20px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="app-logo">🎓</div>
+        <h1 style="color: white; font-size: 2rem; margin: 0; text-align: center;">Teachers Pet</h1>
+        <p style="color: rgba(255,255,255,0.8); font-size: 1.2rem; margin: 0.5rem 0 0 0;">Loading...</p>
+        <div class="loading-spinner"></div>
+    </div>
+
+    <!-- Main Application -->
+    <div class="main-container" id="mainContainer" style="opacity: 0;">
+        <h1 class="app-title">🎓 Teachers Pet</h1>
+        <p class="app-subtitle">Kindergarten Report Generator</p>
+        <p style="color: var(--text-secondary); font-size: 1rem; margin-bottom: 2rem; line-height: 1.4;">
+            Create personalized student reports with intelligent comment generation
+        </p>
+        
+        <div style="margin: 30px 0;">
+            <a href="pages/student-info.html" class="btn btn-primary btn-large" id="startButton">
+                🚀 Start New Report
+            </a>
+        </div>
+        
+        <!-- App Features -->
+        <div class="features-grid" style="margin-top: 2rem; text-align: left;">
+            <div class="feature-item" style="margin-bottom: 1rem; display: flex; align-items: center; gap: 0.75rem;">
+                <span style="font-size: 1.5rem;">📝</span>
+                <span style="font-size: 0.9rem; color: var(--text-secondary);">Smart comment generation</span>
+            </div>
+            <div class="feature-item" style="margin-bottom: 1rem; display: flex; align-items: center; gap: 0.75rem;">
+                <span style="font-size: 1.5rem;">📱</span>
+                <span style="font-size: 0.9rem; color: var(--text-secondary);">Mobile-friendly interface</span>
+            </div>
+            <div class="feature-item" style="margin-bottom: 1rem; display: flex; align-items: center; gap: 0.75rem;">
+                <span style="font-size: 1.5rem;">🔄</span>
+                <span style="font-size: 0.9rem; color: var(--text-secondary);">Works offline</span>
+            </div>
+            <div class="feature-item" style="margin-bottom: 1rem; display: flex; align-items: center; gap: 0.75rem;">
+                <span style="font-size: 1.5rem;">⚡</span>
+                <span style="font-size: 0.9rem; color: var(--text-secondary);">Quick and easy to use</span>
+            </div>
+        </div>
+        
+        <!-- PWA Install Prompt -->
+        <div class="pwa-prompt" id="pwaPrompt" style="display: none; margin-top: 2rem; padding: 1rem; background: rgba(255,255,255,0.1); border-radius: 10px; text-align: center;">
+            <p style="color: white; margin: 0 0 1rem 0; font-size: 0.9rem;">📱 Install Teachers Pet for offline access and better experience!</p>
+            <button class="btn btn-success" id="installButton" style="background: rgba(255,255,255,0.2); border: 1px solid white;">
+                Install App
+            </button>
+        </div>
+        
+        <!-- Recent Reports (if any) -->
+        <div class="recent-reports" id="recentReports" style="margin-top: 2rem; display: none;">
+            <h3 style="color: var(--text-primary); font-size: 1.1rem; margin-bottom: 1rem;">📋 Recent Reports</h3>
+            <div id="recentReportsList"></div>
+        </div>
+    </div>
+
+    <!-- Offline Indicator -->
+    <div class="offline-indicator" id="offlineIndicator" style="display: none; position: fixed; top: 20px; left: 20px; right: 20px; background: #e74c3c; color: white; padding: 10px; border-radius: 5px; text-align: center; z-index: 1000;">
+        📡 You're offline. The app will continue to work!
+    </div>
+
+    <!-- Update Available Notification -->
+    <div class="update-notification" id="updateNotification" style="display: none; position: fixed; bottom: 20px; left: 20px; right: 20px; background: #27ae60; color: white; padding: 15px; border-radius: 5px; text-align: center; z-index: 1000;">
+        <p style="margin: 0 0 10px 0;">🎉 A new version is available!</p>
+        <button class="btn btn-small" id="updateButton" style="background: rgba(255,255,255,0.2); border: 1px solid white; color: white;">
+            Update Now
+        </button>
+        <button class="btn btn-small" id="dismissUpdate" style="background: transparent; border: 1px solid rgba(255,255,255,0.5); color: white; margin-left: 10px;">
+            Later
+        </button>
+    </div>
+
+    <!-- Core JavaScript -->
+    <script>
+        // App initialization
+        const App = {
+            init() {
+                this.setupLoading();
+                this.checkConnection();
+                this.loadRecentReports();
+                this.setupServiceWorker();
+                this.setupPWAPrompt();
+                this.setupEventListeners();
+                this.hideLoadingScreen();
+            },
+            
+            setupLoading() {
+                // Show loading screen while initializing
+                const loadingScreen = document.getElementById('loadingScreen');
+                const mainContainer = document.getElementById('mainContainer');
+                
+                // Hide loading after minimum time for UX
+                setTimeout(() => {
+                    loadingScreen.classList.add('hidden');
+                    mainContainer.style.opacity = '1';
+                    mainContainer.style.transition = 'opacity 0.5s ease';
+                }, 1500);
+            },
+            
+            hideLoadingScreen() {
+                setTimeout(() => {
+                    const loadingScreen = document.getElementById('loadingScreen');
+                    if (loadingScreen) {
+                        loadingScreen.style.display = 'none';
+                    }
+                }, 2000);
+            },
+            
+            checkConnection() {
+                const offlineIndicator = document.getElementById('offlineIndicator');
+                
+                window.addEventListener('online', () => {
+                    offlineIndicator.style.display = 'none';
+                });
+                
+                window.addEventListener('offline', () => {
+                    offlineIndicator.style.display = 'block';
+                    setTimeout(() => {
+                        offlineIndicator.style.display = 'none';
+                    }, 5000);
+                });
+                
+                // Check initial state
+                if (!navigator.onLine) {
+                    offlineIndicator.style.display = 'block';
+                }
+            },
+            
+            loadRecentReports() {
+                try {
+                    const recent = JSON.parse(localStorage.getItem('recentReports') || '[]');
+                    if (recent.length > 0) {
+                        const recentSection = document.getElementById('recentReports');
+                        const recentList = document.getElementById('recentReportsList');
+                        
+                        recentList.innerHTML = recent.slice(0, 3).map(report => `
+                            <div style="padding: 10px; margin: 5px 0; background: rgba(52, 152, 219, 0.1); border-radius: 5px; border-left: 3px solid var(--primary-color);">
+                                <strong>${report.studentName}</strong>
+                                <small style="color: var(--text-secondary); display: block;">
+                                    ${new Date(report.date).toLocaleDateString()}
+                                </small>
+                            </div>
+                        `).join('');
+                        
+                        recentSection.style.display = 'block';
+                    }
+                } catch (error) {
+                    console.log('No recent reports found');
+                }
+            },
+            
+            setupServiceWorker() {
+                if ('serviceWorker' in navigator) {
+                    navigator.serviceWorker.register('/sw.js')
+                        .then(registration => {
+                            console.log('SW registered:', registration);
+                            
+                            // Check for updates
+                            registration.addEventListener('updatefound', () => {
+                                const newWorker = registration.installing;
+                                newWorker.addEventListener('statechange', () => {
+                                    if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                                        this.showUpdateNotification(registration);
+                                    }
+                                });
+                            });
+                        })
+                        .catch(error => {
+                            console.log('SW registration failed:', error);
+                        });
+                }
+            },
+            
+            showUpdateNotification(registration) {
+                const notification = document.getElementById('updateNotification');
+                const updateButton = document.getElementById('updateButton');
+                const dismissButton = document.getElementById('dismissUpdate');
+                
+                notification.style.display = 'block';
+                
+                updateButton.addEventListener('click', () => {
+                    if (registration.waiting) {
+                        registration.waiting.postMessage({ action: 'SKIP_WAITING' });
+                        window.location.reload();
+                    }
+                });
+                
+                dismissButton.addEventListener('click', () => {
+                    notification.style.display = 'none';
+                });
+            },
+            
+            setupPWAPrompt() {
+                let deferredPrompt;
+                
+                window.addEventListener('beforeinstallprompt', (e) => {
+                    e.preventDefault();
+                    deferredPrompt = e;
+                    
+                    const pwaPrompt = document.getElementById('pwaPrompt');
+                    const installButton = document.getElementById('installButton');
+                    
+                    pwaPrompt.style.display = 'block';
+                    
+                    installButton.addEventListener('click', async () => {
+                        if (deferredPrompt) {
+                            deferredPrompt.prompt();
+                            const { outcome } = await deferredPrompt.userChoice;
+                            
+                            if (outcome === 'accepted') {
+                                console.log('User accepted the install prompt');
+                            }
+                            
+                            deferredPrompt = null;
+                            pwaPrompt.style.display = 'none';
+                        }
+                    });
+                });
+                
+                // Hide prompt if already installed
+                window.addEventListener('appinstalled', () => {
+                    console.log('PWA was installed');
+                    document.getElementById('pwaPrompt').style.display = 'none';
+                });
+            },
+            
+            setupEventListeners() {
+                // Enhanced start button with loading state
+                const startButton = document.getElementById('startButton');
+                
+                startButton.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    
+                    // Add loading state
+                    startButton.innerHTML = '⏳ Loading...';
+                    startButton.disabled = true;
+                    
+                    // Preload next page resources
+                    const link = document.createElement('link');
+                    link.rel = 'prefetch';
+                    link.href = 'pages/student-info.html';
+                    document.head.appendChild(link);
+                    
+                    // Navigate after short delay for UX
+                    setTimeout(() => {
+                        window.location.href = 'pages/student-info.html';
+                    }, 500);
+                });
+                
+                // Keyboard shortcuts
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        if (e.target === document.body) {
+                            e.preventDefault();
+                            startButton.click();
+                        }
+                    }
+                });
+            }
+        };
+
+        // Initialize app when DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => App.init());
+        } else {
+            App.init();
+        }
+    </script>
+    
+    <!-- Load mobile features after critical content -->
+    <script src="assets/js/mobile.js" defer></script>
+    
+    <!-- Analytics placeholder for future use -->
+    <script>
+        // Analytics initialization would go here
+        // Example: gtag, analytics, etc.
+    </script>
+</body>
+</html>
