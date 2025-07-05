@@ -5,57 +5,198 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kindergarten Report Generator</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: 
+                url('https://images.unsplash.com/photo-1502134249126-9f3755a50d78?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') center/cover no-repeat fixed,
+                radial-gradient(ellipse at center, rgba(30, 39, 70, 0.8) 0%, rgba(15, 15, 35, 0.9) 50%, rgba(0, 0, 0, 0.95) 100%);
+            min-height: 100vh;
+            padding: 20px;
+            margin: 0;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        /* Space stars animation */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(2px 2px at 20px 30px, rgba(255, 255, 255, 0.8), transparent),
+                radial-gradient(2px 2px at 40px 70px, rgba(255, 255, 255, 0.6), transparent),
+                radial-gradient(1px 1px at 90px 40px, rgba(255, 255, 255, 0.5), transparent),
+                radial-gradient(1px 1px at 130px 80px, rgba(255, 255, 255, 0.4), transparent),
+                radial-gradient(2px 2px at 160px 30px, rgba(255, 255, 255, 0.7), transparent);
+            background-repeat: repeat;
+            background-size: 200px 200px;
+            animation: twinkle 20s linear infinite;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        @keyframes twinkle {
+            0% { transform: translateY(0px) translateX(0px) rotate(0deg); opacity: 0.8; }
+            50% { opacity: 1; }
+            100% { transform: translateY(-200px) translateX(100px) rotate(360deg); opacity: 0.8; }
+        }
+        
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 12px;
+            padding: 30px;
             max-width: 800px;
             margin: 0 auto;
-            padding: 20px;
-            background-color: #f5f5f5;
+            box-shadow: 
+                0 10px 30px rgba(0, 0, 0, 0.3),
+                0 0 50px rgba(255, 255, 255, 0.1);
+            position: relative;
+            z-index: 10;
         }
-        .container {
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
+        
         h1 {
             color: #2c3e50;
+            font-size: 2.2em;
+            margin-bottom: 25px;
+            font-weight: 600;
             text-align: center;
-            margin-bottom: 30px;
+            font-family: 'Segoe UI', sans-serif;
         }
+        
         .form-group {
             margin-bottom: 20px;
-        }        label {
+            position: relative;
+        }
+        
+        .auto-save-indicator {
+            position: absolute;
+            top: -5px;
+            right: 0;
+            background: #27ae60;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 11px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .auto-save-indicator.show {
+            opacity: 1;
+        }
+        
+        .form-progress {
+            background: #f8f9fa;
+            border: 1px solid #e0e6ed;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-left: 4px solid #3498db;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e0e6ed;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #3498db, #27ae60);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        
+        .validation-message {
+            color: #e74c3c;
+            font-size: 12px;
+            margin-top: 5px;
+            display: none;
+            font-weight: 500;
+        }
+        
+        .field-valid {
+            border-color: #27ae60 !important;
+        }
+        
+        .field-invalid {
+            border-color: #e74c3c !important;
+        }
+        
+        label {
             display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
+            margin-bottom: 6px;
+            font-weight: 600;
             color: #34495e;
+            font-size: 14px;
+            font-family: 'Segoe UI', sans-serif;
         }
         
         input[type="text"], textarea, select {
             width: 100%;
-            padding: 10px;
-            border: 2px solid #bdc3c7;
-            border-radius: 5px;
-            font-size: 16px;
+            padding: 12px;
+            border: 2px solid #e0e6ed;
+            border-radius: 8px;
+            font-size: 14px;
             box-sizing: border-box;
+            background: #fff;
+            color: #2c3e50;
+            transition: all 0.3s ease;
+            font-family: 'Segoe UI', sans-serif;
+        }
+        
+        input[type="text"]:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+        }
+        
+        input[type="text"]::placeholder, textarea::placeholder {
+            color: #95a5a6;
         }
         
         textarea {
             height: 80px;
             resize: vertical;
+            font-family: 'Segoe UI', sans-serif;
         }
         .slider-container {
             margin-top: 10px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border: 1px solid #e0e6ed;
         }
+        
         .slider {
             width: 100%;
-            height: 8px;
-            border-radius: 5px;
-            background: #ddd;
+            height: 6px;
+            border-radius: 6px;
+            background: linear-gradient(90deg, #e74c3c, #f39c12, #27ae60);
             outline: none;
             -webkit-appearance: none;
+            appearance: none;
+            position: relative;
         }
+        
         .slider::-webkit-slider-thumb {
             -webkit-appearance: none;
             appearance: none;
@@ -64,101 +205,180 @@
             border-radius: 50%;
             background: #3498db;
             cursor: pointer;
+            box-shadow: 0 2px 8px rgba(52, 152, 219, 0.3);
+            border: 2px solid white;
+            transition: all 0.3s ease;
         }
+        
+        .slider::-webkit-slider-thumb:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 12px rgba(52, 152, 219, 0.4);
+        }
+        
         .slider::-moz-range-thumb {
             width: 20px;
             height: 20px;
             border-radius: 50%;
             background: #3498db;
             cursor: pointer;
-            border: none;
+            border: 2px solid white;
+            box-shadow: 0 2px 8px rgba(52, 152, 219, 0.3);
         }
+        
         .slider-value {
             text-align: center;
             font-size: 18px;
-            font-weight: bold;
+            font-weight: 600;
             color: #3498db;
-            margin-top: 5px;
+            margin-top: 8px;
+            font-family: 'Segoe UI', sans-serif;
         }
         .button {
-            background-color: #3498db;
+            background: linear-gradient(135deg, #3498db, #2980b9);
             color: white;
-            padding: 12px 24px;
+            padding: 12px 25px;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
             cursor: pointer;
-            font-size: 16px;
-            margin: 10px 5px;
-            transition: background-color 0.3s;
-        }
-        .button:hover {
-            background-color: #2980b9;
-        }
-        .button:disabled {
-            background-color: #bdc3c7;
-            cursor: not-allowed;
-        }
-        .button-secondary {
-            background-color: #27ae60;
-        }
-        .button-secondary:hover {
-            background-color: #229954;
-        }
-        .navigation {
-            text-align: center;
-            margin: 30px 0;
-        }
-        .comments-section {
-            margin-top: 30px;
-            border-top: 2px solid #ecf0f1;
-            padding-top: 30px;
-        }
-        .comment-box {
-            background: #ecf0f1;
-            padding: 15px;
-            border-radius: 5px;
-            margin: 10px 0;
-            min-height: 100px;
-        }
-        .comment-option {
-            margin: 15px 0;
-            padding: 15px;
-            border: 2px solid #bdc3c7;
-            border-radius: 5px;
-            background: #f8f9fa;
-        }
-        .comment-option.selected {
-            border-color: #3498db;
-            background: #e3f2fd;
-        }
-        .hidden {
-            display: none;
-        }
-        .status-indicator {
-            padding: 5px 10px;
-            border-radius: 3px;
             font-size: 14px;
-            margin-left: 10px;
-        }        .status-pending {
-            background: #f39c12;
-            color: white;
+            font-weight: 600;
+            font-family: 'Segoe UI', sans-serif;
+            margin: 8px 4px;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 10px rgba(52, 152, 219, 0.3);
         }
         
-        .status-complete {
-            background: #27ae60;
-            color: white;
-        }        .quick-select-btn {
-            background: #e74c3c;
+        .button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+        }
+        
+        .button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .button-secondary {
+            background: linear-gradient(135deg, #27ae60, #229954);
+            box-shadow: 0 3px 10px rgba(39, 174, 96, 0.3);
+        }
+        
+        .button-secondary:hover {
+            box-shadow: 0 5px 15px rgba(39, 174, 96, 0.4);
+        }
+        
+        .quick-select-btn {
+            background: linear-gradient(135deg, #3498db, #2980b9);
             color: white;
             border: none;
             padding: 6px 12px;
-            border-radius: 4px;
+            border-radius: 16px;
             cursor: pointer;
-            font-size: 14px;
-            transition: background-color 0.3s;
+            font-size: 12px;
+            font-family: 'Segoe UI', sans-serif;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            margin: 2px;
+            box-shadow: 0 2px 5px rgba(52, 152, 219, 0.3);
         }
+        
         .quick-select-btn:hover {
-            background: #c0392b;
+            transform: translateY(-1px);
+            box-shadow: 0 3px 8px rgba(52, 152, 219, 0.4);
+        }
+        
+        .improvement-btn {
+            background: linear-gradient(135deg, #e67e22, #d35400);
+            box-shadow: 0 2px 5px rgba(230, 126, 34, 0.3);
+        }
+        
+        .improvement-btn:hover {
+            box-shadow: 0 3px 8px rgba(230, 126, 34, 0.4);
+        }
+        .navigation {
+            text-align: center;
+            margin: 25px 0;
+            padding: 20px;
+            border-top: 2px solid #e0e6ed;
+            position: relative;
+        }
+        
+        .info-section {
+            background: #f8f9fa;
+            border: 1px solid #e0e6ed;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            border-left: 4px solid #3498db;
+        }
+        
+        .info-section h3 {
+            color: #2c3e50;
+            margin-top: 0;
+            margin-bottom: 8px;
+            font-family: 'Segoe UI', sans-serif;
+            font-weight: 600;
+            font-size: 16px;
+        }
+        
+        .info-section p {
+            color: #7f8c8d;
+            margin-bottom: 0;
+            line-height: 1.5;
+            font-family: 'Segoe UI', sans-serif;
+            font-size: 14px;
+        }
+        
+        .status-indicator {
+            padding: 6px 12px;
+            border-radius: 16px;
+            font-size: 12px;
+            margin-left: 10px;
+            font-family: 'Segoe UI', sans-serif;
+            font-weight: 600;
+            border: 1px solid;
+        }
+        
+        .status-pending {
+            background: #fff3cd;
+            color: #856404;
+            border-color: #ffeaa7;
+        }
+        
+        .status-complete {
+            background: #d4edda;
+            color: #155724;
+            border-color: #c3e6cb;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+                margin: 10px;
+            }
+            
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            .form-group div[style*="grid"] {
+                grid-template-columns: 1fr !important;
+                gap: 15px !important;
+            }
+            
+            .quick-select-btn {
+                font-size: 11px;
+                padding: 5px 10px;
+            }
+            
+            .slider {
+                height: 8px;
+            }
+            
+            .progress-bar {
+                height: 6px;
+            }
         }
     </style>
 </head>
@@ -166,54 +386,78 @@
     <div class="container">
         <h1>Kindergarten Report Generator</h1>
         
+        <!-- Progress Indicator -->
+        <div class="form-progress">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <p style="margin: 0; color: #7f8c8d; font-size: 14px;">
+                <span id="progressText">Complete the form to continue</span>
+                <span style="float: right; font-weight: 600;"><span id="progressPercent">0</span>%</span>
+            </p>
+        </div>
+        
         <form id="studentForm">
-            <div class="form-group">
-                <label for="studentName">Student Name:</label>
-                <input type="text" id="studentName" name="studentName" required>
-            </div>            <div class="form-group">
-                <label for="gender">Gender:</label>
-                <select id="gender" name="gender" required style="width: 100%; padding: 10px; border: 2px solid #bdc3c7; border-radius: 5px; font-size: 16px; box-sizing: border-box;">
-                    <option value="">Select gender...</option>
-                    <option value="he">He</option>
-                    <option value="she">She</option>
-                    <option value="they">They</option>
-                </select>
-            </div>            <div class="form-group">
-                <label for="strengths">Strengths:</label>
-                <div style="margin-bottom: 10px;">
-                    <label style="font-weight: normal; margin-bottom: 5px;">Quick Select:</label>
-                    <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 10px;">
-                        <button type="button" class="quick-select-btn" onclick="addToStrengths('Creative thinking')" style="background: #27ae60;">Creative thinking</button>
-                        <button type="button" class="quick-select-btn" onclick="addToStrengths('Strong social skills')" style="background: #27ae60;">Strong social skills</button>
-                        <button type="button" class="quick-select-btn" onclick="addToStrengths('Good listening skills')" style="background: #27ae60;">Good listening skills</button>
-                        <button type="button" class="quick-select-btn" onclick="addToStrengths('Excellent fine motor skills')" style="background: #27ae60;">Excellent fine motor skills</button>
-                        <button type="button" class="quick-select-btn" onclick="addToStrengths('Strong verbal expression')" style="background: #27ae60;">Strong verbal expression</button>
-                        <button type="button" class="quick-select-btn" onclick="addToStrengths('Curious and inquisitive')" style="background: #27ae60;">Curious and inquisitive</button>
-                        <button type="button" class="quick-select-btn" onclick="addToStrengths('Helpful and kind')" style="background: #27ae60;">Helpful and kind</button>
-                        <button type="button" class="quick-select-btn" onclick="addToStrengths('Shows leadership qualities')" style="background: #27ae60;">Shows leadership qualities</button>
-                    </div>
+            <!-- Basic Information Grid -->
+            <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 20px; margin-bottom: 25px;">
+                <div class="form-group" style="margin-bottom: 0;">
+                    <label for="studentName">Student Name:</label>
+                    <input type="text" id="studentName" name="studentName">
+                    <div class="auto-save-indicator" id="nameIndicator">Saved</div>
                 </div>
-                <textarea id="strengths" name="strengths" placeholder="List the student's key strengths..."></textarea>
-            </div><div class="form-group">
-                <label for="weaknesses">Areas for Improvement:</label>
-                <div style="margin-bottom: 10px;">
-                    <label style="font-weight: normal; margin-bottom: 5px;">Quick Select:</label>
-                    <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 10px;">
-                        <button type="button" class="quick-select-btn" onclick="addToAreas('Refining motor skills')">Refining motor skills</button>
-                        <button type="button" class="quick-select-btn" onclick="addToAreas('Refining social awareness')">Refining social awareness</button>
-                        <button type="button" class="quick-select-btn" onclick="addToAreas('Refining spatial awareness')">Refining spatial awareness</button>
-                    </div>
+                <div class="form-group" style="margin-bottom: 0;">
+                    <label for="gender">Gender:</label>
+                    <select id="gender" name="gender">
+                        <option value="">Select gender...</option>
+                        <option value="he">He</option>
+                        <option value="she">She</option>
+                        <option value="they">They</option>
+                    </select>
+                    <div class="auto-save-indicator" id="genderIndicator">Saved</div>
                 </div>
-                <textarea id="weaknesses" name="weaknesses" placeholder="List areas where the student can improve..."></textarea>
             </div>
 
+            <!-- Overall Attributes -->
             <div class="form-group">
                 <label for="overallAttributes">Overall Attributes (1-10):</label>
                 <div class="slider-container">
                     <input type="range" id="overallAttributes" name="overallAttributes" min="1" max="10" value="5" class="slider">
                     <div class="slider-value" id="sliderValue">5</div>
                 </div>
-            </div>        </form>
+            </div>
+
+            <!-- Strengths and Areas for Improvement Grid -->
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 25px;">
+                <div class="form-group" style="margin-bottom: 0;">
+                    <label for="strengths">Strengths:</label>
+                    <div style="margin-bottom: 8px;">
+                        <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 8px;">
+                            <button type="button" class="quick-select-btn" onclick="addToStrengths('Creative thinking')">Creative</button>
+                            <button type="button" class="quick-select-btn" onclick="addToStrengths('Strong social skills')">Social</button>
+                            <button type="button" class="quick-select-btn" onclick="addToStrengths('Good listening skills')">Listening</button>
+                            <button type="button" class="quick-select-btn" onclick="addToStrengths('Excellent fine motor skills')">Motor Skills</button>
+                            <button type="button" class="quick-select-btn" onclick="addToStrengths('Curious and inquisitive')">Curious</button>
+                            <button type="button" class="quick-select-btn" onclick="addToStrengths('Helpful and kind')">Helpful</button>
+                        </div>
+                    </div>
+                    <textarea id="strengths" name="strengths" placeholder="List the student's key strengths..."></textarea>
+                    <div class="auto-save-indicator" id="strengthsIndicator">Saved</div>
+                </div>
+
+                <div class="form-group" style="margin-bottom: 0;">
+                    <label for="weaknesses">Areas for Improvement:</label>
+                    <div style="margin-bottom: 8px;">
+                        <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 8px;">
+                            <button type="button" class="quick-select-btn improvement-btn" onclick="addToAreas('Refining motor skills')">Motor Skills</button>
+                            <button type="button" class="quick-select-btn improvement-btn" onclick="addToAreas('Refining social awareness')">Social Awareness</button>
+                            <button type="button" class="quick-select-btn improvement-btn" onclick="addToAreas('Refining spatial awareness')">Spatial Awareness</button>
+                        </div>
+                    </div>
+                    <textarea id="weaknesses" name="weaknesses" placeholder="List areas where the student can improve..."></textarea>
+                    <div class="auto-save-indicator" id="weaknessesIndicator">Saved</div>
+                </div>
+            </div>
+        </form>
         
         <div class="navigation">
             <button type="button" class="button button-secondary" onclick="goToSubjects()">
@@ -222,20 +466,100 @@
             </button>
         </div>
 
-        <div class="info-section" style="background: #e8f4fd; padding: 20px; border-radius: 5px; margin-top: 20px; border-left: 4px solid #3498db;">
-            <h3 style="color: #2c3e50; margin-top: 0;">Next Steps:</h3>
-            <p style="color: #7f8c8d; margin-bottom: 0;">After completing this form, you'll select subjects and topics to include in the report, then generate personalized comments.</p>
+        <div class="info-section">
+            <h3>Next Steps:</h3>
+            <p>After completing this form, you'll select subjects and topics to include in the report, then generate personalized comments.</p>
         </div>
     </div>
 
     <script>
-        // Update slider value display
+        let autoSaveTimeout;
+        
         document.getElementById('overallAttributes').addEventListener('input', function() {
             document.getElementById('sliderValue').textContent = this.value;
-            saveFormData();
-        });        // Save form data on input
-        document.addEventListener('input', saveFormData);
-        document.addEventListener('change', saveFormData);
+            autoSaveFormData();
+        });
+        
+        // Enhanced auto-save with visual feedback
+        document.addEventListener('input', function(e) {
+            if (e.target.matches('#studentName, #gender, #strengths, #weaknesses, #overallAttributes')) {
+                validateField(e.target);
+                autoSaveFormData();
+            }
+        });
+        
+        document.addEventListener('change', function(e) {
+            if (e.target.matches('#studentName, #gender, #strengths, #weaknesses, #overallAttributes')) {
+                validateField(e.target);
+                autoSaveFormData();
+            }
+        });
+
+        function validateField(field) {
+            const fieldName = field.id;
+            const value = field.value.trim();
+            
+            // Clear previous validation styles
+            field.classList.remove('field-valid', 'field-invalid');
+            const validationMsg = document.getElementById(fieldName + 'Validation');
+            if (validationMsg) {
+                validationMsg.style.display = 'none';
+            }
+            
+            // Mark field as valid if it has content
+            if (value) {
+                field.classList.add('field-valid');
+            }
+            
+            updateProgress();
+            return true;
+        }
+
+        function autoSaveFormData() {
+            clearTimeout(autoSaveTimeout);
+            autoSaveTimeout = setTimeout(() => {
+                saveFormData();
+                showAutoSaveIndicator();
+            }, 500); // Auto-save after 500ms of no typing
+        }
+
+        function showAutoSaveIndicator() {
+            // Show save indicators briefly
+            document.querySelectorAll('.auto-save-indicator').forEach(indicator => {
+                indicator.classList.add('show');
+                setTimeout(() => {
+                    indicator.classList.remove('show');
+                }, 1500);
+            });
+        }
+
+        function updateProgress() {
+            const fields = ['studentName', 'gender', 'strengths', 'weaknesses', 'overallAttributes'];
+            let completed = 0;
+            
+            fields.forEach(fieldId => {
+                const field = document.getElementById(fieldId);
+                if (field && field.value.trim()) {
+                    completed++;
+                }
+            });
+            
+            const percentage = Math.round((completed / fields.length) * 100);
+            document.getElementById('progressFill').style.width = percentage + '%';
+            document.getElementById('progressPercent').textContent = percentage;
+            
+            const progressText = document.getElementById('progressText');
+            if (percentage === 100) {
+                progressText.textContent = 'Form completed! Ready to continue.';
+                progressText.style.color = '#27ae60';
+            } else if (percentage >= 40) {
+                progressText.textContent = 'Great progress! Keep going.';
+                progressText.style.color = '#f39c12';
+            } else {
+                progressText.textContent = 'Complete the form to continue';
+                progressText.style.color = '#7f8c8d';
+            }
+        }
 
         function saveFormData() {
             const formData = {
@@ -245,7 +569,8 @@
                 weaknesses: document.getElementById('weaknesses').value,
                 overallAttributes: document.getElementById('overallAttributes').value
             };
-            localStorage.setItem('studentData', JSON.stringify(formData));            checkFormComplete();
+            localStorage.setItem('studentData', JSON.stringify(formData));
+            checkFormComplete();
         }
 
         function loadFormData() {
@@ -258,9 +583,13 @@
                 document.getElementById('overallAttributes').value = data.overallAttributes || '5';
                 document.getElementById('sliderValue').textContent = data.overallAttributes || '5';
                 document.getElementById('gender').value = data.gender || '';
+                
+                // Validate loaded fields
+                document.querySelectorAll('#studentName, #gender, #strengths, #weaknesses').forEach(validateField);
             }
             checkSubjectsStatus();
             checkFormComplete();
+            updateProgress();
         }
 
         function checkSubjectsStatus() {
@@ -273,78 +602,54 @@
                 statusIndicator.className = 'status-indicator status-complete';
             } else {
                 statusIndicator.textContent = 'Required';
-                statusIndicator.className = 'status-indicator status-pending';            }
+                statusIndicator.className = 'status-indicator status-pending';
+            }
         }
 
         function checkFormComplete() {
             const name = document.getElementById('studentName').value;
             const gender = document.getElementById('gender').value;
             
-            // Enable continue button if basic info is complete
             const continueBtn = document.querySelector('.button-secondary');
             if (name && gender) {
                 continueBtn.style.opacity = '1';
                 continueBtn.style.pointerEvents = 'auto';
+                continueBtn.style.transform = 'none';
             } else {
                 continueBtn.style.opacity = '0.6';
-                continueBtn.style.pointerEvents = 'none';            }
+                continueBtn.style.pointerEvents = 'none';
+                continueBtn.style.transform = 'scale(0.98)';
+            }
         }
 
         function goToSubjects() {
-            const name = document.getElementById('studentName').value;
-            const gender = document.getElementById('gender').value;
-            
-            if (!name || !gender) {
-                alert('Please complete the student name and gender selection before continuing.');
-                return;
-            }
-            
             saveFormData();
             window.location.href = 'Subjects.html';
-        }        function addToAreas(text) {
+        }
+        
+        function addToAreas(text) {
             const textarea = document.getElementById('weaknesses');
             const currentValue = textarea.value.trim();
             
-            // Check if the text is already in the textarea
-            if (currentValue.includes(text)) {
-                return; // Don't add duplicate
-            }
+            if (currentValue.includes(text)) return;
             
-            // Add the text with appropriate formatting
-            if (currentValue === '') {
-                textarea.value = text;
-            } else {
-                textarea.value = currentValue + ', ' + text;
-            }
-            
-            // Save the updated data
-            saveFormData();
+            textarea.value = currentValue === '' ? text : currentValue + ', ' + text;
+            validateField(textarea);
+            autoSaveFormData();
         }
 
         function addToStrengths(text) {
             const textarea = document.getElementById('strengths');
             const currentValue = textarea.value.trim();
             
-            // Check if the text is already in the textarea
-            if (currentValue.includes(text)) {
-                return; // Don't add duplicate
-            }
+            if (currentValue.includes(text)) return;
             
-            // Add the text with appropriate formatting
-            if (currentValue === '') {
-                textarea.value = text;
-            } else {
-                textarea.value = currentValue + ', ' + text;
-            }
-            
-            // Save the updated data
-            saveFormData();
+            textarea.value = currentValue === '' ? text : currentValue + ', ' + text;
+            validateField(textarea);
+            autoSaveFormData();
         }
 
-        // Load saved data on page load
         window.addEventListener('load', loadFormData);
-        
-        // Check for updates when returning from subjects page
         window.addEventListener('focus', function() {
             checkSubjectsStatus();
             checkFormComplete();

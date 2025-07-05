@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="description" content="Enter student information for report generation">
+    <meta name="theme-color" content="#3498db">
+    
+    <title>Student Information - Teachers Pet</title>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="../assets/css/global.css">
+    <link rel="stylesheet" href="../assets/css/mobile.css">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="../manifest.json">
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="../assets/js/mobile.js" as="script">
+    
+    <!-- Critical CSS for immediate rendering -->
+    <style>
+        .page-header {
+            background: var(--bg-gradient, linear-gradient(135deg, #667eea 0%, #764ba2 100%));
+            color: white;
+            padding: var(--spacing-lg) var(--spacing-md);
+            margin: calc(-1 * var(--spacing-lg)) calc(-1 * var(--spacing-md)) var(--spacing-lg);
+            border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+            text-align: center;
+        }
+        
+        .page-header h1 {
+            margin: 0;
+            color: white;
+            font-size: var(--font-size-xl);
+        }
+        
+        .page-header p {
+            margin: var(--spacing-sm) 0 0 0;
+            color: rgba(255,255,255,0.9);
+            font-size: var(--font-size-sm);
+        }
+        
+        .progress-bar {
+            background: rgba(255,255,255,0.2);
+            height: 4px;
+            border-radius: 2px;
+            margin-top: var(--spacing-md);
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            background: white;
+            height: 100%;
+            width: 33%;
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Page Header -->
+        <div class="page-header">
+            <h1>📝 Student Information</h1>
+            <p>Enter basic details about your student</p>
+            <div class="progress-bar">
+                <div class="progress-fill"></div>
+            </div>
+        </div>
+        
+        <!-- Main Form -->
+        <form id="studentForm" novalidate>
+            <!-- Student Name -->
+            <div class="form-group">
+                <label for="studentName" class="form-label">
+                    <span>👤 Student Name</span>
+                    <span style="color: var(--accent-color);">*</span>
+                </label>
+                <input 
+                    type="text" 
+                    id="studentName" 
+                    name="studentName" 
+                    class="form-control" 
+                    placeholder="Enter student's full name"
+                    required 
+                    autocomplete="name"
+                    inputmode="text"
+                >
+                <div class="field-hint">This will appear in the generated comments</div>
+            </div>
+
+            <!-- Gender Selection -->
+            <div class="form-group">
+                <label for="gender" class="form-label">
+                    <span>🏷️ Pronouns</span>
+                    <span style="color: var(--accent-color);">*</span>
+                </label>
+                <select id="gender" name="gender" class="form-control" required>
+                    <option value="">Select pronouns...</option>
+                    <option value="he">He/Him</option>
+                    <option value="she">She/Her</option>
+                    <option value="they">They/Them</option>
+                </select>
+                <div class="field-hint">Choose the appropriate pronouns for the student</div>
+            </div>
+
+            <!-- Strengths Section -->
+            <div class="form-group">
+                <label for="strengths" class="form-label">
+                    <span>⭐ Strengths & Positive Qualities</span>
+                </label>
+                
+                <!-- Quick Select Options -->
+                <div class="quick-select-section">
+                    <label class="field-hint" style="font-weight: normal; margin-bottom: var(--spacing-sm);">
+                        Quick Select (tap to add):
+                    </label>
+                    <div class="quick-select-group">
+                        <button type="button" class="btn btn-small btn-success quick-select-btn" data-target="strengths" data-value="Creative thinking">
+                            Creative thinking
+                        </button>
+                        <button type="button" class="btn btn-small btn-success quick-select-btn" data-target="strengths" data-value="Strong social skills">
+                            Social skills
+                        </button>
+                        <button type="button" class="btn btn-small btn-success quick-select-btn" data-target="strengths" data-value="Good listening skills">
+                            Listening skills
+                        </button>
+                        <button type="button" class="btn btn-small btn-success quick-select-btn" data-target="strengths" data-value="Excellent fine motor skills">
+                            Fine motor skills
+                        </button>
+                        <button type="button" class="btn btn-small btn-success quick-select-btn" data-target="strengths" data-value="Strong verbal expression">
+                            Verbal expression
+                        </button>
+                        <button type="button" class="btn btn-small btn-success quick-select-btn" data-target="strengths" data-value="Curious and inquisitive">
+                            Curious nature
+                        </button>
+                        <button type="button" class="btn btn-small btn-success quick-select-btn" data-target="strengths" data-value="Helpful and kind">
+                            Helpful & kind
+                        </button>
+                        <button type="button" class="btn btn-small btn-success quick-select-btn" data-target="strengths" data-value="Shows leadership qualities">
+                            Leadership
+                        </button>
+                    </div>
+                </div>
+                
+                <textarea 
+                    id="strengths" 
+                    name="strengths" 
+                    class="form-control" 
+                    placeholder="List the student's key strengths and positive qualities..."
+                    rows="3"
+                ></textarea>
+                <div class="field-hint">These will be highlighted in the report comments</div>
+            </div>
+
+            <!-- Areas for Improvement -->
+            <div class="form-group">
+                <label for="weaknesses" class="form-label">
+                    <span>🎯 Areas for Growth & Development</span>
+                </label>
+                
+                <!-- Quick Select Options -->
+                <div class="quick-select-section">
+                    <label class="field-hint" style="font-weight: normal; margin-bottom: var(--spacing-sm);">
+                        Quick Select (tap to add):
+                    </label>
+                    <div class="quick-select-group">
+                        <button type="button" class="btn btn-small btn-danger quick-select-btn" data-target="weaknesses" data-value="Developing motor skills">
+                            Motor skills
+                        </button>
+                        <button type="button" class="btn btn-small btn-danger quick-select-btn" data-target="weaknesses" data-value="Building social awareness">
+                            Social awareness
+                        </button>
+                        <button type="button" class="btn btn-small btn-danger quick-select-btn" data-target="weaknesses" data-value="Improving focus and attention">
+                            Focus & attention
+                        </button>
+                        <button type="button" class="btn btn-small btn-danger quick-select-btn" data-target="weaknesses" data-value="Enhancing communication skills">
+                            Communication
+                        </button>
+                        <button type="button" class="btn btn-small btn-danger quick-select-btn" data-target="weaknesses" data-value="Building confidence">
+                            Confidence building
+                        </button>
+                        <button type="button" class="btn btn-small btn-danger quick-select-btn" data-target="weaknesses" data-value="Following instructions">
+                            Following directions
+                        </button>
+                    </div>
+                </div>
+                
+                <textarea 
+                    id="weaknesses" 
+                    name="weaknesses" 
+                    class="form-control" 
+                    placeholder="Areas where the student can continue to grow and develop..."
+                    rows="3"
+                ></textarea>
+                <div class="field-hint">Framed positively for constructive feedback</div>
+            </div>
+
+            <!-- Overall Attributes Slider -->
+            <div class="form-group">
+                <label for="overallAttributes" class="form-label">
+                    <span>📊 Overall Performance Level</span>
+                </label>
+                <div class="slider-container">
+                    <div class="slider-labels" style="display: flex; justify-content: space-between; font-size: var(--font-size-sm); color: var(--text-secondary); margin-bottom: var(--spacing-sm);">
+                        <span>Emerging</span>
+                        <span>Developing</span>
+                        <span>Proficient</span>
+                        <span>Advanced</span>
+                    </div>
+                    <input 
+                        type="range" 
+                        id="overallAttributes" 
+                        name="overallAttributes" 
+                        min="1" 
+                        max="10" 
+                        value="5" 
+                        class="slider mobile-slider"
+                        aria-label="Overall performance level from 1 to 10"
+                    >
+                    <div class="slider-value" id="sliderValue">5 / 10</div>
+                    <div class="performance-description" id="performanceDescription" style="text-align: center; font-size: var(--font-size-sm); color: var(--text-secondary); margin-top: var(--spacing-sm);">
+                        Developing appropriately
+                    </div>
+                </div>
+                <div class="field-hint">Rate the student's overall kindergarten performance</div>
+            </div>
+        </form>
+        
+        <!-- Form Status -->
+        <div class="form-status" id="formStatus" style="margin: var(--spacing-lg) 0;">
+            <div class="status-item" style="display: flex; align-items: center; justify-content: space-between; padding: var(--spacing-sm) 0;">
+                <span>Student Information</span>
+                <span class="status-indicator status-pending" id="infoStatus">Incomplete</span>
+            </div>
+            <div class="status-item" style="display: flex; align-items: center; justify-content: space-between; padding: var(--spacing-sm) 0; border-top: 1px solid var(--bg-accent);">
+                <span>Subject Selection</span>
+                <span class="status-indicator status-pending" id="subjectsStatus">Pending</span>
+            </div>
+        </div>
+        
+        <!-- Navigation -->
+        <div class="navigation">
+            <button type="button" class="btn" onclick="goBack()" style="margin-right: var(--spacing-sm);">
+                ← Back to Home
+            </button>
+            <button type="button" class="btn btn-primary" id="continueBtn" onclick="goToSubjects()" disabled>
+                Continue to Subjects →
+            </button>
+        </div>
+
+        <!-- Info Section -->
+        <div class="info-section">
+            <h3>📋 Next Steps</h3>
+            <p>After completing this form, you'll select subjects and topics to include in the report, then generate personalized comments based on your selections.</p>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 9999; display: flex; align-items: center; justify-content: center;">
+        <div class="mobile-loading">
+            <div class="mobile-spinner"></div>
+            <p style="color: white; margin-top: var(--spacing-md);">Saving your information...</p>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Form management
+        const StudentInfoForm = {
+            form: null,
+            continueBtn: null,
+            
+            init() {
+                this.form = document.getElementById('studentForm');
+                this.continueBtn = document.getElementById('continueBtn');
+                
+                this.setupFormElements();
+                this.loadSavedData();
+                this.setupEventListeners();
+                this.setupQuickSelect();
+                this.setupSlider();
+                this.validateForm();
+            },
+            
+            setupFormElements() {
+                // Add mobile-friendly attributes
+                const inputs = this.form.querySelectorAll('input, textarea, select');
+                inputs.forEach(input => {
+                    input.classList.add('touch-friendly');
+                    
+                    // Prevent zoom on iOS
+                    if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+                        if (input.type !== 'range') {
+                            input.style.fontSize = '16px';
+                        }
+                    }
+                });
+            },
+            
+            setupEventListeners() {
+                // Auto-save on input
+                this.form.addEventListener('input', () => {
+                    this.saveFormData();
+                    this.validateForm();
+                });
+                
+                this.form.addEventListener('change', () => {
+                    this.saveFormData();
+                    this.validateForm();
+                });
+                
+                // Form submission prevention
+                this.form.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    this.goToSubjects();
+                });
+            },
+            
+            setupQuickSelect() {
+                document.querySelectorAll('.quick-select-btn').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const target = btn.dataset.target;
+                        const value = btn.dataset.value;
+                        this.addToField(target, value);
+                        
+                        // Visual feedback
+                        btn.style.transform = 'scale(0.95)';
+                        setTimeout(() => {
+                            btn.style.transform = 'scale(1)';
+                        }, 150);
+                    });
+                });
+            },
+            
+            setupSlider() {
+                const slider = document.getElementById('overallAttributes');
+                const valueDisplay = document.getElementById('sliderValue');
+                const descriptionDisplay = document.getElementById('performanceDescription');
+                
+                const descriptions = {
+                    1: 'Needs significant support',
+                    2: 'Emerging skills',
+                    3: 'Beginning to develop',
+                    4: 'Developing with support',
+                    5: 'Developing appropriately',
+                    6: 'Making good progress',
+                    7: 'Performing well',
+                    8: 'Strong performance',
+                    9: 'Excellent achievement',
+                    10: 'Outstanding performance'
+                };
+                
+                const updateSlider = () => {
+                    const value = slider.value;
+                    valueDisplay.textContent = `${value} / 10`;
+                    descriptionDisplay.textContent = descriptions[value] || 'Developing appropriately';
+                };
+                
+                slider.addEventListener('input', updateSlider);
+                updateSlider(); // Initial update
+            },
+            
+            addToField(fieldId, value) {
+                const field = document.getElementById(fieldId);
+                const currentValue = field.value.trim();
+                
+                // Check if value already exists
+                if (currentValue.toLowerCase().includes(value.toLowerCase())) {
+                    return;
+                }
+                
+                // Add value with appropriate formatting
+                if (currentValue === '') {
+                    field.value = value;
+                } else {
+                    field.value = currentValue + ', ' + value;
+                }
+                
+                // Trigger save and validation
+                this.saveFormData();
+                this.validateForm();
+                
+                // Scroll to field on mobile
+                if (window.innerWidth <= 768) {
+                    setTimeout(() => {
+                        field.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }, 100);
+                }
+            },
+            
+            validateForm() {
+                const name = document.getElementById('studentName').value.trim();
+                const gender = document.getElementById('gender').value;
+                
+                const isValid = name && gender;
+                
+                // Update continue button
+                this.continueBtn.disabled = !isValid;
+                this.continueBtn.style.opacity = isValid ? '1' : '0.6';
+                
+                // Update status indicator
+                const infoStatus = document.getElementById('infoStatus');
+                if (isValid) {
+                    infoStatus.textContent = 'Complete';
+                    infoStatus.className = 'status-indicator status-complete';
+                } else {
+                    infoStatus.textContent = 'Incomplete';
+                    infoStatus.className = 'status-indicator status-pending';
+                }
+                
+                return isValid;
+            },
+            
+            saveFormData() {
+                const formData = {
+                    studentName: document.getElementById('studentName').value,
+                    gender: document.getElementById('gender').value,
+                    strengths: document.getElementById('strengths').value,
+                    weaknesses: document.getElementById('weaknesses').value,
+                    overallAttributes: document.getElementById('overallAttributes').value,
+                    timestamp: Date.now()
+                };
+                
+                try {
+                    localStorage.setItem('studentData', JSON.stringify(formData));
+                    
+                    // Update progress in subject status if returning from subjects page
+                    this.checkSubjectsStatus();
+                } catch (error) {
+                    console.error('Failed to save form data:', error);
+                    this.showError('Failed to save your information. Please try again.');
+                }
+            },
+            
+            loadSavedData() {
+                try {
+                    const saved = localStorage.getItem('studentData');
+                    if (saved) {
+                        const data = JSON.parse(saved);
+                        
+                        document.getElementById('studentName').value = data.studentName || '';
+                        document.getElementById('gender').value = data.gender || '';
+                        document.getElementById('strengths').value = data.strengths || '';
+                        document.getElementById('weaknesses').value = data.weaknesses || '';
+                        document.getElementById('overallAttributes').value = data.overallAttributes || '5';
+                        
+                        // Update slider display
+                        const event = new Event('input');
+                        document.getElementById('overallAttributes').dispatchEvent(event);
+                    }
+                } catch (error) {
+                    console.error('Failed to load saved data:', error);
+                }
+                
+                this.checkSubjectsStatus();
+            },
+            
+            checkSubjectsStatus() {
+                try {
+                    const subjects = localStorage.getItem('selectedSubjects');
+                    const subjectTitles = localStorage.getItem('selectedSubjectTitles');
+                    const subjectsStatus = document.getElementById('subjectsStatus');
+                    
+                    const hasSubjects = (subjects && JSON.parse(subjects).length > 0) || 
+                                      (subjectTitles && JSON.parse(subjectTitles).length > 0);
+                    
+                    if (hasSubjects) {
+                        subjectsStatus.textContent = 'Complete';
+                        subjectsStatus.className = 'status-indicator status-complete';
+                    } else {
+                        subjectsStatus.textContent = 'Pending';
+                        subjectsStatus.className = 'status-indicator status-pending';
+                    }
+                } catch (error) {
+                    // Ignore errors for now
+                }
+            },
+            
+            showError(message) {
+                // Create or update error message
+                let errorDiv = document.getElementById('errorMessage');
+                if (!errorDiv) {
+                    errorDiv = document.createElement('div');
+                    errorDiv.id = 'errorMessage';
+                    errorDiv.className = 'mobile-error';
+                    errorDiv.style.margin = 'var(--spacing-lg) 0';
+                    this.form.insertBefore(errorDiv, this.form.firstChild);
+                }
+                
+                errorDiv.textContent = message;
+                errorDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                
+                // Auto-hide after 5 seconds
+                setTimeout(() => {
+                    if (errorDiv.parentNode) {
+                        errorDiv.remove();
+                    }
+                }, 5000);
+            },
+            
+            showLoading(show = true) {
+                const overlay = document.getElementById('loadingOverlay');
+                overlay.style.display = show ? 'flex' : 'none';
+            }
+        };
+
+        // Navigation functions
+        function goBack() {
+            StudentInfoForm.showLoading();
+            setTimeout(() => {
+                window.location.href = '../index.html';
+            }, 500);
+        }
+
+        function goToSubjects() {
+            if (!StudentInfoForm.validateForm()) {
+                StudentInfoForm.showError('Please complete the required fields (Student Name and Pronouns) before continuing.');
+                return;
+            }
+            
+            StudentInfoForm.saveFormData();
+            StudentInfoForm.showLoading();
+            
+            // Add to recent reports
+            const studentName = document.getElementById('studentName').value;
+            if (studentName) {
+                try {
+                    const recent = JSON.parse(localStorage.getItem('recentReports') || '[]');
+                    const newReport = {
+                        studentName,
+                        date: Date.now()
+                    };
+                    
+                    // Remove duplicates and add new report
+                    const filtered = recent.filter(r => r.studentName !== studentName);
+                    filtered.unshift(newReport);
+                    
+                    // Keep only last 10
+                    localStorage.setItem('recentReports', JSON.stringify(filtered.slice(0, 10)));
+                } catch (error) {
+                    console.error('Failed to update recent reports:', error);
+                }
+            }
+            
+            setTimeout(() => {
+                window.location.href = 'subjects.html';
+            }, 500);
+        }
+
+        // Initialize when DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => {
+                StudentInfoForm.init();
+            });
+        } else {
+            StudentInfoForm.init();
+        }
+
+        // Handle back button
+        window.addEventListener('popstate', () => {
+            goBack();
+        });
+        
+        // Auto-focus first empty required field on mobile
+        window.addEventListener('load', () => {
+            if (window.innerWidth <= 768) {
+                const firstEmpty = document.querySelector('input[required]:invalid, select[required]:invalid');
+                if (firstEmpty) {
+                    setTimeout(() => {
+                        firstEmpty.focus();
+                    }, 1000);
+                }
+            }
+        });
+    </script>
+    
+    <!-- Load mobile features -->
+    <script src="../assets/js/mobile.js" defer></script>
+</body>
+</html>

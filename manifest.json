@@ -1,0 +1,124 @@
+{
+  "name": "Kindergarten Report Generator - Teachers Pet",
+  "short_name": "TeachersPet",
+  "description": "An automated kindergarten comment generator for teachers to create personalized student reports",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#3498db",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "en-US",
+  "dir": "ltr",
+  "categories": ["education", "productivity", "utilities"],
+  "icons": [
+    {
+      "src": "assets/images/icons/icon-72x72.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/images/icons/icon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/images/icons/icon-128x128.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/images/icons/icon-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/images/icons/icon-152x152.png",
+      "sizes": "152x152",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/images/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/images/icons/icon-384x384.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/images/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "New Report",
+      "short_name": "New Report",
+      "description": "Start creating a new student report",
+      "url": "/pages/student-info.html",
+      "icons": [
+        {
+          "src": "assets/images/icons/icon-96x96.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Subject Selection",
+      "short_name": "Subjects",
+      "description": "Select subjects for reporting",
+      "url": "/pages/subjects.html",
+      "icons": [
+        {
+          "src": "assets/images/icons/icon-96x96.png",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ],
+  "share_target": {
+    "action": "/pages/student-info.html",
+    "method": "GET",
+    "params": {
+      "title": "name",
+      "text": "description",
+      "url": "url"
+    }
+  },
+  "prefer_related_applications": false,
+  "edge_side_panel": {},
+  "screenshots": [
+    {
+      "src": "assets/images/screenshots/mobile-1.png",
+      "sizes": "640x1136",
+      "type": "image/png",
+      "platform": "mobile",
+      "label": "Student Information Form"
+    },
+    {
+      "src": "assets/images/screenshots/mobile-2.png",
+      "sizes": "640x1136",
+      "type": "image/png",
+      "platform": "mobile",
+      "label": "Subject Selection Interface"
+    },
+    {
+      "src": "assets/images/screenshots/desktop-1.png",
+      "sizes": "1280x800",
+      "type": "image/png",
+      "platform": "wide",
+      "label": "Desktop View - Report Generation"
+    }
+  ]
+}
