@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kindergarten Report Generator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Kindergarten Report Generator</h1>
+        
+        <div id="student-info" class="section">
+            <h2>Student Information</h2>
+            <div class="form-group">
+                <label for="student-name">Student Name:</label>
+                <input type="text" id="student-name" required>
+            </div>
+            
+            <div class="form-group">
+                <label>Gender:</label>
+                <div class="radio-group">
+                    <input type="radio" id="gender-male" name="gender" value="male" checked>
+                    <label for="gender-male">Male</label>
+                    <input type="radio" id="gender-female" name="gender" value="female">
+                    <label for="gender-female">Female</label>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="strengths">Strengths:</label>
+                <textarea id="strengths" rows="3"></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="weaknesses">Weaknesses:</label>
+                <textarea id="weaknesses" rows="3"></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="overall-rating">Overall Attributes (1-10):</label>
+                <input type="range" id="overall-rating" min="1" max="10" value="7">
+                <span id="rating-value">7</span>
+            </div>
+        </div>
+        
+        <div id="subjects" class="section">
+            <h2>Subject Evaluation</h2>
+            <div class="subjects-grid">
+                <div class="subject-item">
+                    <input type="checkbox" id="reading" class="subject-checkbox">
+                    <label for="reading">Reading</label>
+                    <div class="slider-container">
+                        <input type="range" min="0" max="5" value="3" class="subject-slider" id="reading-slider" disabled>
+                        <span class="slider-value">3</span>
+                    </div>
+                </div>
+                
+                <div class="subject-item">
+                    <input type="checkbox" id="writing" class="subject-checkbox">
+                    <label for="writing">Writing</label>
+                    <div class="slider-container">
+                        <input type="range" min="0" max="5" value="3" class="subject-slider" id="writing-slider" disabled>
+                        <span class="slider-value">3</span>
+                    </div>
+                </div>
+                
+                <div class="subject-item">
+                    <input type="checkbox" id="math" class="subject-checkbox">
+                    <label for="math">Math</label>
+                    <div class="slider-container">
+                        <input type="range" min="0" max="5" value="3" class="subject-slider" id="math-slider" disabled>
+                        <span class="slider-value">3</span>
+                    </div>
+                </div>
+                
+                <div class="subject-item">
+                    <input type="checkbox" id="science" class="subject-checkbox">
+                    <label for="science">Science</label>
+                    <div class="slider-container">
+                        <input type="range" min="0" max="5" value="3" class="subject-slider" id="science-slider" disabled>
+                        <span class="slider-value">3</span>
+                    </div>
+                </div>
+                
+                <div class="subject-item">
+                    <input type="checkbox" id="art" class="subject-checkbox">
+                    <label for="art">Art</label>
+                    <div class="slider-container">
+                        <input type="range" min="0" max="5" value="3" class="subject-slider" id="art-slider" disabled>
+                        <span class="slider-value">3</span>
+                    </div>
+                </div>
+                
+                <div class="subject-item">
+                    <input type="checkbox" id="social" class="subject-checkbox">
+                    <label for="social">Social Skills</label>
+                    <div class="slider-container">
+                        <input type="range" min="0" max="5" value="3" class="subject-slider" id="social-slider" disabled>
+                        <span class="slider-value">3</span>
+                    </div>
+                </div>
+                
+                <div class="subject-item">
+                    <input type="checkbox" id="motor" class="subject-checkbox">
+                    <label for="motor">Motor Skills</label>
+                    <div class="slider-container">
+                        <input type="range" min="0" max="5" value="3" class="subject-slider" id="motor-slider" disabled>
+                        <span class="slider-value">3</span>
+                    </div>
+                </div>
+                
+                <div class="subject-item">
+                    <input type="checkbox" id="behavior" class="subject-checkbox">
+                    <label for="behavior">Behavior</label>
+                    <div class="slider-container">
+                        <input type="range" min="0" max="5" value="3" class="subject-slider" id="behavior-slider" disabled>
+                        <span class="slider-value">3</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="button-container">
+            <button id="generate-btn" class="primary-btn">Generate Comments</button>
+        </div>
+        
+        <div id="comments-section" class="section hidden">
+            <h2>Choose your preferred comment:</h2>
+            
+            <div class="comment-box" id="male-style">
+                <h3>👨‍🏫 Male Teacher Style <span class="word-count">(0 words)</span></h3>
+                <p id="male-comment"></p>
+            </div>
+            
+            <div class="comment-box" id="female-style">
+                <h3>👩‍🏫 Female Teacher Style <span class="word-count">(0 words)</span></h3>
+                <p id="female-comment"></p>
+            </div>
+            
+            <div class="button-container">
+                <button id="copy-btn" class="secondary-btn">Copy Selected Comment</button>
+                <button id="regenerate-btn" class="secondary-btn">Generate New Comments</button>
+                <button id="start-over-btn" class="secondary-btn">Start Over</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

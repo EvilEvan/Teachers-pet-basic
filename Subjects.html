@@ -5,146 +5,296 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Subject Selection - Kindergarten Report Generator</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
         body {
-            font-family: Arial, sans-serif;
-            max-width: 1000px;
-            margin: 0 auto;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: 
+                url('https://images.unsplash.com/photo-1502134249126-9f3755a50d78?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') center/cover no-repeat fixed,
+                radial-gradient(ellipse at center, rgba(30, 39, 70, 0.8) 0%, rgba(15, 15, 35, 0.9) 50%, rgba(0, 0, 0, 0.95) 100%);
+            min-height: 100vh;
             padding: 20px;
-            background-color: #f5f5f5;
+            margin: 0;
+            position: relative;
+            overflow-x: hidden;
         }
+        
+        /* Space stars animation */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(2px 2px at 20px 30px, rgba(255, 255, 255, 0.8), transparent),
+                radial-gradient(2px 2px at 40px 70px, rgba(255, 255, 255, 0.6), transparent),
+                radial-gradient(1px 1px at 90px 40px, rgba(255, 255, 255, 0.5), transparent),
+                radial-gradient(1px 1px at 130px 80px, rgba(255, 255, 255, 0.4), transparent),
+                radial-gradient(2px 2px at 160px 30px, rgba(255, 255, 255, 0.7), transparent);
+            background-repeat: repeat;
+            background-size: 200px 200px;
+            animation: twinkle 20s linear infinite;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        @keyframes twinkle {
+            0% { transform: translateY(0px) translateX(0px) rotate(0deg); opacity: 0.8; }
+            50% { opacity: 1; }
+            100% { transform: translateY(-200px) translateX(100px) rotate(360deg); opacity: 0.8; }
+        }
+        
         .container {
-            background: white;
+            background: rgba(255, 255, 255, 0.3);
+            -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 12px;
             padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 10;
+            box-shadow: 
+                0 10px 30px rgba(0, 0, 0, 0.3),
+                0 0 50px rgba(255, 255, 255, 0.1);
         }
+        
         h1 {
-            color: #2c3e50;
+            color: white;
+            font-size: 2.2em;
+            margin-bottom: 25px;
+            font-weight: 600;
             text-align: center;
-            margin-bottom: 30px;
+            font-family: 'Segoe UI', sans-serif;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
         }
+        
         .subject-section {
-            margin-bottom: 30px;
-            border: 2px solid #ecf0f1;
-            border-radius: 8px;
-            padding: 20px;
-        }        .subject-title {
-            color: #3498db;
-            font-size: 20px;
-            font-weight: bold;
             margin-bottom: 15px;
-            border-bottom: 2px solid #3498db;
-            padding-bottom: 5px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 12px;
+            background: rgba(255,255,255,0.1);
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+        
+        .subject-header {
+            padding: 15px 20px;
+            cursor: pointer;
+            background: rgba(255,255,255,0.1);
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .subject-header:hover {
+            background: rgba(255,255,255,0.2);
+        }
+        
+        .subject-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: white;
             display: flex;
             align-items: center;
             gap: 10px;
+            font-family: 'Segoe UI', sans-serif;
         }
-        .subject-checkbox {
-            transform: scale(1.3);
-            margin-right: 5px;
-        }
+        
         .topic-item {
             display: flex;
-            align-items: flex-start;
+            align-items: center;
             margin: 10px 0;
             padding: 8px;
-            border-radius: 5px;
-            transition: background-color 0.2s;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            gap: 10px;
         }
-        .topic-item:hover {
-            background-color: #f8f9fa;
-        }
-        .topic-checkbox {
-            margin-right: 10px;
-            margin-top: 2px;
-            transform: scale(1.2);
-        }
+        
         .topic-text {
             flex: 1;
-            line-height: 1.4;
-        }
-        .button {
-            background-color: #3498db;
             color: white;
-            padding: 12px 24px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            margin: 10px 5px;
-            transition: background-color 0.3s;
-        }
-        .button:hover {
-            background-color: #2980b9;
-        }
-        .button-success {
-            background-color: #27ae60;
-        }
-        .button-success:hover {
-            background-color: #229954;
-        }
-        .navigation {
-            text-align: center;
-            margin: 30px 0;
-            padding: 20px;
-            border-top: 2px solid #ecf0f1;
-        }
-        .selection-summary {
-            background: #e8f4fd;
-            padding: 15px;
-            border-radius: 5px;
-            margin: 20px 0;
-            border-left: 4px solid #3498db;
-        }
-        .bulk-actions {
-            margin-bottom: 20px;
-            text-align: center;
-        }        .bulk-actions button {
-            margin: 5px;
-            padding: 8px 16px;
+            font-family: 'Segoe UI', sans-serif;
             font-size: 14px;
         }
-        .comments-section {
-            margin-top: 30px;
-            border-top: 2px solid #ecf0f1;
-            padding-top: 30px;
+        
+        .dropdown-arrow {
+            transition: transform 0.3s ease;
+            color: white;
+            margin-left: auto;
         }
-        .comment-box {
-            background: #ecf0f1;
+        
+        .dropdown-arrow.rotated {
+            transform: rotate(180deg);
+        }
+        
+        .button {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            font-family: 'Segoe UI', sans-serif;
+            margin: 8px 4px;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 10px rgba(52, 152, 219, 0.3);
+        }
+        
+        .button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+        }
+        
+        .button-success {
+            background: linear-gradient(135deg, #27ae60, #229954);
+            box-shadow: 0 3px 10px rgba(39, 174, 96, 0.3);
+        }
+        
+        .button-success:hover {
+            box-shadow: 0 5px 15px rgba(39, 174, 96, 0.4);
+        }
+        
+        .selection-summary {
+            background: #f1f8ff;
+            border: 1px solid #3498db;
             padding: 15px;
-            border-radius: 5px;
-            margin: 10px 0;
-            min-height: 100px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #3498db;
+            color: #2c3e50;
+            font-family: 'Segoe UI', sans-serif;
         }
+        
+        .bulk-actions {
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border: 1px solid #e0e6ed;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
         .comment-option {
             margin: 15px 0;
             padding: 15px;
-            border: 2px solid #bdc3c7;
-            border-radius: 5px;
-            background: #f8f9fa;
+            border: 2px solid #e0e6ed;
+            border-radius: 8px;
+            background: #fff;
             cursor: pointer;
+            transition: all 0.3s ease;
+            color: #2c3e50;
+            font-family: 'Segoe UI', sans-serif;
         }
+        
         .comment-option:hover {
-            background: #e9ecef;
-        }
-        .comment-option.selected {
             border-color: #3498db;
-            background: #e3f2fd;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.1);
         }
+        
+        .comment-option.selected {
+            border-color: #27ae60;
+            background: #f1f8ff;
+            box-shadow: 0 4px 15px rgba(39, 174, 96, 0.2);
+        }
+        
+        .navigation {
+            text-align: center;
+            margin: 25px 0;
+            padding: 20px;
+            border-top: 2px solid #e0e6ed;
+        }
+        
         .final-actions {
             margin-top: 20px;
             text-align: center;
+            padding: 15px;
+            border-top: 1px solid #e0e6ed;
         }
-        .final-actions .button {
-            margin: 10px;
+        
+        .comments-section {
+            margin-top: 25px;
+            border-top: 2px solid #e0e6ed;
+            padding-top: 25px;
+        }
+        
+        .comment-box {
+            background: #f8f9fa;
+            padding: 12px;
+            border-radius: 6px;
+            margin: 8px 0;
+            min-height: 80px;
+            border: 1px solid #e0e6ed;
+            font-family: 'Segoe UI', sans-serif;
+        }
+        
+        .subject-content {
+            display: none;
+            padding: 20px;
+            background: rgba(255,255,255,0.05);
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .subject-content.active {
+            display: block;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+                margin: 10px;
+            }
+            
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            .subject-header {
+                padding: 12px 15px;
+            }
+            
+            .subject-title {
+                font-size: 16px;
+            }
+            
+            .topic-text {
+                font-size: 13px;
+            }
+            
+            .button {
+                padding: 10px 20px;
+                font-size: 13px;
+                margin: 6px 3px;
+            }
+            
+            .comment-option {
+                padding: 12px;
+                margin: 10px 0;
+            }
+            
+            .comment-box {
+                min-height: 60px;
+                font-size: 13px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Subject Selection</h1>
-        <p style="text-align: center; color: #7f8c8d; margin-bottom: 30px;">
-            Select the topics you want to mention in the student's report comments.
+        <p style="text-align: center; color: #7f8c8d; margin-bottom: 25px; font-family: 'Segoe UI', sans-serif;">
+            Select subjects and rate student performance (0-5 scale, 5 being excellent).
         </p>
         
         <div class="bulk-actions">
@@ -156,171 +306,217 @@
             <strong>Selected Topics: </strong><span id="selectionCount">0</span>
         </div>
 
-        <form id="subjectsForm">            <!-- ENGLISH -->
+        <form id="subjectsForm">
+            <!-- ENGLISH -->
             <div class="subject-section">
-                <div class="subject-title">
-                    <input type="checkbox" class="subject-checkbox" id="subject_english" value="English">
-                    <label for="subject_english">ENGLISH</label>
+                <div class="subject-header" onclick="toggleSubject('english')">
+                    <div class="subject-title">
+                        <input type="checkbox" class="subject-checkbox" id="subject_english" value="English" onchange="handleSubjectCheck('english')">
+                        <label for="subject_english">ENGLISH</label>
+                        <span class="dropdown-arrow" id="arrow_english">▼</span>
+                    </div>
                 </div>
-                <div class="topic-item">
-                    <input type="checkbox" class="topic-checkbox" id="english1" value="Draw lines to match the letter with the correct picture">
-                    <label for="english1" class="topic-text">Draw lines to match the letter with the correct picture</label>
-                </div>
-                <div class="topic-item">
-                    <input type="checkbox" class="topic-checkbox" id="english2" value="Trace the letter and color">
-                    <label for="english2" class="topic-text">Trace the letter and color</label>
-                </div>
-                <div class="topic-item">
-                    <input type="checkbox" class="topic-checkbox" id="english3" value="Draw lines to match the same letters">
-                    <label for="english3" class="topic-text">Draw lines to match the same letters</label>
+                <div class="subject-content" id="content_english">
+                    <div class="topic-item">
+                        <input type="checkbox" class="topic-checkbox" id="english1" value="Draw lines to match the letter with the correct picture">
+                        <label for="english1" class="topic-text">Draw lines to match the letter with the correct picture</label>
+                    </div>
+                    <div class="topic-item">
+                        <input type="checkbox" class="topic-checkbox" id="english2" value="Trace the letter and color">
+                        <label for="english2" class="topic-text">Trace the letter and color</label>
+                    </div>
+                    <div class="topic-item">
+                        <input type="checkbox" class="topic-checkbox" id="english3" value="Draw lines to match the same letters">
+                        <label for="english3" class="topic-text">Draw lines to match the same letters</label>
+                    </div>
                 </div>
             </div>            <!-- PHONICS -->
             <div class="subject-section">
-                <div class="subject-title">
-                    <input type="checkbox" class="subject-checkbox" id="subject_phonics" value="Phonics">
-                    <label for="subject_phonics">PHONICS</label>
+                <div class="subject-header" onclick="toggleSubject('phonics')">
+                    <div class="subject-title">
+                        <input type="checkbox" class="subject-checkbox" id="subject_phonics" value="Phonics" onchange="handleSubjectCheck('phonics')">
+                        <label for="subject_phonics">PHONICS</label>
+                        <span class="dropdown-arrow" id="arrow_phonics">▼</span>
+                    </div>
                 </div>
-                <div class="topic-item">
-                    <input type="checkbox" class="topic-checkbox" id="phonics1" value="Letter A-E recognition">
-                    <label for="phonics1" class="topic-text">Letter A-E recognition</label>
-                </div>
-                <div class="topic-item">
-                    <input type="checkbox" class="topic-checkbox" id="phonics2" value="Candy Cat-Cut vocabulary">
-                    <label for="phonics2" class="topic-text">Candy Cat-Cut vocabulary</label>
-                </div>
-                <div class="topic-item">
-                    <input type="checkbox" class="topic-checkbox" id="phonics3" value="Eddie Elephant-Egg vocabulary">
-                    <label for="phonics3" class="topic-text">Eddie Elephant-Egg vocabulary</label>
+                <div class="subject-content" id="content_phonics">
+                    <div class="topic-item">
+                        <input type="checkbox" class="topic-checkbox" id="phonics1" value="Letter A-E recognition">
+                        <label for="phonics1" class="topic-text">Letter A-E recognition</label>
+                    </div>
+                    <div class="topic-item">
+                        <input type="checkbox" class="topic-checkbox" id="phonics2" value="Candy Cat-Cut vocabulary">
+                        <label for="phonics2" class="topic-text">Candy Cat-Cut vocabulary</label>
+                    </div>
+                    <div class="topic-item">
+                        <input type="checkbox" class="topic-checkbox" id="phonics3" value="Eddie Elephant-Egg vocabulary">
+                        <label for="phonics3" class="topic-text">Eddie Elephant-Egg vocabulary</label>
+                    </div>
                 </div>
             </div>            <!-- MATHEMATICS -->
             <div class="subject-section">
-                <div class="subject-title">
-                    <input type="checkbox" class="subject-checkbox" id="subject_mathematics" value="Mathematics">
-                    <label for="subject_mathematics">MATHEMATICS</label>
+                <div class="subject-header" onclick="toggleSubject('mathematics')">
+                    <div class="subject-title">
+                        <input type="checkbox" class="subject-checkbox" id="subject_mathematics" value="Mathematics" onchange="handleSubjectCheck('mathematics')">
+                        <label for="subject_mathematics">MATHEMATICS</label>
+                        <span class="dropdown-arrow" id="arrow_mathematics">▼</span>
+                    </div>
                 </div>
-                <div class="topic-item">
-                    <input type="checkbox" class="topic-checkbox" id="math1" value="Count from 1-10">
-                    <label for="math1" class="topic-text">Count from 1-10</label>
-                </div>
-                <div class="topic-item">
-                    <input type="checkbox" class="topic-checkbox" id="math2" value="Trace numbers 1-3">
-                    <label for="math2" class="topic-text">Trace numbers 1-3 following the dotted line and coloring</label>
-                </div>
-                <div class="topic-item">
-                    <input type="checkbox" class="topic-checkbox" id="math3" value="Place correct amount of pictures in boxes">
-                    <label for="math3" class="topic-text">Place the correct amount of pictures in the boxes</label>
-                </div>
-                <div class="topic-item">
-                    <input type="checkbox" class="topic-checkbox" id="math4" value="Counting 1-10 with fingers">
-                    <label for="math4" class="topic-text">Counting from 1-10 with our fingers</label>
+                <div class="subject-content" id="content_mathematics">
+                    <div class="topic-item">
+                        <input type="checkbox" class="topic-checkbox" id="math1" value="Count from 1-10">
+                        <label for="math1" class="topic-text">Count from 1-10</label>
+                    </div>
+                    <div class="topic-item">
+                        <input type="checkbox" class="topic-checkbox" id="math2" value="Trace numbers 1-3">
+                        <label for="math2" class="topic-text">Trace numbers 1-3 following the dotted line and coloring</label>
+                    </div>
+                    <div class="topic-item">
+                        <input type="checkbox" class="topic-checkbox" id="math3" value="Place correct amount of pictures in boxes">
+                        <label for="math3" class="topic-text">Place the correct amount of pictures in the boxes</label>
+                    </div>
+                    <div class="topic-item">
+                        <input type="checkbox" class="topic-checkbox" id="math4" value="Counting 1-10 with fingers">
+                        <label for="math4" class="topic-text">Counting from 1-10 with our fingers</label>
+                    </div>
                 </div>
             </div>            <!-- I.Q -->
             <div class="subject-section">
-                <div class="subject-title">
-                    <input type="checkbox" class="subject-checkbox" id="subject_iq" value="I.Q">
-                    <label for="subject_iq">I.Q</label>
+                <div class="subject-header" onclick="toggleSubject('iq')">
+                    <div class="subject-title">
+                        <input type="checkbox" class="subject-checkbox" id="subject_iq" value="I.Q" onchange="handleSubjectCheck('iq')">
+                        <label for="subject_iq">I.Q</label>
+                        <span class="dropdown-arrow" id="arrow_iq">▼</span>
+                    </div>
                 </div>
-                <div class="topic-item">
-                    <input type="checkbox" class="topic-checkbox" id="iq1" value="Animal and their food">
-                    <label for="iq1" class="topic-text">Animal and their food and different food that animals can eat</label>
-                </div>
-                <div class="topic-item">
-                    <input type="checkbox" class="topic-checkbox" id="iq2" value="Shapes and colours">
-                    <label for="iq2" class="topic-text">Shapes and colours</label>
+                <div class="subject-content" id="content_iq">
+                    <div class="topic-item">
+                        <input type="checkbox" class="topic-checkbox" id="iq1" value="Animal and their food">
+                        <label for="iq1" class="topic-text">Animal and their food and different food that animals can eat</label>
+                    </div>
+                    <div class="topic-item">
+                        <input type="checkbox" class="topic-checkbox" id="iq2" value="Shapes and colours">
+                        <label for="iq2" class="topic-text">Shapes and colours</label>
+                    </div>
                 </div>
             </div>            <!-- SOCIAL STUDIES -->
             <div class="subject-section">
-                <div class="subject-title">
-                    <input type="checkbox" class="subject-checkbox" id="subject_social" value="Social Studies">
-                    <label for="subject_social">SOCIAL STUDIES</label>
+                <div class="subject-header" onclick="toggleSubject('social')">
+                    <div class="subject-title">
+                        <input type="checkbox" class="subject-checkbox" id="subject_social" value="Social Studies" onchange="handleSubjectCheck('social')">
+                        <label for="subject_social">SOCIAL STUDIES</label>
+                        <span class="dropdown-arrow" id="arrow_social">▼</span>
+                    </div>
                 </div>
-                <div class="topic-item">
-                    <input type="checkbox" class="topic-checkbox" id="social1" value="Farm animals characteristics">
-                    <label for="social1" class="topic-text">Farm animals - characteristic, abilities</label>
-                </div>
-                <div class="topic-item">
-                    <input type="checkbox" class="topic-checkbox" id="social2" value="Animal sounds">
-                    <label for="social2" class="topic-text">Animal sounds</label>
-                </div>
-                <div class="topic-item">
-                    <input type="checkbox" class="topic-checkbox" id="social3" value="My Body - My face">
-                    <label for="social3" class="topic-text">My Body - My face</label>
+                <div class="subject-content" id="content_social">
+                    <div class="topic-item">
+                        <input type="checkbox" class="topic-checkbox" id="social1" value="Farm animals characteristics">
+                        <label for="social1" class="topic-text">Farm animals - characteristic, abilities</label>
+                    </div>
+                    <div class="topic-item">
+                        <input type="checkbox" class="topic-checkbox" id="social2" value="Animal sounds">
+                        <label for="social2" class="topic-text">Animal sounds</label>
+                    </div>
+                    <div class="topic-item">
+                        <input type="checkbox" class="topic-checkbox" id="social3" value="My Body - My face">
+                        <label for="social3" class="topic-text">My Body - My face</label>
+                    </div>
                 </div>
             </div>            <!-- SCIENCE -->
             <div class="subject-section">
-                <div class="subject-title">
-                    <input type="checkbox" class="subject-checkbox" id="subject_science" value="Science">
-                    <label for="subject_science">SCIENCE</label>
+                <div class="subject-header" onclick="toggleSubject('science')">
+                    <div class="subject-title">
+                        <input type="checkbox" class="subject-checkbox" id="subject_science" value="Science" onchange="handleSubjectCheck('science')">
+                        <label for="subject_science">SCIENCE</label>
+                        <span class="dropdown-arrow" id="arrow_science">▼</span>
+                    </div>
                 </div>
-                <div class="topic-item">
-                    <input type="checkbox" class="topic-checkbox" id="science1" value="Floating Sinking eggs experiment">
-                    <label for="science1" class="topic-text">Floating Sinking eggs - Introducing the concept of buoyancy and how salt affects water density</label>
-                </div>
-                <div class="topic-item">
-                    <input type="checkbox" class="topic-checkbox" id="science2" value="The Rock is light experiment">
-                    <label for="science2" class="topic-text">The Rock is light - Introducing the effects of buoyancy with water</label>
-                </div>
-                <div class="topic-item">
-                    <input type="checkbox" class="topic-checkbox" id="science3" value="Bottle balloon blow-up experiment">
-                    <label for="science3" class="topic-text">Bottle balloon blow-up experiment - Introducing concept of carbonation (gas) in soda water</label>
-                </div>
-                <div class="topic-item">
-                    <input type="checkbox" class="topic-checkbox" id="science4" value="Dancing colors milk experiment">
-                    <label for="science4" class="topic-text">Dancing colors (milk) - Introducing concept of surface tension and interactions between different materials</label>
+                <div class="subject-content" id="content_science">
+                    <div class="topic-item">
+                        <input type="checkbox" class="topic-checkbox" id="science1" value="Floating Sinking eggs experiment">
+                        <label for="science1" class="topic-text">Floating Sinking eggs - Introducing the concept of buoyancy and how salt affects water density</label>
+                    </div>
+                    <div class="topic-item">
+                        <input type="checkbox" class="topic-checkbox" id="science2" value="The Rock is light experiment">
+                        <label for="science2" class="topic-text">The Rock is light - Introducing the effects of buoyancy with water</label>
+                    </div>
+                    <div class="topic-item">
+                        <input type="checkbox" class="topic-checkbox" id="science3" value="Bottle balloon blow-up experiment">
+                        <label for="science3" class="topic-text">Bottle balloon blow-up experiment - Introducing concept of carbonation (gas) in soda water</label>
+                    </div>
+                    <div class="topic-item">
+                        <input type="checkbox" class="topic-checkbox" id="science4" value="Dancing colors milk experiment">
+                        <label for="science4" class="topic-text">Dancing colors (milk) - Introducing concept of surface tension and interactions between different materials</label>
+                    </div>
                 </div>
             </div>            <!-- CONVERSATION 1 -->
             <div class="subject-section">
-                <div class="subject-title">
-                    <input type="checkbox" class="subject-checkbox" id="subject_conv1" value="Conversation Skills">
-                    <label for="subject_conv1">CONVERSATION 1</label>
+                <div class="subject-header" onclick="toggleSubject('conv1')">
+                    <div class="subject-title">
+                        <input type="checkbox" class="subject-checkbox" id="subject_conv1" value="Conversation Skills" onchange="handleSubjectCheck('conv1')">
+                        <label for="subject_conv1">CONVERSATION 1</label>
+                        <span class="dropdown-arrow" id="arrow_conv1">▼</span>
+                    </div>
                 </div>
-                <div class="topic-item">
-                    <input type="checkbox" class="topic-checkbox" id="conv1_1" value="How old are you conversation">
-                    <label for="conv1_1" class="topic-text">How old are you? - I am three years old</label>
-                </div>
-                <div class="topic-item">
-                    <input type="checkbox" class="topic-checkbox" id="conv1_2" value="Daily routine conversations">
-                    <label for="conv1_2" class="topic-text">Daily routine conversations (morning routine, after eating, etc.)</label>
+                <div class="subject-content" id="content_conv1">
+                    <div class="topic-item">
+                        <input type="checkbox" class="topic-checkbox" id="conv1_1" value="How old are you conversation">
+                        <label for="conv1_1" class="topic-text">How old are you? - I am three years old</label>
+                    </div>
+                    <div class="topic-item">
+                        <input type="checkbox" class="topic-checkbox" id="conv1_2" value="Daily routine conversations">
+                        <label for="conv1_2" class="topic-text">Daily routine conversations (morning routine, after eating, etc.)</label>
+                    </div>
                 </div>
             </div>            <!-- CONVERSATION 3 -->
             <div class="subject-section">
-                <div class="subject-title">
-                    <input type="checkbox" class="subject-checkbox" id="subject_conv3" value="Vocabulary Development">
-                    <label for="subject_conv3">CONVERSATION 3</label>
+                <div class="subject-header" onclick="toggleSubject('conv3')">
+                    <div class="subject-title">
+                        <input type="checkbox" class="subject-checkbox" id="subject_conv3" value="Vocabulary Development" onchange="handleSubjectCheck('conv3')">
+                        <label for="subject_conv3">CONVERSATION 3</label>
+                        <span class="dropdown-arrow" id="arrow_conv3">▼</span>
+                    </div>
                 </div>
-                <div class="topic-item">
-                    <input type="checkbox" class="topic-checkbox" id="conv3_1" value="Snacks conversation">
-                    <label for="conv3_1" class="topic-text">Snacks - What snacks do you like? – I like donut</label>
-                </div>
-                <div class="topic-item">
-                    <input type="checkbox" class="topic-checkbox" id="conv3_2" value="Fruits conversation">
-                    <label for="conv3_2" class="topic-text">Fruits - What is this? - It's a banana</label>
-                </div>
-                <div class="topic-item">
-                    <input type="checkbox" class="topic-checkbox" id="conv3_3" value="Vegetables conversation">
-                    <label for="conv3_3" class="topic-text">Vegetables - What vegetables do you have? - I have a pumpkin</label>
+                <div class="subject-content" id="content_conv3">
+                    <div class="topic-item">
+                        <input type="checkbox" class="topic-checkbox" id="conv3_1" value="Snacks conversation">
+                        <label for="conv3_1" class="topic-text">Snacks - What snacks do you like? – I like donut</label>
+                    </div>
+                    <div class="topic-item">
+                        <input type="checkbox" class="topic-checkbox" id="conv3_2" value="Fruits conversation">
+                        <label for="conv3_2" class="topic-text">Fruits - What is this? - It's a banana</label>
+                    </div>
+                    <div class="topic-item">
+                        <input type="checkbox" class="topic-checkbox" id="conv3_3" value="Vegetables conversation">
+                        <label for="conv3_3" class="topic-text">Vegetables - What vegetables do you have? - I have a pumpkin</label>
+                    </div>
                 </div>
             </div>            <!-- PHYSICAL EDUCATION -->
             <div class="subject-section">
-                <div class="subject-title">
-                    <input type="checkbox" class="subject-checkbox" id="subject_pe" value="Physical Education">
-                    <label for="subject_pe">PHYSICAL EDUCATION</label>
+                <div class="subject-header" onclick="toggleSubject('pe')">
+                    <div class="subject-title">
+                        <input type="checkbox" class="subject-checkbox" id="subject_pe" value="Physical Education" onchange="handleSubjectCheck('pe')">
+                        <label for="subject_pe">PHYSICAL EDUCATION</label>
+                        <span class="dropdown-arrow" id="arrow_pe">▼</span>
+                    </div>
                 </div>
-                <div class="topic-item">
-                    <input type="checkbox" class="topic-checkbox" id="pe1" value="Pass the ball">
-                    <label for="pe1" class="topic-text">Pass the ball</label>
-                </div>
-                <div class="topic-item">
-                    <input type="checkbox" class="topic-checkbox" id="pe2" value="Drop and catch the ball">
-                    <label for="pe2" class="topic-text">Drop and catch the ball</label>
-                </div>
-                <div class="topic-item">
-                    <input type="checkbox" class="topic-checkbox" id="pe3" value="Racing game">
-                    <label for="pe3" class="topic-text">Racing game</label>
-                </div>
-                <div class="topic-item">
-                    <input type="checkbox" class="topic-checkbox" id="pe4" value="Football">
-                    <label for="pe4" class="topic-text">Football</label>
+                <div class="subject-content" id="content_pe">
+                    <div class="topic-item">
+                        <input type="checkbox" class="topic-checkbox" id="pe1" value="Pass the ball">
+                        <label for="pe1" class="topic-text">Pass the ball</label>
+                    </div>
+                    <div class="topic-item">
+                        <input type="checkbox" class="topic-checkbox" id="pe2" value="Drop and catch the ball">
+                        <label for="pe2" class="topic-text">Drop and catch the ball</label>
+                    </div>
+                    <div class="topic-item">
+                        <input type="checkbox" class="topic-checkbox" id="pe3" value="Racing game">
+                        <label for="pe3" class="topic-text">Racing game</label>
+                    </div>
+                    <div class="topic-item">
+                        <input type="checkbox" class="topic-checkbox" id="pe4" value="Football">
+                        <label for="pe4" class="topic-text">Football</label>
+                    </div>
                 </div>
             </div>        </form>
 
@@ -339,27 +535,32 @@
             <div id="generatedComments" style="display: none;">
                 <h3 style="color: #2c3e50; margin-top: 30px;">Choose your preferred comment:</h3>
                   <div class="comment-option" id="comment1" onclick="selectComment(1)">
-                    <h4>Option 1: <span id="wordCount1" style="color: #7f8c8d; font-weight: normal; font-size: 14px;"></span></h4>
+                    <h4>👨‍🏫 Male Teacher Style <span id="wordCount1" style="color: #7f8c8d; font-weight: normal; font-size: 14px;"></span></h4>
                     <div id="commentText1" class="comment-box">Comments will appear here after generation...</div>
                 </div>
                 
                 <div class="comment-option" id="comment2" onclick="selectComment(2)">
-                    <h4>Option 2: <span id="wordCount2" style="color: #7f8c8d; font-weight: normal; font-size: 14px;"></span></h4>
+                    <h4>👩‍🏫 Female Teacher Style <span id="wordCount2" style="color: #7f8c8d; font-weight: normal; font-size: 14px;"></span></h4>
                     <div id="commentText2" class="comment-box">Comments will appear here after generation...</div>
                 </div>
 
                 <div class="final-actions">
-                    <button type="button" class="button" onclick="copySelectedComment()">Copy Selected Comment</button>
-                    <button type="button" class="button" onclick="generateComments()">Generate New Comments</button>
-                    <button type="button" class="button" onclick="startOver()">Start Over</button>
+                    <button type="button" class="button" onclick="copySelectedComment()">📋 Copy Selected Comment</button>
+                    <button type="button" class="button" onclick="generateComments()">🔄 Generate New Comments</button>
+                    <button type="button" class="button button-success" onclick="exportReport()">📄 Export Report</button>
+                    <button type="button" class="button" onclick="startOver()">🔄 Start Over</button>
                 </div>
             </div>
-        </div>
+        </div> <!-- .comments-section -->
 
+        <!-- back-button navigation -->
         <div class="navigation">
             <button type="button" class="button" onclick="goBack()">← Back to Student Info</button>
         </div>
-    </div>    <script>
+
+    </div> <!-- .container -->
+
+    <script>
         let selectedTopics = [];
         let selectedComment = null;
 
@@ -398,11 +599,20 @@
             
             localStorage.setItem('selectedSubjects', JSON.stringify(selectedTopics));
             localStorage.setItem('selectedSubjectTitles', JSON.stringify(selectedSubjects));
+            updateSelectionCount();
         }
 
         function loadSelections() {
             const savedTopics = localStorage.getItem('selectedSubjects');
             const savedSubjects = localStorage.getItem('selectedSubjectTitles');
+            
+            // First, ensure all dropdowns are closed
+            document.querySelectorAll('.subject-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            document.querySelectorAll('.dropdown-arrow').forEach(arrow => {
+                arrow.classList.remove('rotated');
+            });
             
             if (savedTopics) {
                 const selectedValues = JSON.parse(savedTopics);
@@ -418,6 +628,15 @@
                 document.querySelectorAll('.subject-checkbox').forEach(checkbox => {
                     if (selectedSubjectValues.includes(checkbox.value)) {
                         checkbox.checked = true;
+                        
+                        // Only show dropdown for checked subjects
+                        const subjectId = checkbox.id.replace('subject_', '');
+                        const content = document.getElementById(`content_${subjectId}`);
+                        const arrow = document.getElementById(`arrow_${subjectId}`);
+                        if (content && arrow) {
+                            content.classList.add('active');
+                            arrow.classList.add('rotated');
+                        }
                     }
                 });
             }
@@ -430,22 +649,262 @@
             window.location.href = 'student-information.html';
         }
 
-        function generateComments() {
-            const studentData = JSON.parse(localStorage.getItem('studentData') || '{}');
-            const selectedTopics = JSON.parse(localStorage.getItem('selectedSubjects') || '[]');
-            const selectedSubjects = JSON.parse(localStorage.getItem('selectedSubjectTitles') || '[]');
+        function generateComment(studentData, selectedTopics, selectedSubjects, variant) {
+            const name = studentData.studentName || 'The student';
+            const gender = studentData.gender || 'they';
+            const pronoun = gender === 'he' ? 'He' : gender === 'she' ? 'She' : 'They';
+            const possessive = gender === 'he' ? 'his' : gender === 'she' ? 'her' : 'their';
+            const verb = gender === 'they' ? 'have' : 'has';
+            const isAre = gender === 'they' ? 'are' : 'is';
+
+            const overall = parseInt(studentData.overallAttributes || 5);
+            const strengths = studentData.strengths || '';
+            const weaknesses = studentData.weaknesses || '';
             
-            if (!studentData.studentName || !studentData.gender) {
-                alert('Please complete student information first by going back to the previous page.');
-                return;
+            // Use the actual selected subjects and topics arrays passed as parameters
+            const subjectData = selectedSubjects || [];
+            const topicData = selectedTopics || [];
+
+            // Helper function to capitalize subject names properly
+            function capitalizeSubjects(subjectList) {
+                return subjectList.map(subject => {
+                    // Capitalize key educational subjects
+                    const lower = subject.toLowerCase();
+                    if (lower === 'english') return 'English';
+                    if (lower === 'mathematics') return 'Mathematics';
+                    if (lower === 'phonics') return 'Phonics';
+                    if (lower === 'science') return 'Science';
+                    if (lower === 'social studies') return 'Social Studies';
+                    if (lower === 'i.q') return 'I.Q';
+                    if (lower === 'physical education') return 'Physical Education';
+                    if (lower.includes('conversation')) return subject.charAt(0).toUpperCase() + subject.slice(1);
+                    return subject.charAt(0).toUpperCase() + subject.slice(1);
+                });
             }
+
+            // Performance descriptors
+            const performanceMap = {
+                10: { level: 'exceptional', achievement: 'outstanding mastery of developmental milestones', attitude: 'exemplary engagement' },
+                9: { level: 'excellent', achievement: 'impressive command of key learning objectives', attitude: 'consistently positive approach' },
+                8: { level: 'very strong', achievement: 'solid grasp of essential concepts', attitude: 'enthusiastic participation' },
+                7: { level: 'strong', achievement: 'good understanding of fundamental skills', attitude: 'positive engagement' },
+                6: { level: 'good', achievement: 'satisfactory progress in key areas', attitude: 'cooperative behavior' },
+                5: { level: 'satisfactory', achievement: 'appropriate developmental progress', attitude: 'willing participation' },
+                4: { level: 'developing', achievement: 'emerging understanding of core concepts', attitude: 'engaged learning' },
+                3: { level: 'basic', achievement: 'foundational skill recognition', attitude: 'participative approach' },
+                2: { level: 'beginning', achievement: 'early skill development', attitude: 'responsive to support' },
+                1: { level: 'emerging', achievement: 'initial learning exploration', attitude: 'benefits from guidance' }
+            };
             
-            if (selectedTopics.length === 0 && selectedSubjects.length === 0) {
-                alert('Please select at least one topic or subject area before generating comments.');
-                return;
-            }            // Generate two different comments
-            const comment1 = generateComment(studentData, selectedTopics, selectedSubjects, 1);
-            const comment2 = generateComment(studentData, selectedTopics, selectedSubjects, 2);
+            const perf = performanceMap[overall] || performanceMap[5];
+            const isMaleTeacher = variant === 1;
+
+            // Build varied sentence components
+            const sentences = [];
+
+            // Opening sentence
+            const opening = isMaleTeacher ? 
+                `${name} demonstrates ${perf.level} performance this term, showing ${perf.achievement}.` :
+                `${name} ${verb} flourished beautifully this term, displaying remarkable growth and development.`;
+            sentences.push(opening);
+
+            // Strengths integration - include ALL strengths, not just first one
+            if (strengths.trim()) {
+                const strengthList = strengths.split(',').map(s => s.trim()).filter(s => s.length > 0);
+                if (strengthList.length === 1) {
+                    const strengthSentence = isMaleTeacher ? 
+                        `${pronoun} consistently demonstrates strong capabilities in ${strengthList[0].toLowerCase()}.` :
+                        `${possessive} wonderful ${strengthList[0].toLowerCase()} truly shines throughout our activities.`;
+                    sentences.push(strengthSentence);
+                } else if (strengthList.length > 1) {
+                    const strengthSentence = isMaleTeacher ? 
+                        `${pronoun} consistently demonstrates strong capabilities in ${strengthList.slice(0, 2).join(' and ').toLowerCase()}.` :
+                        `${possessive} wonderful strengths in ${strengthList.slice(0, 2).join(' and ').toLowerCase()} truly shine throughout our activities.`;
+                    sentences.push(strengthSentence);
+                }
+            }
+
+            // Subject performance - reference ALL selected subjects properly capitalized
+            if (subjectData.length > 0) {
+                const capitalizedSubjects = capitalizeSubjects(subjectData);
+                let subjectSentence;
+                
+                if (subjectData.length === 1) {
+                    subjectSentence = isMaleTeacher ?
+                        `Academic development in ${capitalizedSubjects[0]} has been particularly noteworthy this term.` :
+                        `${pronoun} ${verb} shown wonderful progress in ${capitalizedSubjects[0]} with genuine enthusiasm.`;
+                } else if (subjectData.length === 2) {
+                    subjectSentence = isMaleTeacher ?
+                        `Academic development in ${capitalizedSubjects.join(' and ')} has been particularly noteworthy this term.` :
+                        `${pronoun} ${verb} shown wonderful progress in ${capitalizedSubjects.join(' and ')} with genuine enthusiasm.`;
+                } else {
+                    subjectSentence = isMaleTeacher ?
+                        `Academic development across ${subjectData.length} subject areas including ${capitalizedSubjects.slice(0, 2).join(', ')} and others has been particularly noteworthy this term.` :
+                        `${pronoun} ${verb} shown wonderful progress across ${subjectData.length} subject areas with genuine enthusiasm and dedication.`;
+                }
+                sentences.push(subjectSentence);
+            }
+
+            // Specific topic achievements - reference multiple topics more comprehensively
+            if (topicData.length > 0) {
+                let topicSentence;
+                if (topicData.length === 1) {
+                    const cleanTopic = topicData[0].length > 50 ? topicData[0].substring(0, 50).trim() + "..." : topicData[0];
+                    topicSentence = isMaleTeacher ?
+                        `Notable achievements include mastering activities such as "${cleanTopic.toLowerCase()}".` :
+                        `${pronoun} particularly excelled in "${cleanTopic.toLowerCase()}" and similar learning experiences.`;
+                } else if (topicData.length <= 3) {
+                    const firstTopic = topicData[0].length > 35 ? topicData[0].substring(0, 35).trim() + "..." : topicData[0];
+                    topicSentence = isMaleTeacher ?
+                        `Notable achievements include mastering activities such as "${firstTopic.toLowerCase()}" and ${topicData.length - 1} other topic area${topicData.length > 2 ? 's' : ''}.` :
+                        `${pronoun} particularly excelled in "${firstTopic.toLowerCase()}" along with ${topicData.length - 1} other learning area${topicData.length > 2 ? 's' : ''}.`;
+                } else {
+                    topicSentence = isMaleTeacher ?
+                        `Notable achievements span ${topicData.length} topic areas, demonstrating comprehensive skill development across multiple learning objectives.` :
+                        `${pronoun} achieved success across ${topicData.length} different learning topics, showing wonderful engagement with diverse activities.`;
+                }
+                sentences.push(topicSentence);
+            }
+
+            // Learning behavior and attitude - avoid repetition by making this more unique
+            const behaviorSentences = isMaleTeacher ? [
+                `${pronoun} maintains ${perf.attitude} throughout classroom activities.`,
+                `${possessive} learning approach demonstrates maturity and focus.`,
+                `${name} shows consistent effort in all educational pursuits.`
+            ] : [
+                `${name} brings ${perf.attitude} to our classroom every day.`,
+                `${possessive} curiosity and wonder make learning truly special.`,
+                `${pronoun} approaches challenges with determination and joy.`
+            ];
+            sentences.push(behaviorSentences[Math.floor(Math.random() * behaviorSentences.length)]);
+
+            // Growth areas (if weaknesses provided) - include multiple areas
+            if (weaknesses.trim()) {
+                const weaknessList = weaknesses.split(',').map(w => w.trim()).filter(w => w.length > 0);
+                let growthSentence;
+                if (weaknessList.length === 1) {
+                    growthSentence = isMaleTeacher ?
+                        `Continued development in ${weaknessList[0].toLowerCase()} will enhance future academic success.` :
+                        `We'll continue nurturing growth in ${weaknessList[0].toLowerCase()} with supportive guidance.`;
+                } else {
+                    growthSentence = isMaleTeacher ?
+                        `Continued development in areas such as ${weaknessList.slice(0, 2).join(' and ').toLowerCase()} will enhance future academic success.` :
+                        `We'll continue nurturing growth in areas including ${weaknessList.slice(0, 2).join(' and ').toLowerCase()} with supportive guidance.`;
+                }
+                sentences.push(growthSentence);
+            }
+
+            // Comprehensive performance summary based on actual selections
+            if (subjectData.length >= 2 && topicData.length > 0) {
+                const comprehensiveSentence = isMaleTeacher ?
+                    `${pronoun} consistently meets and often exceeds developmental expectations across ${subjectData.length} subject areas.` :
+                    `${possessive} achievements across ${subjectData.length} different subjects reflect dedicated effort and natural curiosity.`;
+                sentences.push(comprehensiveSentence);
+            } else if (topicData.length > 3) {
+                const engagementSentence = isMaleTeacher ? 
+                    `${possessive} engagement across ${topicData.length} learning activities demonstrates well-rounded development.` :
+                    `${name} embraces diverse learning opportunities with genuine excitement, showing growth in ${topicData.length} different areas.`;
+                sentences.push(engagementSentence);
+            }
+
+            // Social and collaborative aspects - but avoid if we already have too many sentences
+            if (sentences.length < 6) {
+                const socialSentences = isMaleTeacher ? [
+                    `${name} demonstrates appropriate social skills and classroom behavior.`,
+                    `${possessive} collaborative spirit enhances the learning environment for everyone.`,
+                    `${pronoun} interacts positively with peers and contributes meaningfully to group activities.`
+                ] : [
+                    `${name} brings kindness and cooperation to all classroom interactions.`,
+                    `${possessive} gentle nature creates a positive atmosphere for learning.`,
+                    `${pronoun} naturally supports classmates and celebrates others' successes.`
+                ];
+                sentences.push(socialSentences[Math.floor(Math.random() * socialSentences.length)]);
+            }
+
+            // Specific subject mention (avoid repetition of earlier subject references)
+            if (subjectData.length > 0 && sentences.length < 7) {
+                const randomSubject = capitalizeSubjects([subjectData[Math.floor(Math.random() * subjectData.length)]])[0];
+                const mentionSentence = isMaleTeacher ?
+                    `Throughout our work in ${randomSubject}, ${pronoun.toLowerCase()} has shown particular strength and engagement.` :
+                    `${name} lights up when working on ${randomSubject} activities and brings wonderful energy to our lessons.`;
+                
+                // Only add if this subject mention isn't too similar to what we already said
+                const alreadyMentioned = sentences.some(s => s.toLowerCase().includes(randomSubject.toLowerCase()));
+                if (!alreadyMentioned) {
+                    sentences.push(mentionSentence);
+                }
+            }
+
+            // Conclusion - avoid repetitive "well-prepared" endings
+            const conclusions = isMaleTeacher ? [
+                `${name} ${isAre} well-prepared for continued academic advancement and future learning challenges.`,
+                `${name} demonstrates consistent academic growth and ${isAre} ready for the next educational phase.`,
+                `${possessive} overall development positions ${pronoun.toLowerCase()} well for continued success in learning.`
+            ] : [
+                `${name} ${isAre} ready for wonderful future adventures in learning and discovery.`,
+                `${possessive} bright future in education ${isAre} filled with exciting possibilities and continued growth.`,
+                `${name} will continue to thrive and inspire others in ${possessive} educational journey.`
+            ];
+            sentences.push(conclusions[Math.floor(Math.random() * conclusions.length)]);
+
+            // Join sentences and ensure proper word count
+            let comment = sentences.join(' ');
+            let words = comment.split(' ');
+
+            // Adjust to approximately 100 words (95-105 range is acceptable)
+            if (words.length > 105) {
+                words = words.slice(0, 105);
+            } else if (words.length < 95) {
+                // Add meaningful filler without repetition, focusing on comprehensive coverage
+                const additionalInsights = isMaleTeacher ? [
+                    `${possessive} consistent effort reflects strong work ethic and dedication.`,
+                    `${name} approaches new challenges with confidence and determination.`,
+                    `${pronoun} demonstrates excellent attention to detail in all activities.`,
+                    `${possessive} positive attitude contributes significantly to classroom dynamics.`
+                ] : [
+                    `${name} radiates joy and enthusiasm in every learning moment.`,
+                    `${possessive} creativity and imagination inspire everyone around ${pronoun.toLowerCase()}.`,
+                    `${pronoun} brings a special spark to our classroom community.`,
+                    `${possessive} natural curiosity leads to wonderful discoveries daily.`
+                ];
+                
+                // Only add fillers that don't repeat concepts already mentioned
+                const existingContent = comment.toLowerCase();
+                const availableFillers = additionalInsights.filter(filler => {
+                    const key_words = ['effort', 'challenge', 'attention', 'attitude', 'joy', 'creativity', 'spark', 'curiosity'];
+                    return !key_words.some(word => existingContent.includes(word) && filler.toLowerCase().includes(word));
+                });
+                
+                while (words.length < 95 && availableFillers.length > 0) {
+                    const filler = availableFillers.shift();
+                    words.push(...filler.split(' '));
+                }
+                words = words.slice(0, 105); // Ensure we don't exceed
+            }
+
+            let finalComment = words.join(' ');
+            
+            // Ensure proper ending and fix common grammatical issues
+            if (!finalComment.endsWith('.') && !finalComment.endsWith('!')) {
+                finalComment = finalComment.replace(/[,;:]$/, '') + '.';
+            }
+
+            // Fix any remaining grammar issues
+            finalComment = finalComment.replace(/\s+/g, ' '); // Fix double spaces
+            finalComment = finalComment.trim(); // Remove leading/trailing whitespace
+
+            return finalComment;
+        }
+
+        function generateComments() {
+            // parse stored data with valid JSON fallbacks & correct keys
+            const studentData = JSON.parse(localStorage.getItem('studentData')               || '{}');
+            const subjectData = JSON.parse(localStorage.getItem('selectedSubjectTitles')     || '[]');
+            const topicData   = JSON.parse(localStorage.getItem('selectedSubjects')          || '[]');
+
+            // Generate two different comments using whatever data is available
+            const comment1 = generateComment(studentData, topicData, subjectData, 1);
+            const comment2 = generateComment(studentData, topicData, subjectData, 2);
 
             document.getElementById('commentText1').innerHTML = comment1;
             document.getElementById('commentText2').innerHTML = comment2;
@@ -457,181 +916,198 @@
             document.getElementById('wordCount2').textContent = `(${wordCount2} words)`;
             
             document.getElementById('generatedComments').style.display = 'block';
-            
-            // Scroll to comments
             document.getElementById('generatedComments').scrollIntoView({ behavior: 'smooth' });
-        }        function generateComment(studentData, selectedTopics, selectedSubjects, variant) {
-            const name = studentData.studentName;
-            const pronoun = studentData.gender === 'he' ? 'He' : studentData.gender === 'she' ? 'She' : 'They';
-            const possessive = studentData.gender === 'he' ? 'his' : studentData.gender === 'she' ? 'her' : 'their';
-            const pronounLower = pronoun.toLowerCase();
-            const verb = studentData.gender === 'they' ? 'have' : 'has';
-            const isAre = studentData.gender === 'they' ? 'are' : 'is';
-            const verbPast = studentData.gender === 'they' ? 'were' : 'was';
-            
-            // Enhanced performance descriptors based on overall attributes
-            const overall = parseInt(studentData.overallAttributes || 5);
-            const performanceData = {
-                9: { desc: 'exceptional', adverb: 'consistently', achievement: 'outstanding progress' },
-                8: { desc: 'excellent', adverb: 'confidently', achievement: 'remarkable growth' },
-                7: { desc: 'very good', adverb: 'effectively', achievement: 'significant development' },
-                6: { desc: 'good', adverb: 'steadily', achievement: 'positive progress' },
-                5: { desc: 'satisfactory', adverb: 'gradually', achievement: 'steady improvement' },
-                4: { desc: 'developing', adverb: 'persistently', achievement: 'encouraging development' },
-                3: { desc: 'emerging', adverb: 'determinedly', achievement: 'foundational growth' }
-            };
-            const perf = performanceData[Math.min(overall, 9)] || performanceData[5];
-            
-            // Subject-specific vocabulary and descriptors
-            const subjectDescriptors = {
-                'English': ['letter recognition', 'early literacy skills', 'foundational reading concepts', 'alphabet knowledge'],
-                'Phonics': ['sound awareness', 'phonemic skills', 'letter-sound connections', 'pronunciation development'],
-                'Mathematics': ['number recognition', 'counting abilities', 'mathematical concepts', 'numerical understanding'],
-                'Physical Education': ['motor skills', 'physical coordination', 'athletic abilities', 'movement activities'],
-                'Social Studies': ['social awareness', 'environmental understanding', 'community concepts', 'cultural knowledge'],
-                'Science': ['scientific curiosity', 'exploratory learning', 'investigative skills', 'natural phenomena understanding'],
-                'Conversation': ['verbal communication', 'language expression', 'conversational skills', 'oral development']
-            };
+        }
 
-            // Opening variations
-            const openings = [
-                `${name} ${verb} demonstrated ${perf.desc} engagement throughout this reporting period.`,
-                `${name} ${verb} shown ${perf.achievement} across multiple learning areas this term.`,
-                `${name} ${verb} approached learning opportunities with ${perf.desc} enthusiasm and effort.`,
-                `Throughout this term, ${name} ${verb} displayed ${perf.desc} participation in classroom activities.`
-            ];
+        function toggleSubject(subjectId) {
+            const content = document.getElementById(`content_${subjectId}`);
+            const arrow = document.getElementById(`arrow_${subjectId}`);
+            const checkbox = document.getElementById(`subject_${subjectId}`);
             
-            let comment = openings[variant % openings.length] + ' ';
-
-            // Enhanced strengths integration
-            if (studentData.strengths) {
-                const strengthTransitions = [
-                    `${pronoun} particularly excels in`,
-                    `Notable strengths are evident in`,
-                    `${pronoun} demonstrates particular aptitude for`,
-                    `Areas of strength include`
-                ];
-                comment += `${strengthTransitions[variant % strengthTransitions.length]} ${studentData.strengths.toLowerCase()}. `;
+            // Only allow toggle if checkbox is checked
+            if (checkbox.checked) {
+                content.classList.toggle('active');
+                arrow.classList.toggle('rotated');
             }
-
-            // Subject-specific commentary with educational vocabulary
-            if (selectedSubjects.length > 0) {
-                const subjectComments = [];
-                selectedSubjects.forEach(subject => {
-                    const descriptors = subjectDescriptors[subject] || ['academic skills'];
-                    const descriptor = descriptors[Math.floor(Math.random() * descriptors.length)];
-                    subjectComments.push(`${descriptor} in ${subject}`);
+        }
+        
+        function handleSubjectCheck(subjectId) {
+            const checkbox = document.getElementById(`subject_${subjectId}`);
+            const content = document.getElementById(`content_${subjectId}`);
+            const arrow = document.getElementById(`arrow_${subjectId}`);
+            
+            if (checkbox.checked) {
+                // Show dropdown when subject is checked
+                content.classList.add('active');
+                arrow.classList.add('rotated');
+            } else {
+                // Hide dropdown and uncheck all topics when subject is unchecked
+                content.classList.remove('active');
+                arrow.classList.remove('rotated');
+                
+                // Uncheck all topics in this subject
+                const topicCheckboxes = content.querySelectorAll('.topic-checkbox');
+                topicCheckboxes.forEach(cb => {
+                    cb.checked = false;
                 });
-
-                const transitions = [
-                    `${pronoun} ${verb} made meaningful progress in`,
-                    `Significant development ${verbPast} observed in`,
-                    `${name} demonstrates growing competence in`,
-                    `Progress ${verb} been particularly notable in`
-                ];
-                
-                comment += `${transitions[variant % transitions.length]} ${subjectComments.join(', ')}. `;
             }
-
-            // Specific topic integration with pedagogical language
-            if (selectedTopics.length > 0) {
-                const topicSample = selectedTopics.slice(0, Math.min(3, selectedTopics.length));
-                const activityTransitions = [
-                    `Specifically, ${pronounLower} ${verb} shown competency in activities such as`,
-                    `Notable achievements include`,
-                    `Particular success ${verbPast} evident in`,
-                    `${pronoun} demonstrates skill development through`
-                ];
-                
-                comment += `${activityTransitions[variant % activityTransitions.length]} ${topicSample.join(', ').toLowerCase()}. `;
-            }
-
-            // Growth areas with constructive language
-            if (studentData.weaknesses) {
-                const growthTransitions = [
-                    `Areas identified for continued development include`,
-                    `Future learning goals focus on`,
-                    `Opportunities for growth lie in`,
-                    `With ongoing support, ${pronounLower} will continue developing`
-                ];
-                comment += `${growthTransitions[variant % growthTransitions.length]} ${studentData.weaknesses.toLowerCase()}. `;
-            }
-
-            // Enhanced positive conclusions
-            const conclusions = [
-                `${name} ${isAre} a valued and enthusiastic member of our learning community who demonstrates great potential for continued academic growth.`,
-                `With ${possessive} positive attitude and growing independence, ${name} ${isAre} well-positioned for future learning success.`,
-                `${pronoun} ${isAre} a pleasure to teach and should feel proud of ${possessive} accomplishments and progress this term.`,
-                `${name} approaches learning with curiosity and determination, qualities that will serve ${possessive.toLowerCase()} well in future educational endeavors.`,
-                `The progress ${name} ${verb} made this term reflects ${possessive} dedication and readiness for new challenges ahead.`
-            ];
-            
-            comment += conclusions[variant % conclusions.length];
-
-            // Ensure comment meets 90-120 word target
-            const wordCount = comment.split(' ').length;
-            if (wordCount < 90) {
-                // Add bridging sentence for length
-                const bridges = [
-                    ` ${pronoun} consistently demonstrates a positive learning attitude that enhances ${possessive} educational experience.`,
-                    ` ${name}'s engagement in classroom activities reflects ${possessive} growing confidence and academic readiness.`,
-                    ` The social and academic skills ${pronounLower} ${verb} developed will provide a strong foundation for future learning.`
-                ];
-                comment = comment.slice(0, -1) + bridges[variant % bridges.length] + comment.slice(-1);
-            }
-
-            return comment;
+            saveSelections();
         }
-
-        function selectComment(optionNumber) {
-            // Remove previous selection
-            document.querySelectorAll('.comment-option').forEach(el => el.classList.remove('selected'));
-            
-            // Add selection to clicked option
-            document.getElementById(`comment${optionNumber}`).classList.add('selected');
-            selectedComment = optionNumber;
-        }
-
-        function copySelectedComment() {
-            if (!selectedComment) {
-                alert('Please select a comment option first.');
-                return;
-            }
-            
-            const commentText = document.getElementById(`commentText${selectedComment}`).textContent;
-            navigator.clipboard.writeText(commentText).then(() => {
-                alert('Comment copied to clipboard!');
-            }).catch(() => {
-                // Fallback for older browsers
-                const textArea = document.createElement('textarea');
-                textArea.value = commentText;
-                document.body.appendChild(textArea);
-                textArea.select();
-                document.execCommand('copy');
-                document.body.removeChild(textArea);
-                alert('Comment copied to clipboard!');
-            });
-        }
-
-        function startOver() {
-            if (confirm('This will clear all your selections and start over. Are you sure?')) {
-                localStorage.removeItem('studentData');
-                localStorage.removeItem('selectedSubjects');
-                localStorage.removeItem('selectedSubjectTitles');
-                window.location.href = 'student-information.html';
-            }
-        }
-
-        // Add event listeners to all checkboxes
-        document.addEventListener('change', function(e) {
-            if (e.target.classList.contains('topic-checkbox') || e.target.classList.contains('subject-checkbox')) {
-                updateSelectionCount();
-                saveSelections();
-            }
-        });
 
         // Load saved selections on page load
         window.addEventListener('load', loadSelections);
+        
+        // Missing functions for start over and comment selection
+        function startOver() {
+            // Clear all stored data
+            localStorage.clear();
+            sessionStorage.clear();
+            // Redirect to the beginning
+            window.location.href = 'Play.html';
+        }
+        
+        function selectComment(commentNumber) {
+            console.log("Selecting comment:", commentNumber);
+            
+            // Remove selection from other comments
+            document.querySelectorAll('.comment-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            
+            // Select the clicked comment
+            const commentElement = document.getElementById(`comment${commentNumber}`);
+            if (commentElement) {
+                commentElement.classList.add('selected');
+                selectedComment = commentNumber;
+                console.log("Comment selected successfully");
+            } else {
+                console.error("Comment element not found:", `comment${commentNumber}`);
+            }
+        }
+
+        function copySelectedComment() {
+            console.log("Attempting to copy comment:", selectedComment);
+            
+            if (!selectedComment) {
+                alert('Please select a comment first by clicking on one of the comment options.');
+                return;
+            }
+            
+            const commentElement = document.getElementById(`commentText${selectedComment}`);
+            if (!commentElement) {
+                console.error("Comment text element not found:", `commentText${selectedComment}`);
+                alert("Could not find the selected comment. Please try selecting again.");
+                return;
+            }
+            
+            const commentText = commentElement.innerText || commentElement.textContent;
+            console.log("Copying text:", commentText.substring(0, 30) + "...");
+
+            try {
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    navigator.clipboard.writeText(commentText)
+                        .then(() => {
+                            alert('Comment copied to clipboard!');
+                        })
+                        .catch(err => {
+                            console.error("Clipboard API error:", err);
+                            fallbackCopy(commentText);
+                        });
+                } else {
+                    console.log("Clipboard API not available, using fallback");
+                    fallbackCopy(commentText);
+                }
+            } catch (e) {
+                console.error("Error during copy:", e);
+                fallbackCopy(commentText);
+            }
+        }
+
+        function fallbackCopy(text) {
+            const textArea = document.createElement('textarea');
+            textArea.value = text;
+            textArea.style.position = 'fixed';
+            textArea.style.left = '0';
+            textArea.style.top = '0';
+            textArea.style.opacity = '0';
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            
+            try {
+                const successful = document.execCommand('copy');
+                if (successful) {
+                    alert('Comment copied to clipboard!');
+                } else {
+                    alert('Unable to copy. Please try selecting the text manually and copying it.');
+                }
+            } catch (err) {
+                console.error("Fallback copy failed:", err);
+                alert('Copy failed. Please try selecting the text manually and copying it.');
+            }
+            
+            document.body.removeChild(textArea);
+        }
+
+        function exportReport() {
+            const studentData = JSON.parse(localStorage.getItem('studentData') || '{}');
+            const selectedSubjects = JSON.parse(localStorage.getItem('selectedSubjectTitles') || '[]');
+            const selectedTopics = JSON.parse(localStorage.getItem('selectedSubjects') || '[]');
+            
+            if (!studentData.studentName) {
+                alert('Please complete student information first.');
+                return;
+            }
+            
+            const selectedCommentText = selectedComment ? 
+                document.getElementById(`commentText${selectedComment}`).innerText : 
+                'No comment selected';
+            
+            const currentDate = new Date().toLocaleDateString();
+            
+            // Create comprehensive report
+            let reportContent = `KINDERGARTEN PROGRESS REPORT
+=====================================
+
+Student Information:
+- Name: ${studentData.studentName || 'Not specified'}
+- Gender: ${studentData.gender || 'Not specified'}
+- Overall Rating: ${studentData.overallAttributes || 'Not specified'}/10
+- Report Date: ${currentDate}
+
+Strengths:
+${studentData.strengths || 'Not specified'}
+
+Areas for Improvement:
+${studentData.weaknesses || 'Not specified'}
+
+Selected Subjects:
+${selectedSubjects.length > 0 ? selectedSubjects.join(', ') : 'None selected'}
+
+Selected Topics:
+${selectedTopics.length > 0 ? selectedTopics.join(', ') : 'None selected'}
+
+Teacher Comment:
+${selectedCommentText}
+
+=====================================
+Generated by Teachers Pet - Kindergarten Report Generator
+`;
+
+            // Create and download file
+            const blob = new Blob([reportContent], { type: 'text/plain' });
+            const url = window.URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `${studentData.studentName || 'Student'}_Report_${currentDate.replace(/\//g, '-')}.txt`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            window.URL.revokeObjectURL(url);
+            
+            alert('Report exported successfully!');
+        }
     </script>
+    <script src="debug-tools.js"></script>
 </body>
 </html>
