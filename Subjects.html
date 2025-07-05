@@ -59,6 +59,27 @@
             border: 1px solid rgba(255, 255, 255, 0.3);
             border-radius: 12px;
             padding: 30px;
+            cursor/add-tick-boxes-and-refresh-button-d0c7
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: relative;
+        }
+        .refresh-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: #27ae60;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s;
+        }
+        .refresh-button:hover {
+            background-color: #229954;
+
             max-width: 1200px;
             margin: 0 auto;
             position: relative;
@@ -66,6 +87,7 @@
             box-shadow: 
                 0 10px 30px rgba(0, 0, 0, 0.3),
                 0 0 50px rgba(255, 255, 255, 0.1);
+           main
         }
         
         h1 {
@@ -292,7 +314,11 @@
 </head>
 <body>
     <div class="container">
+ cursor/add-tick-boxes-and-refresh-button-d0c7
+        <button type="button" class="refresh-button" onclick="refreshReport()">🔄 Refresh Report</button>
+
         <button type="button" class="button" id="refreshReportBtn" style="float:right;" onclick="refreshReport()">Refresh Report</button>
+     main
         <h1>Subject Selection</h1>
         <p style="text-align: center; color: #7f8c8d; margin-bottom: 25px; font-family: 'Segoe UI', sans-serif;">
             Select subjects and rate student performance (0-5 scale, 5 being excellent).
@@ -339,6 +365,14 @@
                     <input type="checkbox" class="topic-checkbox" id="english5" value="Sing the Alphabet song with actions">
                     <label for="english5" class="topic-text">Sing the Alphabet song with actions</label>
                 </div>
+                <div class="topic-item">
+                    <input type="checkbox" class="topic-checkbox" id="english4" value="Circle the beginning letter sounds">
+                    <label for="english4" class="topic-text">Circle the beginning letter sounds</label>
+                </div>
+                <div class="topic-item">
+                    <input type="checkbox" class="topic-checkbox" id="english5" value="Write uppercase and lowercase letters">
+                    <label for="english5" class="topic-text">Write uppercase and lowercase letters</label>
+                </div>
             </div>            <!-- PHONICS -->
             <div class="subject-section">
                 <div class="subject-header" onclick="toggleSubject('phonics')">
@@ -369,6 +403,14 @@
                 <div class="topic-item">
                     <input type="checkbox" class="topic-checkbox" id="phonics5" value="Blend simple CVC words">
                     <label for="phonics5" class="topic-text">Blend simple CVC words</label>
+                </div>
+                <div class="topic-item">
+                    <input type="checkbox" class="topic-checkbox" id="phonics4" value="Letter sound blending activities">
+                    <label for="phonics4" class="topic-text">Letter sound blending activities</label>
+                </div>
+                <div class="topic-item">
+                    <input type="checkbox" class="topic-checkbox" id="phonics5" value="Rhyming words recognition">
+                    <label for="phonics5" class="topic-text">Rhyming words recognition</label>
                 </div>
             </div>            <!-- MATHEMATICS -->
             <div class="subject-section">
@@ -401,6 +443,10 @@
                     <input type="checkbox" class="topic-checkbox" id="math5" value="Identify basic shapes">
                     <label for="math5" class="topic-text">Identify basic shapes</label>
                 </div>
+                <div class="topic-item">
+                    <input type="checkbox" class="topic-checkbox" id="math5" value="Basic shape recognition and sorting">
+                    <label for="math5" class="topic-text">Basic shape recognition and sorting</label>
+                </div>
             </div>            <!-- I.Q -->
             <div class="subject-section">
                 <div class="subject-header" onclick="toggleSubject('iq')">
@@ -431,6 +477,18 @@
                 <div class="topic-item">
                     <input type="checkbox" class="topic-checkbox" id="iq5" value="Sorting objects by size">
                     <label for="iq5" class="topic-text">Sorting objects by size</label>
+                </div>
+                <div class="topic-item">
+                    <input type="checkbox" class="topic-checkbox" id="iq3" value="Pattern recognition and sequencing">
+                    <label for="iq3" class="topic-text">Pattern recognition and sequencing</label>
+                </div>
+                <div class="topic-item">
+                    <input type="checkbox" class="topic-checkbox" id="iq4" value="Memory games and brain teasers">
+                    <label for="iq4" class="topic-text">Memory games and brain teasers</label>
+                </div>
+                <div class="topic-item">
+                    <input type="checkbox" class="topic-checkbox" id="iq5" value="Problem solving with puzzles">
+                    <label for="iq5" class="topic-text">Problem solving with puzzles</label>
                 </div>
             </div>            <!-- SOCIAL STUDIES -->
             <div class="subject-section">
@@ -463,6 +521,14 @@
                     <input type="checkbox" class="topic-checkbox" id="social5" value="Good manners at school">
                     <label for="social5" class="topic-text">Good manners at school</label>
                 </div>
+                <div class="topic-item">
+                    <input type="checkbox" class="topic-checkbox" id="social4" value="Community helpers and their roles">
+                    <label for="social4" class="topic-text">Community helpers and their roles</label>
+                </div>
+                <div class="topic-item">
+                    <input type="checkbox" class="topic-checkbox" id="social5" value="Family members and relationships">
+                    <label for="social5" class="topic-text">Family members and relationships</label>
+                </div>
             </div>            <!-- SCIENCE -->
             <div class="subject-section">
                 <div class="subject-header" onclick="toggleSubject('science')">
@@ -493,6 +559,10 @@
                 <div class="topic-item">
                     <input type="checkbox" class="topic-checkbox" id="science5" value="Five senses matching game">
                     <label for="science5" class="topic-text">Five senses matching game</label>
+                </div>
+                <div class="topic-item">
+                    <input type="checkbox" class="topic-checkbox" id="science5" value="Simple weather observation and recording">
+                    <label for="science5" class="topic-text">Simple weather observation and recording</label>
                 </div>
             </div>            <!-- CONVERSATION 1 -->
             <div class="subject-section">
@@ -525,6 +595,18 @@
                     <input type="checkbox" class="topic-checkbox" id="conv1_5" value="Expressing likes and dislikes">
                     <label for="conv1_5" class="topic-text">Expressing likes and dislikes</label>
                 </div>
+                <div class="topic-item">
+                    <input type="checkbox" class="topic-checkbox" id="conv1_3" value="Greeting and goodbye expressions">
+                    <label for="conv1_3" class="topic-text">Greeting and goodbye expressions</label>
+                </div>
+                <div class="topic-item">
+                    <input type="checkbox" class="topic-checkbox" id="conv1_4" value="Polite words and manners">
+                    <label for="conv1_4" class="topic-text">Polite words and manners (please, thank you, excuse me)</label>
+                </div>
+                <div class="topic-item">
+                    <input type="checkbox" class="topic-checkbox" id="conv1_5" value="Expressing feelings and emotions">
+                    <label for="conv1_5" class="topic-text">Expressing feelings and emotions</label>
+                </div>
             </div>            <!-- CONVERSATION 3 -->
             <div class="subject-section">
                 <div class="subject-header" onclick="toggleSubject('conv3')">
@@ -556,6 +638,14 @@
                     <input type="checkbox" class="topic-checkbox" id="conv3_5" value="Colors vocabulary conversation">
                     <label for="conv3_5" class="topic-text">Colors vocabulary conversation</label>
                 </div>
+                <div class="topic-item">
+                    <input type="checkbox" class="topic-checkbox" id="conv3_4" value="Colors and sizes descriptions">
+                    <label for="conv3_4" class="topic-text">Colors and sizes descriptions (big, small, red, blue)</label>
+                </div>
+                <div class="topic-item">
+                    <input type="checkbox" class="topic-checkbox" id="conv3_5" value="Favorite activities and games">
+                    <label for="conv3_5" class="topic-text">Favorite activities and games</label>
+                </div>
             </div>            <!-- PHYSICAL EDUCATION -->
             <div class="subject-section">
                 <div class="subject-header" onclick="toggleSubject('pe')">
@@ -586,6 +676,10 @@
                 <div class="topic-item">
                     <input type="checkbox" class="topic-checkbox" id="pe5" value="Jumping on the spot">
                     <label for="pe5" class="topic-text">Jumping on the spot</label>
+                </div>
+                <div class="topic-item">
+                    <input type="checkbox" class="topic-checkbox" id="pe5" value="Balance and coordination exercises">
+                    <label for="pe5" class="topic-text">Balance and coordination exercises</label>
                 </div>
             </div>        </form>
 
@@ -1133,6 +1227,19 @@
             document.body.removeChild(textArea);
         }
 
+      cursor/add-tick-boxes-and-refresh-button-d0c7
+        function refreshReport() {
+            if (confirm('This will refresh the page and reload all your saved selections. Continue?')) {
+                location.reload();
+            }
+        }
+
+        // Add event listeners to all checkboxes
+        document.addEventListener('change', function(e) {
+            if (e.target.classList.contains('topic-checkbox') || e.target.classList.contains('subject-checkbox')) {
+                updateSelectionCount();
+                saveSelections();
+
         function exportReport() {
             const studentData = JSON.parse(localStorage.getItem('studentData') || '{}');
             const selectedSubjects = JSON.parse(localStorage.getItem('selectedSubjectTitles') || '[]');
@@ -1141,6 +1248,7 @@
             if (!studentData.studentName) {
                 alert('Please complete student information first.');
                 return;
+         main
             }
             
             const selectedCommentText = selectedComment ? 
