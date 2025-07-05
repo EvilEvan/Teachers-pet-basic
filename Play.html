@@ -3,76 +3,743 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kindergarten Report Generator</title>    <style>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="theme-color" content="#3498db">
+    <meta name="description" content="Kindergarten Report Generator - Teachers Pet Application">
+    <title>Kindergarten Report Generator</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
         body {
-            font-family: Arial, sans-serif;
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 20px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: 
+                url('https://images.unsplash.com/photo-1502134249126-9f3755a50d78?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') center/cover no-repeat fixed,
+                radial-gradient(ellipse at center, rgba(30, 39, 70, 0.8) 0%, rgba(15, 15, 35, 0.9) 50%, rgba(0, 0, 0, 0.95) 100%);
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
+            position: relative;
+            overflow-x: hidden;
         }
-        .main-container {
-            background: white;
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            text-align: center;
-            max-width: 400px;
+        
+        /* Space stars animation */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(2px 2px at 20px 30px, rgba(255, 255, 255, 0.8), transparent),
+                radial-gradient(2px 2px at 40px 70px, rgba(255, 255, 255, 0.6), transparent),
+                radial-gradient(1px 1px at 90px 40px, rgba(255, 255, 255, 0.5), transparent),
+                radial-gradient(1px 1px at 130px 80px, rgba(255, 255, 255, 0.4), transparent),
+                radial-gradient(2px 2px at 160px 30px, rgba(255, 255, 255, 0.7), transparent);
+            background-repeat: repeat;
+            background-size: 200px 200px;
+            -webkit-animation: twinkle 20s linear infinite;
+            -moz-animation: twinkle 20s linear infinite;
+            -ms-animation: twinkle 20s linear infinite;
+            -o-animation: twinkle 20s linear infinite;
+            animation: twinkle 20s linear infinite;
+            pointer-events: none;
+            z-index: 1;
         }
+        
+        @-webkit-keyframes twinkle {
+            0% { 
+                -webkit-transform: translateY(0px) translateX(0px) rotate(0deg);
+                opacity: 0.8; 
+            }
+            50% { opacity: 1; }
+            100% { 
+                -webkit-transform: translateY(-200px) translateX(100px) rotate(360deg);
+                opacity: 0.8; 
+            }
+        }
+        
+        @-moz-keyframes twinkle {
+            0% { 
+                -moz-transform: translateY(0px) translateX(0px) rotate(0deg);
+                opacity: 0.8; 
+            }
+            50% { opacity: 1; }
+            100% { 
+                -moz-transform: translateY(-200px) translateX(100px) rotate(360deg);
+                opacity: 0.8; 
+            }
+        }
+        
+        @-ms-keyframes twinkle {
+            0% { 
+                -ms-transform: translateY(0px) translateX(0px) rotate(0deg);
+                opacity: 0.8; 
+            }
+            50% { opacity: 1; }
+            100% { 
+                -ms-transform: translateY(-200px) translateX(100px) rotate(360deg);
+                opacity: 0.8; 
+            }
+        }
+        
+        @-o-keyframes twinkle {
+            0% { 
+                -o-transform: translateY(0px) translateX(0px) rotate(0deg);
+                opacity: 0.8; 
+            }
+            50% { opacity: 1; }
+            100% { 
+                -o-transform: translateY(-200px) translateX(100px) rotate(360deg);
+                opacity: 0.8; 
+            }
+        }
+        
+        @keyframes twinkle {
+            0% { 
+                -webkit-transform: translateY(0px) translateX(0px) rotate(0deg);
+                -moz-transform: translateY(0px) translateX(0px) rotate(0deg);
+                -ms-transform: translateY(0px) translateX(0px) rotate(0deg);
+                -o-transform: translateY(0px) translateX(0px) rotate(0deg);
+                transform: translateY(0px) translateX(0px) rotate(0deg); 
+                opacity: 0.8; 
+            }
+            50% { opacity: 1; }
+            100% { 
+                -webkit-transform: translateY(-200px) translateX(100px) rotate(360deg);
+                -moz-transform: translateY(-200px) translateX(100px) rotate(360deg);
+                -ms-transform: translateY(-200px) translateX(100px) rotate(360deg);
+                -o-transform: translateY(-200px) translateX(100px) rotate(360deg);
+                transform: translateY(-200px) translateX(100px) rotate(360deg); 
+                opacity: 0.8; 
+            }
+        }
+        
+        .refresh-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 45px;
+            height: 45px;
+            background: rgba(52, 152, 219, 0.8);
+            /* Fallback for browsers without backdrop-filter support */
+            background: rgba(52, 152, 219, 0.9);
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            cursor: pointer;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+            font-size: 18px;
+            color: white;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+            -webkit-transition: all 0.3s ease;
+            -moz-transition: all 0.3s ease;
+            -ms-transition: all 0.3s ease;
+            -o-transition: all 0.3s ease;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+        
+        .refresh-button:hover {
+            -webkit-transform: rotate(180deg) scale(1.1);
+            -moz-transform: rotate(180deg) scale(1.1);
+            -ms-transform: rotate(180deg) scale(1.1);
+            -o-transform: rotate(180deg) scale(1.1);
+            transform: rotate(180deg) scale(1.1);
+            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+        }
+        
+        .main-container {
+            background: rgba(255, 255, 255, 0.3);
+            /* Fallback for browsers without backdrop-filter support */
+            background: rgba(255, 255, 255, 0.85);
+            -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 12px;
+            padding: 40px;
+            text-align: center;
+            max-width: 450px;
+            width: 90%;
+            position: relative;
+            z-index: 10;
+            box-shadow: 
+                0 10px 30px rgba(0, 0, 0, 0.3),
+                0 0 50px rgba(255, 255, 255, 0.1);
+        }
+        
+        @media (max-width: 768px) {
+            .main-container {
+                padding: 25px;
+                margin: 10px;
+                width: calc(100% - 20px);
+            }
+            
+            .app-title {
+                font-size: 2em !important;
+            }
+            
+            .app-subtitle {
+                font-size: 1em !important;
+            }
+            
+            #calendar {
+                padding: 10px;
+                font-size: 12px;
+            }
+            
+            .booking-modal-content {
+                margin: 10% auto;
+                padding: 20px;
+                width: 95%;
+            }
+        }
+        
         .app-title {
-            color: #2c3e50;
+            color: white;
             font-size: 2.5em;
-            margin-bottom: 10px;
-            font-weight: bold;
+            margin-bottom: 20px;
+            font-weight: 900;
+            letter-spacing: 2px;
+            font-family: 'Segoe UI', sans-serif;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
         }
+        
         .app-subtitle {
-            color: #7f8c8d;
+            color: rgba(255,255,255,0.9);
             font-size: 1.2em;
             margin-bottom: 30px;
-            line-height: 1.4;
+            line-height: 1.6;
+            font-weight: 400;
+            font-family: 'Segoe UI', sans-serif;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
         }
+        
         .start-button {
             background: linear-gradient(135deg, #3498db, #2980b9);
             color: white;
             padding: 15px 40px;
             border: none;
-            border-radius: 25px;
+            border-radius: 8px;
             cursor: pointer;
-            font-size: 18px;
-            font-weight: bold;
-            transition: all 0.3s ease;
+            font-size: 16px;
+            font-weight: 600;
+            font-family: 'Segoe UI', sans-serif;
             text-decoration: none;
             display: inline-block;
-            margin: 20px 10px;
+            margin: 20px 0;
+            -webkit-transition: all 0.3s ease;
+            -moz-transition: all 0.3s ease;
+            -ms-transition: all 0.3s ease;
+            -o-transition: all 0.3s ease;
+            transition: all 0.3s ease;
             box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
         }
+        
         .start-button:hover {
+            -webkit-transform: translateY(-2px);
+            -moz-transform: translateY(-2px);
+            -ms-transform: translateY(-2px);
+            -o-transform: translateY(-2px);
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
         }
+        
+        .start-over-button {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            font-family: 'Segoe UI', sans-serif;
+            text-decoration: none;
+            display: inline-block;
+            margin: 10px;
+            -webkit-transition: all 0.3s ease;
+            -moz-transition: all 0.3s ease;
+            -ms-transition: all 0.3s ease;
+            -o-transition: all 0.3s ease;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
+        }
+        
+        .start-over-button:hover {
+            -webkit-transform: translateY(-2px);
+            -moz-transform: translateY(-2px);
+            -ms-transform: translateY(-2px);
+            -o-transform: translateY(-2px);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(231, 76, 60, 0.4);
+        }
+        
+        .button-container {
+            margin: 30px 0;
+        }
+        
+        #calendar {
+            max-width: 450px;
+            margin: 20px auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 12px;
+            padding: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+        
+        .fc-header-toolbar {
+            margin-bottom: 1em !important;
+        }
+        
+        .fc-event {
+            background: linear-gradient(135deg, #3498db, #2980b9) !important;
+            border: none !important;
+            border-radius: 4px !important;
+            font-size: 12px !important;
+            padding: 2px 4px !important;
+        }
+        
+        .fc-daygrid-day:hover {
+            background-color: rgba(52, 152, 219, 0.1) !important;
+            cursor: pointer;
+        }
+        
+        .booking-modal {
+            display: none;
+            position: fixed;
+            z-index: 10000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            /* Fallback for browsers without backdrop-filter support */
+            background-color: rgba(0, 0, 0, 0.7);
+            -webkit-backdrop-filter: blur(5px);
+            backdrop-filter: blur(5px);
+        }
+        
+        .booking-modal-content {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(240, 248, 255, 0.95));
+            margin: 15% auto;
+            padding: 30px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+        
+        .close-modal {
+            position: absolute;
+            right: 15px;
+            top: 15px;
+            font-size: 24px;
+            font-weight: bold;
+            color: #aaa;
+            cursor: pointer;
+            width: 30px;
+            height: 30px;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+            border-radius: 50%;
+            -webkit-transition: all 0.3s ease;
+            -moz-transition: all 0.3s ease;
+            -ms-transition: all 0.3s ease;
+            -o-transition: all 0.3s ease;
+            transition: all 0.3s ease;
+        }
+        
+        .close-modal:hover {
+            color: #000;
+            background: rgba(0, 0, 0, 0.1);
+        }
+        
+        .calendar-section {
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        .calendar-title {
+            color: white;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            font-weight: 600;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
     </style>
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6/main.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6/main.min.js"></script>
 </head>
-<body>    <div class="main-container">
+<body>
+    <!-- Refresh Button -->
+    <button class="refresh-button" onclick="refreshPage()" title="Refresh Page">
+        🔄
+    </button>
+    
+    <div class="main-container">
         <h1 class="app-title">🎓 Teachers Pet</h1>
         <p class="app-subtitle">Kindergarten Report Generator</p>
         
-        <div style="margin: 30px 0;">
+        <div class="button-container">
             <a href="student-information.html" class="start-button">
                 🚀 Start New Report
             </a>
+            <br>
+            <button class="start-over-button" onclick="startOver()">
+                🔄 Start Over
+            </button>
         </div>
-    </div>    <script>
-        // Auto-redirect to student information page
-        window.addEventListener('load', function() {
-            setTimeout(() => {
-                window.location.href = 'student-information.html';
-            }, 1000);
+        
+        <div class="calendar-section">
+            <h3 class="calendar-title">📅 Student Sessions</h3>
+            <div id="calendar"></div>
+        </div>
+    </div>
+
+    <!-- Booking Modal -->
+    <div id="bookingModal" class="booking-modal">
+        <div class="booking-modal-content">
+            <span class="close-modal" onclick="closeBookingModal()">&times;</span>
+            <h3 style="color: #2c3e50; margin-bottom: 20px; text-align: center;">Book Student Session</h3>
+            <form id="bookingForm">
+                <div style="margin-bottom: 15px;">
+                    <label for="studentNameBook" style="display: block; margin-bottom: 5px; color: #2c3e50; font-weight: 600;">Student Name:</label>
+                    <input type="text" id="studentNameBook" required style="width: 100%; padding: 10px; border: 2px solid #e0e6ed; border-radius: 8px; font-size: 14px;">
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <label for="sessionTime" style="display: block; margin-bottom: 5px; color: #2c3e50; font-weight: 600;">Time:</label>
+                    <select id="sessionTime" required style="width: 100%; padding: 10px; border: 2px solid #e0e6ed; border-radius: 8px; font-size: 14px;">
+                        <option value="">Select time...</option>
+                        <option value="09:00">9:00 AM</option>
+                        <option value="10:00">10:00 AM</option>
+                        <option value="11:00">11:00 AM</option>
+                        <option value="13:00">1:00 PM</option>
+                        <option value="14:00">2:00 PM</option>
+                        <option value="15:00">3:00 PM</option>
+                    </select>
+                </div>
+                <div style="margin-bottom: 20px;">
+                    <label for="sessionNote" style="display: block; margin-bottom: 5px; color: #2c3e50; font-weight: 600;">Notes (optional):</label>
+                    <input type="text" id="sessionNote" placeholder="Session focus or special notes..." style="width: 100%; padding: 10px; border: 2px solid #e0e6ed; border-radius: 8px; font-size: 14px;">
+                </div>
+                <div style="text-align: center;">
+                    <button type="submit" style="background: linear-gradient(135deg, #27ae60, #229954); color: white; padding: 12px 25px; border: none; border-radius: 8px; cursor: pointer; font-size: 14px; font-weight: 600; margin-right: 10px;">Book Session</button>
+                    <button type="button" onclick="closeBookingModal()" style="background: linear-gradient(135deg, #95a5a6, #7f8c8d); color: white; padding: 12px 25px; border: none; border-radius: 8px; cursor: pointer; font-size: 14px; font-weight: 600;">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        let calendar;
+        let selectedDate;
+
+        // Browser compatibility checks and polyfills
+        (function() {
+            // Check for localStorage support
+            function storageAvailable(type) {
+                try {
+                    var storage = window[type],
+                        x = '__storage_test__';
+                    storage.setItem(x, x);
+                    storage.removeItem(x);
+                    return true;
+                } catch(e) {
+                    return false;
+                }
+            }
+
+            // LocalStorage fallback for older browsers
+            if (!storageAvailable('localStorage')) {
+                window.localStorage = {
+                    data: {},
+                    getItem: function(key) {
+                        return this.data[key] || null;
+                    },
+                    setItem: function(key, value) {
+                        this.data[key] = value;
+                    },
+                    removeItem: function(key) {
+                        delete this.data[key];
+                    },
+                    clear: function() {
+                        this.data = {};
+                    }
+                };
+            }
+
+            // Array.find polyfill for older browsers
+            if (!Array.prototype.find) {
+                Array.prototype.find = function(predicate) {
+                    if (this == null) {
+                        throw new TypeError('Array.prototype.find called on null or undefined');
+                    }
+                    if (typeof predicate !== 'function') {
+                        throw new TypeError('predicate must be a function');
+                    }
+                    var list = Object(this);
+                    var length = parseInt(list.length) || 0;
+                    var thisArg = arguments[1];
+                    var value;
+
+                    for (var i = 0; i < length; i++) {
+                        value = list[i];
+                        if (predicate.call(thisArg, value, i, list)) {
+                            return value;
+                        }
+                    }
+                    return undefined;
+                };
+            }
+
+            // Array.filter polyfill for older browsers
+            if (!Array.prototype.filter) {
+                Array.prototype.filter = function(fun) {
+                    var len = this.length;
+                    if (typeof fun != "function")
+                        throw new TypeError();
+
+                    var res = new Array();
+                    var thisp = arguments[1];
+                    for (var i = 0; i < len; i++) {
+                        if (i in this) {
+                            var val = this[i]; 
+                            if (fun.call(thisp, val, i, this))
+                                res.push(val);
+                        }
+                    }
+                    return res;
+                };
+            }
+        })();
+
+        // Refresh page function
+        function refreshPage() {
+            window.location.reload();
+        }
+        
+        // Start over function
+        function startOver() {
+            // Clear any stored data
+            localStorage.clear();
+            sessionStorage.clear();
+            // Stay on current page instead of redirecting
+            alert('All data cleared. Click "Start New Report" to begin.');
+            // Refresh calendar to show changes
+            if (calendar) {
+                calendar.refetchEvents();
+            }
+        }
+        
+        // Initialize calendar with enhanced booking functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            var calendarEl = document.getElementById('calendar');
+            calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                headerToolbar: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth'
+                },
+                height: 'auto',
+                events: function(fetchInfo, successCallback, failureCallback) {
+                    try {
+                        var bookingsStr = localStorage.getItem('studentBookings');
+                        var bookings = bookingsStr ? JSON.parse(bookingsStr) : [];
+                        var events = bookings.map ? bookings.map(function(booking) {
+                            return {
+                                title: booking.studentName + ' - ' + booking.time,
+                                start: booking.date,
+                                backgroundColor: booking.completed ? '#27ae60' : '#3498db',
+                                borderColor: booking.completed ? '#27ae60' : '#3498db',
+                                extendedProps: {
+                                    studentName: booking.studentName,
+                                    time: booking.time,
+                                    note: booking.note,
+                                    completed: booking.completed,
+                                    id: booking.id
+                                }
+                            };
+                        }) : [];
+                        successCallback(events);
+                    } catch (e) {
+                        console.error('Error loading events:', e);
+                        successCallback([]);
+                    }
+                },
+                dateClick: function(info) {
+                    selectedDate = info.dateStr;
+                    document.getElementById('bookingModal').style.display = 'block';
+                },
+                eventClick: function(info) {
+                    var event = info.event;
+                    var props = event.extendedProps;
+                    
+                    var message = 'Student: ' + props.studentName + '\n' +
+                        'Time: ' + props.time + '\n' +
+                        'Notes: ' + (props.note || 'None') + '\n' +
+                        'Status: ' + (props.completed ? 'Completed' : 'Scheduled') + '\n\n' +
+                        'Click OK to ' + (props.completed ? 'mark as pending' : 'mark as completed') + ', Cancel to delete';
+                    
+                    var action = confirm(message);
+                    
+                    if (action === true) {
+                        toggleBookingStatus(props.id);
+                    } else if (action === false) {
+                        deleteBooking(props.id);
+                    }
+                },
+                eventDidMount: function(info) {
+                    info.el.style.cursor = 'pointer';
+                    info.el.title = 'Click to manage this booking';
+                }
+            });
+            calendar.render();
         });
+
+        // Booking modal functions
+        function closeBookingModal() {
+            document.getElementById('bookingModal').style.display = 'none';
+            document.getElementById('bookingForm').reset();
+        }
+
+        // Handle booking form submission
+        document.getElementById('bookingForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            var studentName = document.getElementById('studentNameBook').value;
+            var sessionTime = document.getElementById('sessionTime').value;
+            var sessionNote = document.getElementById('sessionNote').value;
+            
+            if (!studentName || !sessionTime) {
+                alert('Please fill in all required fields.');
+                return;
+            }
+            
+            // Create booking object
+            var booking = {
+                id: Date.now(), // Simple ID generation
+                date: selectedDate,
+                studentName: studentName,
+                time: sessionTime,
+                note: sessionNote,
+                completed: false,
+                created: new Date().toISOString()
+            };
+            
+            // Save to localStorage
+            try {
+                var bookingsStr = localStorage.getItem('studentBookings');
+                var bookings = bookingsStr ? JSON.parse(bookingsStr) : [];
+                bookings.push(booking);
+                localStorage.setItem('studentBookings', JSON.stringify(bookings));
+                
+                // Refresh calendar and close modal
+                calendar.refetchEvents();
+                closeBookingModal();
+                
+                // Show success message
+                alert('Session booked for ' + studentName + ' on ' + selectedDate + ' at ' + sessionTime);
+            } catch (e) {
+                console.error('Error saving booking:', e);
+                alert('Error saving booking. Please try again.');
+            }
+        });
+
+        function toggleBookingStatus(bookingId) {
+            try {
+                var bookingsStr = localStorage.getItem('studentBookings');
+                var bookings = bookingsStr ? JSON.parse(bookingsStr) : [];
+                var booking = bookings.find ? bookings.find(function(b) { return b.id === bookingId; }) : null;
+                
+                if (!booking && !bookings.find) {
+                    // Fallback for browsers without Array.find
+                    for (var i = 0; i < bookings.length; i++) {
+                        if (bookings[i].id === bookingId) {
+                            booking = bookings[i];
+                            break;
+                        }
+                    }
+                }
+                
+                if (booking) {
+                    booking.completed = !booking.completed;
+                    localStorage.setItem('studentBookings', JSON.stringify(bookings));
+                    calendar.refetchEvents();
+                }
+            } catch (e) {
+                console.error('Error toggling booking status:', e);
+            }
+        }
+
+        function deleteBooking(bookingId) {
+            try {
+                var bookingsStr = localStorage.getItem('studentBookings');
+                var bookings = bookingsStr ? JSON.parse(bookingsStr) : [];
+                var updatedBookings;
+                
+                if (bookings.filter) {
+                    updatedBookings = bookings.filter(function(b) { return b.id !== bookingId; });
+                } else {
+                    // Fallback for browsers without Array.filter
+                    updatedBookings = [];
+                    for (var i = 0; i < bookings.length; i++) {
+                        if (bookings[i].id !== bookingId) {
+                            updatedBookings.push(bookings[i]);
+                        }
+                    }
+                }
+                
+                localStorage.setItem('studentBookings', JSON.stringify(updatedBookings));
+                calendar.refetchEvents();
+            } catch (e) {
+                console.error('Error deleting booking:', e);
+            }
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            var modal = document.getElementById('bookingModal');
+            if (event.target === modal) {
+                closeBookingModal();
+            }
+        };
+
+        // Additional browser compatibility for older IE versions
+        if (typeof window.addEventListener === 'undefined') {
+            // Fallback for very old browsers
+            window.attachEvent('onclick', function(event) {
+                var modal = document.getElementById('bookingModal');
+                if (event.srcElement === modal) {
+                    closeBookingModal();
+                }
+            });
+        }
     </script>
 </body>
 </html>

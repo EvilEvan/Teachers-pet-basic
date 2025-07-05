@@ -15,7 +15,7 @@ Add a checkbox and slider (0-5 5being good) next to each topic/subject.
 Subjects not ticked or edited are not mentioned in overall comment
 
 Assistant needs to be careful not to repeat comments. and always start comment with the student's name.
-Comments should be between 90-120 words
+Comments MUST contain at least 90 words (minimum requirement) and should not exceed 120 words. The generator should enforce this minimum word count to ensure comprehensive comments.
 Added feature:
 2 comments will be provided to the user to choose from.
 *Reference all information provided by the user in the final comment.
